@@ -1,0 +1,310 @@
+fileFormatVersion: 2
+guid: c66eec17d78561b419ab1bf3f354a88a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: A_ HighGloss_Sideboard
+    100002: A_ HighGloss_Sideboard 1
+    100004: B_ HighGloss_Cupboard
+    100006: B_ HighGloss_Cupboard 1
+    100008: C_ HighGloss_TVUnit
+    100010: C_ HighGloss_TVUnit 1
+    100012: Coffee Legs
+    100014: CoffeeTable Doors
+    100016: //RootNode
+    100018: Cup Legs
+    100020: CupBoard Front
+    100022: Cylinder02
+    100024: Cylinder03
+    100026: Cylinder04
+    100028: Cylinder08
+    100030: Cylinder12
+    100032: Cylinder13
+    100034: Cylinder14
+    100036: Cylinder15
+    100038: Cylinder16
+    100040: Cylinder17
+    100042: Cylinder18
+    100044: Cylinder19
+    100046: Cylinder20
+    100048: Cylinder21
+    100050: Cylinder22
+    100052: Cylinder24
+    100054: Cylinder25
+    100056: Cylinder27
+    100058: Cylinder28
+    100060: Cylinder29
+    100062: Cylinder30
+    100064: Cylinder31
+    100066: D_ HighGloss_CoffeeTable
+    100068: D_ HighGloss_CoffeeTable 1
+    100070: Draw Legs
+    100072: DrawerUnit Front
+    100074: E_ HighGloss_ShelfUnit
+    100076: E_ HighGloss_ShelfUnit 1
+    100078: F_ HighGloss_DrawerUnit
+    100080: F_ HighGloss_DrawerUnit 1
+    100082: Front Sideboard
+    100084: Inside Shelf Unit
+    100086: Shelf Unit Door
+    100088: Sideboard Legs
+    100090: TV Legs
+    100092: TVUnit Doors
+    400000: A_ HighGloss_Sideboard
+    400002: A_ HighGloss_Sideboard 1
+    400004: B_ HighGloss_Cupboard
+    400006: B_ HighGloss_Cupboard 1
+    400008: C_ HighGloss_TVUnit
+    400010: C_ HighGloss_TVUnit 1
+    400012: Coffee Legs
+    400014: CoffeeTable Doors
+    400016: //RootNode
+    400018: Cup Legs
+    400020: CupBoard Front
+    400022: Cylinder02
+    400024: Cylinder03
+    400026: Cylinder04
+    400028: Cylinder08
+    400030: Cylinder12
+    400032: Cylinder13
+    400034: Cylinder14
+    400036: Cylinder15
+    400038: Cylinder16
+    400040: Cylinder17
+    400042: Cylinder18
+    400044: Cylinder19
+    400046: Cylinder20
+    400048: Cylinder21
+    400050: Cylinder22
+    400052: Cylinder24
+    400054: Cylinder25
+    400056: Cylinder27
+    400058: Cylinder28
+    400060: Cylinder29
+    400062: Cylinder30
+    400064: Cylinder31
+    400066: D_ HighGloss_CoffeeTable
+    400068: D_ HighGloss_CoffeeTable 1
+    400070: Draw Legs
+    400072: DrawerUnit Front
+    400074: E_ HighGloss_ShelfUnit
+    400076: E_ HighGloss_ShelfUnit 1
+    400078: F_ HighGloss_DrawerUnit
+    400080: F_ HighGloss_DrawerUnit 1
+    400082: Front Sideboard
+    400084: Inside Shelf Unit
+    400086: Shelf Unit Door
+    400088: Sideboard Legs
+    400090: TV Legs
+    400092: TVUnit Doors
+    2100000: 03 - Default
+    2100002: 02 - Default
+    2100004: 01 - Default
+    2100006: No Name
+    2300000: A_ HighGloss_Sideboard 1
+    2300002: B_ HighGloss_Cupboard 1
+    2300004: C_ HighGloss_TVUnit 1
+    2300006: Coffee Legs
+    2300008: CoffeeTable Doors
+    2300010: Cup Legs
+    2300012: CupBoard Front
+    2300014: Cylinder02
+    2300016: Cylinder03
+    2300018: Cylinder04
+    2300020: Cylinder08
+    2300022: Cylinder12
+    2300024: Cylinder13
+    2300026: Cylinder14
+    2300028: Cylinder15
+    2300030: Cylinder16
+    2300032: Cylinder17
+    2300034: Cylinder18
+    2300036: Cylinder19
+    2300038: Cylinder20
+    2300040: Cylinder21
+    2300042: Cylinder22
+    2300044: Cylinder24
+    2300046: Cylinder25
+    2300048: Cylinder27
+    2300050: Cylinder28
+    2300052: Cylinder29
+    2300054: Cylinder30
+    2300056: Cylinder31
+    2300058: D_ HighGloss_CoffeeTable 1
+    2300060: Draw Legs
+    2300062: DrawerUnit Front
+    2300064: E_ HighGloss_ShelfUnit 1
+    2300066: F_ HighGloss_DrawerUnit 1
+    2300068: Front Sideboard
+    2300070: Inside Shelf Unit
+    2300072: Shelf Unit Door
+    2300074: Sideboard Legs
+    2300076: TV Legs
+    2300078: TVUnit Doors
+    3300000: A_ HighGloss_Sideboard 1
+    3300002: B_ HighGloss_Cupboard 1
+    3300004: C_ HighGloss_TVUnit 1
+    3300006: Coffee Legs
+    3300008: CoffeeTable Doors
+    3300010: Cup Legs
+    3300012: CupBoard Front
+    3300014: Cylinder02
+    3300016: Cylinder03
+    3300018: Cylinder04
+    3300020: Cylinder08
+    3300022: Cylinder12
+    3300024: Cylinder13
+    3300026: Cylinder14
+    3300028: Cylinder15
+    3300030: Cylinder16
+    3300032: Cylinder17
+    3300034: Cylinder18
+    3300036: Cylinder19
+    3300038: Cylinder20
+    3300040: Cylinder21
+    3300042: Cylinder22
+    3300044: Cylinder24
+    3300046: Cylinder25
+    3300048: Cylinder27
+    3300050: Cylinder28
+    3300052: Cylinder29
+    3300054: Cylinder30
+    3300056: Cylinder31
+    3300058: D_ HighGloss_CoffeeTable 1
+    3300060: Draw Legs
+    3300062: DrawerUnit Front
+    3300064: E_ HighGloss_ShelfUnit 1
+    3300066: F_ HighGloss_DrawerUnit 1
+    3300068: Front Sideboard
+    3300070: Inside Shelf Unit
+    3300072: Shelf Unit Door
+    3300074: Sideboard Legs
+    3300076: TV Legs
+    3300078: TVUnit Doors
+    4300000: Cylinder13
+    4300002: Shelf Unit Door
+    4300004: E_ HighGloss_ShelfUnit
+    4300006: Inside Shelf Unit
+    4300008: Cylinder12
+    4300010: Draw Legs
+    4300012: F_ HighGloss_DrawerUnit
+    4300014: DrawerUnit Front
+    4300016: Cylinder02
+    4300018: Cylinder03
+    4300020: Cylinder04
+    4300022: CupBoard Front
+    4300024: B_ HighGloss_Cupboard
+    4300026: Cup Legs
+    4300028: TVUnit Doors
+    4300030: Cylinder27
+    4300032: C_ HighGloss_TVUnit
+    4300034: TV Legs
+    4300036: Cylinder14
+    4300038: Cylinder15
+    4300040: Cylinder16
+    4300042: Cylinder17
+    4300044: Cylinder18
+    4300046: Cylinder19
+    4300048: Cylinder20
+    4300050: Cylinder21
+    4300052: Coffee Legs
+    4300054: Cylinder22
+    4300056: Cylinder24
+    4300058: Cylinder25
+    4300060: CoffeeTable Doors
+    4300062: D_ HighGloss_CoffeeTable
+    4300064: Cylinder29
+    4300066: Cylinder30
+    4300068: Cylinder31
+    4300070: Sideboard Legs
+    4300072: Cylinder08
+    4300074: Cylinder28
+    4300076: A_ HighGloss_Sideboard
+    4300078: Front Sideboard
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
