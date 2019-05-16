@@ -84,9 +84,6 @@ public class paquetesManager : MonoBehaviour {
         Debug.Log(manager.getNombre());
         GameObject.Find("Nombre").GetComponent<Text>().text = manager.getNombre();
         Debug.Log(manager.getUsuario());
-        GameObject.Find("Matricula").GetComponent<Text>().text = manager.getUsuario();
-        Debug.Log(manager.getGradoEstudios());
-        GameObject.Find("GradoEstudio").GetComponent<Text>().text = manager.getGradoEstudios();
 
     }
 
