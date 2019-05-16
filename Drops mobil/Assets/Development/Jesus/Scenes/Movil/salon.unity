@@ -2007,18 +2007,22 @@ MonoBehaviour:
   PuntajeObtenido: {fileID: 1747735158}
   textoMultiplicador: {fileID: 602056485}
   textoPuntajeObtenido: {fileID: 1056698562}
-  textoPuntaje: {fileID: 0}
-  textoPuntajeMarcador: {fileID: 0}
-  textoCompletado: {fileID: 0}
-  correctoimg: {fileID: 0}
-  incorrectoimg: {fileID: 0}
-  scoreFinal: {fileID: 0}
-  preguntaText: {fileID: 0}
-  respuestaNormal: {fileID: 0}
-  respuestaRelacionar: {fileID: 0}
-  respuestaCompletar: {fileID: 0}
-  respuestaTexto: {fileID: 0}
-  canvasParentOfAnswers: {fileID: 0}
+  textoPuntaje: {fileID: 1056698562}
+  textoPuntajeMarcador: {fileID: 1412557058}
+  textoCompletado: {fileID: 1341264869}
+  correctoimg: {fileID: 524409232}
+  incorrectoimg: {fileID: 524409232}
+  scoreFinal: {fileID: 1412557056}
+  preguntaText: {fileID: 1798587852}
+  respuestaNormal: {fileID: 8703047868535777384, guid: 50ad603d0b369a143b2ce0ceebc6b98d,
+    type: 3}
+  respuestaRelacionar: {fileID: 3071499863815233967, guid: 3d0eca8c9705b0740a924324a80e0800,
+    type: 3}
+  respuestaCompletar: {fileID: 525256352099266023, guid: a6719d57ada22c543abad9ca10215d12,
+    type: 3}
+  respuestaTexto: {fileID: 6535893433170059835, guid: cde90951e0433e04681a0c92400c7d7a,
+    type: 3}
+  canvasParentOfAnswers: {fileID: 1762246766}
 --- !u!1 &1103016431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,7 +3399,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 325, y: 325}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
