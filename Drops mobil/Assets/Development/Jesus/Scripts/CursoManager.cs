@@ -8,11 +8,6 @@ using System;
 public class CursoManager : MonoBehaviour {
 
     SyncroManager sicroManager;
-    // public GameObject panelCompletarPalabra;
-    public Text textoRachaMax;
-    public Text textoAciertos;
-    public Text textoNotaLetra;
-    public Text textoRacha;
     public GameObject Multi;
     public GameObject PuntajeObtenido;
     public Text textoMultiplicador;
@@ -24,10 +19,6 @@ public class CursoManager : MonoBehaviour {
     public GameObject incorrectoimg;
     public GameObject scoreFinal;
     public Text preguntaText;
-
-    public AudioClip dialogo1;
-    public AudioClip dialogo2;
-    public AudioClip dialogo3;
 
     private AudioClip bien;
     private UnityEngine.Object bienSp;
@@ -48,8 +39,10 @@ public class CursoManager : MonoBehaviour {
     private AudioClip ops;
     private UnityEngine.Object opsSp;
 
-    public GameObject butonToInstantiate;
-    public GameObject butonToInstantiateText;
+    public GameObject respuestaNormal;
+    public GameObject respuestaRelacionar;
+    public GameObject respuestaCompletar;
+    public GameObject respuestaTexto;
     public GameObject canvasParentOfAnswers;
 
     webServicePreguntas.preguntaData[] preguntas = null;
@@ -124,34 +117,6 @@ public class CursoManager : MonoBehaviour {
         var idLog = webServiceLog.getLastLogSqLite(idUsuario);
         webServiceIntento.insertarIntentoSqLite("0", manager.getUsuario());
         idIntento = webServiceIntento.consultarUltimoIdIntentoByIdLogSqLite(idLog);
-        if (manager.mascotaActive) {
-            StartCoroutine(mensajesMascota());
-        } else {
-            GameObject.Find("Mascota").SetActive(false);
-            llamarPreguntas();
-        }
-    }
-
-    IEnumerator mensajesMascota() {
-        GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Bienvenido a tu salon de clases. Si quieres salir da click en las luces de SALIDA que se encuentran en cada una de las puertas";
-        GameObject.Find("Mascota").GetComponent<AudioSource>().clip = dialogo1;
-        GameObject.Find("Mascota").GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(7);
-        GameObject.Find("Mascota").GetComponent<AudioSource>().clip = dialogo2;
-        GameObject.Find("Mascota").GetComponent<AudioSource>().Play();
-        GameObject.Find("Mascota").GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-        GameObject.Find("Mascota").GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
-        GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Contesta las preguntas que se muestran en el pizarron con las imagenes que se encuentran a tu alrededor";
-        yield return new WaitForSeconds(6);
-        GameObject.Find("Mascota").GetComponent<AudioSource>().clip = dialogo3;
-        GameObject.Find("Mascota").GetComponent<AudioSource>().Play();
-        GameObject.Find("Mascota").GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-        GameObject.Find("Mascota").GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
-        GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "¡COMENCEMOS!";
-        yield return new WaitForSeconds(3);
-        GameObject.Find("Mascota").GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-        GameObject.Find("Mascota").GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
-        GameObject.Find("Mascota").SetActive(false);
         llamarPreguntas();
     }
 
@@ -165,7 +130,6 @@ public class CursoManager : MonoBehaviour {
                     }
                     break;
                 case "Completar palabra":
-                    //panelCompletarPalabra.SetActive(true);
                     textoCompletado.text = fraseCompletada;
                     if (fraseCompletada == fraseACompletar) {
                         webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
@@ -177,7 +141,7 @@ public class CursoManager : MonoBehaviour {
                     }
                     break;
                 case "Seleccion Multiple":
-                    textoCompletado.text = "Preguntas faltantes " + (correctasAContestar-correctas);
+                    textoCompletado.text = "Preguntas faltantes " + (correctasAContestar - correctas);
                     if (correctas >= correctasAContestar) {
                         webServiceRegistro.validarAccionSqlite("Respondió correctamente(Seleccion Multiple)", manager.getUsuario(), "Respondió pregunta");
                         respuestaCorrecta();
@@ -187,13 +151,13 @@ public class CursoManager : MonoBehaviour {
                     if (contador > 1 && contador <= 60) {
                         contador++;
                         textoCompletado.text = "Par encontrado";
-                    } else if(contador == 0 || contador > 60){
+                    } else if (contador == 0 || contador > 60) {
                         contador = 0;
                         textoCompletado.text = "Selecciona par 1";
                     }
 
                     if (seleccion) {
-                        contador=1;
+                        contador = 1;
                         textoCompletado.text = "Selecciona par 2";
                         if (parDos != "") {
                             if (parUno == parDos) {
@@ -202,7 +166,7 @@ public class CursoManager : MonoBehaviour {
                                 parUno = "a";
                                 parDos = "";
                                 seleccion = false;
-                                contador=2;
+                                contador = 2;
                             } else {
                                 seleccion = false;
                                 parUno = "a";
@@ -234,12 +198,11 @@ public class CursoManager : MonoBehaviour {
             correctas = 0;
             racha = 0;
             multiplicador = 1;
-            textoRacha.text = "";
+            //textoRacha.text = "";
             textoMultiplicador.text = "";
             StartCoroutine(activaObjeto(incorrectoimg));
             webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
             webServiceDetalleIntento.insertarDetalleIntentoSqLite("False", idPregunta, idRespuesta, idIntento);
-            //panelCompletarPalabra.SetActive(false);
         }
     }
 
@@ -250,7 +213,6 @@ public class CursoManager : MonoBehaviour {
         verificarRacha();
         StartCoroutine(activaObjeto(correctoimg));
         webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
-        //panelCompletarPalabra.SetActive(false);
         textoCompletado.text = "";
     }
 
@@ -260,10 +222,9 @@ public class CursoManager : MonoBehaviour {
         if (racha > mayorRacha) {
             mayorRacha = racha;
         }
-        textoRacha.text = racha + "";
+        //textoRacha.text = racha + "";
         if (racha >= 2) {
             puntajePregunta = 100 * multiplicador;
-            //PuntajeObtenido.SetActive(false);
             textoPuntajeObtenido.text = "+" + puntajePregunta + "";
             score = score + puntajePregunta;
             if (multiplicador < 4) {
@@ -274,14 +235,12 @@ public class CursoManager : MonoBehaviour {
             Multi.SetActive(true);
         } else {
             puntajePregunta = 100;
-            //PuntajeObtenido.SetActive(false);
             textoPuntajeObtenido.text = "+" + puntajePregunta + "";
             score = score + puntajePregunta;
         }
     }
 
     public void llamarPreguntas() {
-        //panelCompletarPalabra.SetActive(false);
         if (countPreguntas < preguntas.Length) {
             textoCompletado.text = "-";
             idPregunta = preguntas[countPreguntas].id;
@@ -313,8 +272,8 @@ public class CursoManager : MonoBehaviour {
             textoPuntaje.text = "";
             textoMultiplicador.text = "";
             textoPuntajeMarcador.text = score + "";
-            textoRachaMax.text = mayorRacha + "";
-            textoAciertos.text = aciertos + "";
+            //textoRachaMax.text = mayorRacha + "";
+            //textoAciertos.text = aciertos + "";
             getNota();
             webServiceRegistro.validarAccionSqlite("Puntaje obtenido: " + score, manager.getUsuario(), "Puntaje obtenido");
             webServiceRegistro.validarAccionSqlite("Terminó ejercicio", manager.getUsuario(), "Terminó ejercicio");
@@ -328,38 +287,38 @@ public class CursoManager : MonoBehaviour {
         string nota = "";
         string modificador = null;
         if (promedio == 10.0f) {
-            textoNotaLetra.text = "S";
+            //textoNotaLetra.text = "S";
             nota = "S";
         } else if (promedio >= 9.5f && promedio < 10.0f) {
-            textoNotaLetra.text = "A+";
+            //textoNotaLetra.text = "A+";
             nota = "A";
             modificador = "+";
         } else if (promedio >= 9.0f && promedio < 9.5f) {
-            textoNotaLetra.text = "A";
+            //textoNotaLetra.text = "A";
             nota = "A";
         } else if (promedio >= 8.5f && promedio < 9f) {
-            textoNotaLetra.text = "B+";
+            //textoNotaLetra.text = "B+";
             nota = "B";
             modificador = "+";
         } else if (promedio >= 8.0f && promedio < 8.5f) {
-            textoNotaLetra.text = "B";
+            //textoNotaLetra.text = "B";
             nota = "B";
         } else if (promedio >= 7.5f && promedio < 8f) {
-            textoNotaLetra.text = "C+";
+            //textoNotaLetra.text = "C+";
             nota = "C";
             modificador = "+";
         } else if (promedio >= 7.0f && promedio < 7.5f) {
-            textoNotaLetra.text = "C";
+            //textoNotaLetra.text = "C";
             nota = "C";
         } else if (promedio >= 6.5f && promedio < 7.0f) {
-            textoNotaLetra.text = "D+";
+            //textoNotaLetra.text = "D+";
             nota = "D";
             modificador = "+";
         } else if (promedio >= 6.0f && promedio < 6.5f) {
-            textoNotaLetra.text = "D";
+            //textoNotaLetra.text = "D";
             nota = "D";
         } else if (promedio < 6.0f) {
-            textoNotaLetra.text = "F";
+            //textoNotaLetra.text = "F";
             nota = "F";
         }
         scoreFinal.SetActive(true);
@@ -435,10 +394,8 @@ public class CursoManager : MonoBehaviour {
     }
 
     public void crearBotonLetra(char respuesta, float angle, float radius) {
-        //Validar la ñ o caracteres especiales
-
         Vector3 pos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
-        var x = Instantiate(butonToInstantiate, pos, Quaternion.Euler(new Vector3(0, 0, 0)));
+        var x = Instantiate(respuestaCompletar, pos, Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
         x.transform.LookAt(GameObject.Find("CenterEyeAnchor").transform);
         var rotation = x.transform.localRotation.eulerAngles;
@@ -456,35 +413,34 @@ public class CursoManager : MonoBehaviour {
     }
 
     public void crearBoton(webServiceRespuestas.respuestaData respuesta, float angle, float radius) {
-        GameObject x;
         try {
-            if (descripcionTipoEjercicio != "Seleccion simple texto") {
-                x = crearObjeto(angle, radius, butonToInstantiate);
-                Debug.Log(preguntas[countPreguntas].idPaquete);
-                if (Int32.Parse(preguntas[countPreguntas].idPaquete) > 4) {
-                    var splitUrk = respuesta.urlImagen.Split('/');
-                    var path = splitUrk[splitUrk.Length - 1];
-                    byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-                    Texture2D texture = new Texture2D(8, 8);
-                    texture.LoadImage(byteArray);
-                    Rect rec = new Rect(0, 0, texture.width, texture.height);
-                    var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                    x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>().sprite = sprite;
-                } else {
-                    Debug.Log("Carga de preloaded");
-                    var splitUrl = respuesta.urlImagen.Split('.');
-                    var spriteObj = Resources.Load("preloadedPacks/" + splitUrl[0]);
-                    var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
-                    Texture2D tex = spriteObj as Texture2D;
-                    Rect rec = new Rect(0, 0, tex.width, tex.height);
-                    var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
-                    imagen.sprite = sprite;
-                }
-            } else {
-                x = crearObjeto(angle, radius, butonToInstantiateText);
-                x.GetComponentInChildren<Text>().text = respuesta.descripcion;
-                //llenar texto en base a la respuesta
+            GameObject respuestaToLoad;
+            switch (descripcionTipoEjercicio) {
+                case "Seleccion simple texto":
+                    respuestaToLoad = respuestaTexto;
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(325.0f,325.0f);
+                    break;
+                case "Seleccion simple":
+                    respuestaToLoad = respuestaNormal;
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(325.0f, 325.0f);
+                    break;
+                case "Seleccion Multiple":
+                    respuestaToLoad = respuestaNormal;
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(325.0f, 325.0f);
+                    break;
+                case "Relacionar":
+                    respuestaToLoad = respuestaRelacionar;
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(257.5f, 194.3f);
+                    break;
+                case "Completar palabra":
+                    respuestaToLoad = respuestaCompletar;
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100, 100);
+                    break;
             }
+
+            var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+            x.transform.SetParent(canvasParentOfAnswers.transform, false);
+
             if (descripcionTipoEjercicio == "Relacionar") {
                 addEventPares(x, respuesta);
             } else {
@@ -493,21 +449,6 @@ public class CursoManager : MonoBehaviour {
         } catch (Exception ex) {
             Debug.Log("No se encontro la imagen: " + ex);
         }
-    }
-
-    public GameObject crearObjeto(float angle, float radius, GameObject boton) {
-        GameObject x;
-        Vector3 pos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
-        x = Instantiate(boton, pos, Quaternion.Euler(new Vector3(0, 0, 0)));
-        x.transform.SetParent(canvasParentOfAnswers.transform, false);
-        x.transform.LookAt(GameObject.Find("CenterEyeAnchor").transform);
-        var rotation = x.transform.localRotation.eulerAngles;
-        rotation += new Vector3(-21, 180, 0);
-        x.transform.localRotation = Quaternion.Euler(rotation);
-        if (!x.GetComponent<GraphicRaycaster>()) {
-            x.AddComponent<GraphicRaycaster>();
-        }
-        return x;
     }
 
     void addEvent(GameObject obj, char caracter) {
@@ -521,7 +462,7 @@ public class CursoManager : MonoBehaviour {
                 correctas = -1;
                 racha = 0;
                 multiplicador = 1;
-                textoRacha.text = "";
+                //textoRacha.text = "";
                 textoMultiplicador.text = "";
             }
             Destroy(obj);
@@ -628,12 +569,10 @@ public class CursoManager : MonoBehaviour {
         destroyChildrens();
         valAudio(objeto);
         objeto.SetActive(true);
-        //valAudio(objeto);
         objeto.GetComponentInChildren<AudioSource>().Play();
         PuntajeObtenido.SetActive(false);
         PuntajeObtenido.SetActive(true);
         yield return new WaitUntil(() => objeto.GetComponentInChildren<AudioSource>().isPlaying == false);
-        //yield return new WaitForSeconds(0.8f);
         textoPuntaje.text = score + "";
         objeto.SetActive(false);
         correctasAContestar = 0;
