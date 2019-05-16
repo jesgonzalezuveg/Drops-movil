@@ -245,7 +245,7 @@ public class keyboardManager : MonoBehaviour {
                 StartCoroutine(GameObject.FindObjectOfType<appManager>().cambiarEscena("menuCategorias", "mainMenu"));
             } else {
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Contraseña incorrecta";
+                Debug.Log("Contraseña incorrecta");
             }
         } else {
             // Consultar en SII ambas BD
@@ -255,27 +255,27 @@ public class keyboardManager : MonoBehaviour {
 
     public void registrar() {
         if (usuario == "" || nombre == "" || password == "") {
-            GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Faltan campos por llenar";
+            Debug.Log("Faltan campos por llenar");
             return;
         }
         if (usuario.Length < 8 || usuario.Length > 35) {
-            GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "El usuario debe tener entre 8 y 35 caracteres";
+            Debug.Log("El usuario debe tener entre 8 y 35 caracteres");
             return;
         }
         string[] charAEliminar = { " ", "!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "ñ", "Ñ" };
         foreach (string caracter in charAEliminar) {
             string charPosition = caracter + "";
             if (password.Contains(charPosition)) {
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "La contraseña contiene caracteres invalidos";
+                Debug.Log("La contraseña contiene caracteres invalidos");
                 return;
             }
         }
         if (password.Length < 8 || password.Length > 50) {
-            GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "La contraseña debe tener entre 8 y 50 caracteres";
+            Debug.Log("La contraseña debe tener entre 8 y 50 caracteres");
             return;
         }
         if (password != password2) {
-            GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Las contraseñas no coinciden";
+            Debug.Log("Las contraseñas no coinciden");
             return;
         }
 
