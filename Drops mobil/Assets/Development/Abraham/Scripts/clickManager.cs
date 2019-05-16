@@ -74,7 +74,6 @@ public class clickManager : MonoBehaviour {
                 }
             }
             if (!isOnlyMesagge) {
-                gameObject.transform.localScale += gameObject.GetComponent<RectTransform>().localScale * .05f;
                 source.clip = hover;
                 source.Play();
             }
@@ -85,7 +84,7 @@ public class clickManager : MonoBehaviour {
         entry3.eventID = EventTriggerType.PointerExit;
         entry3.callback.AddListener((data) => {
             if (!isOnlyMesagge) {
-                gameObject.GetComponent<RectTransform>().localScale -= gameObject.GetComponent<RectTransform>().localScale * .05f;
+                
             }
         });
         trigger.triggers.Add(entry3);

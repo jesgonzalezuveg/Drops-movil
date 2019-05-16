@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class keyboardManager : MonoBehaviour {
 
-    GameObject teclasLetras;                ///< Conjunto botones que simulan las teclas de un teclado
-    GameObject teclasOtros;                 ///< Conjunto botones que simulan las teclas especiales de un teclado
+    public GameObject teclasLetras;                ///< Conjunto botones que simulan las teclas de un teclado
+    public GameObject teclasOtros;                 ///< Conjunto botones que simulan las teclas especiales de un teclado
+    public GameObject teclasOtros2;                 ///< Conjunto botones que simulan las teclas especiales de un teclado
     string usuario = "";
     string nombre = "";
     string password = "";                   ///< string que contenera la verdadera contraseña, ya que el texto que aparecera en pantalla solo son asteriscos
     string password2 = "";
 
     bool isMinusculas = false;              ///< Bandera detecta si esta o no en mayusculas el teclado
-    bool btnOtros = true;                   ///< Bandera detecta si estan activadas o no las teclas especiales
 
     public GameObject[] inputs;
 
@@ -28,9 +28,8 @@ public class keyboardManager : MonoBehaviour {
      */
     void Start() {
         inputActivo = inputs[0];
-        teclasLetras = GameObject.Find("tecladoLetras");
-        teclasOtros = GameObject.Find("tecladoEspecial");
         teclasOtros.SetActive(false);
+        teclasOtros2.SetActive(false);
     }
     private void Update() {
         if (isUsuario) {
@@ -192,9 +191,28 @@ public class keyboardManager : MonoBehaviour {
     /** Función que activa o desactiva los caracteres especiales
      * @param
      */
+    public void BtnLetras() {
+        teclasOtros2.SetActive(false);
+        teclasOtros.SetActive(false);
+        teclasLetras.SetActive(true);
+    }
+
+    /** Función que activa o desactiva los caracteres especiales
+     * @param
+     */
     public void BtnOtros() {
-        btnOtros = !btnOtros;
-        teclasOtros.SetActive(!btnOtros);
+        teclasOtros2.SetActive(false);
+        teclasLetras.SetActive(false);
+        teclasOtros.SetActive(true);
+    }
+
+    /** Función que activa o desactiva los caracteres especiales numero 2
+     * @param
+     */
+    public void BtnOtros2() {
+        teclasOtros.SetActive(false);
+        teclasLetras.SetActive(false);
+        teclasOtros2.SetActive(true);
     }
 
 
@@ -244,7 +262,7 @@ public class keyboardManager : MonoBehaviour {
             GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "El usuario debe tener entre 8 y 35 caracteres";
             return;
         }
-        string[] charAEliminar = { " ", "!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}","ñ","Ñ" };
+        string[] charAEliminar = { " ", "!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "ñ", "Ñ" };
         foreach (string caracter in charAEliminar) {
             string charPosition = caracter + "";
             if (password.Contains(charPosition)) {
@@ -252,7 +270,7 @@ public class keyboardManager : MonoBehaviour {
                 return;
             }
         }
-        if (password.Length <8 || password.Length > 50) {
+        if (password.Length < 8 || password.Length > 50) {
             GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "La contraseña debe tener entre 8 y 50 caracteres";
             return;
         }
@@ -265,6 +283,6 @@ public class keyboardManager : MonoBehaviour {
             input.GetComponentInChildren<Text>().text = "";
         }
         usuario = usuario.ToLower();
-        StartCoroutine(webServiceUsuario.insertUsuario(usuario,nombre,password));
+        StartCoroutine(webServiceUsuario.insertUsuario(usuario, nombre, password));
     }
 }
