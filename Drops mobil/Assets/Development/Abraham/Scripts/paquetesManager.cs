@@ -14,7 +14,6 @@ public class paquetesManager : MonoBehaviour {
     public GameObject listaPaquetesNuevos;  ///< listaPaquetesNuevos referencia al objeto que contiene los paquetes nuevos por descargar
     public GameObject configuracionModal;   ///< configuracionModal referencia al modal de configuracion de curso
     public GameObject scrollBar;            ///< scrollBar referencia al scrollbar para seleccionar el numero maximo de preguntas por curso
-    public GameObject mascotaActive;      ///< scrollBar referencia al toggle para activar o desactivar la mascota
     private bool bandera = true;            ///< bandera bandera que valida si ya se obtuo la imagen del usuario
     private bool banderaTabs = false;
     public GameObject tabToInstantiate;
@@ -76,8 +75,7 @@ public class paquetesManager : MonoBehaviour {
             StartCoroutine(getUserImg());
         }
 
-        scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
-        mascotaActive.GetComponent<Toggle>().isOn = manager.mascotaActive;
+        //scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
         setVisibleModal(false);
         manager.setBanderas(true);
         tabActivo = GameObject.Find("tabContentTodos");
@@ -189,15 +187,6 @@ public class paquetesManager : MonoBehaviour {
             GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().textoPaquetes.SetActive(true);
         } else {
             GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().textoPaquetes.SetActive(false);
-        }
-        if (mascotaActive.GetComponent<Toggle>().isOn) {
-            if (mascotaActive.GetComponentInChildren<Text>()) {
-                mascotaActive.GetComponentInChildren<Text>().text = "Activado";
-            }
-        } else {
-            if (mascotaActive.GetComponentInChildren<Text>()) {
-                mascotaActive.GetComponentInChildren<Text>().text = "Desactivado";
-            }
         }
     }
 
@@ -348,8 +337,6 @@ public class paquetesManager : MonoBehaviour {
             }
             //gameObject.GetComponent<GraphicRaycaster>().enabled = true;
             manager.numeroPreguntas = scrollBar.GetComponent<Slider>().value;
-            manager.mascotaActive = mascotaActive.GetComponent<Toggle>().isOn;
-            mascota.SetActive(manager.mascotaActive);
             webServicePreferencias.updatePreferenciaSqlite(manager.getUsuario(), manager.numeroPreguntas, manager.mascotaActive, manager.getFondo());
         } else {
             foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
