@@ -327,6 +327,8 @@ public class appManager : MonoBehaviour {
                 }
                 paquetesManager.fillEmpty(null);
                 banderaPaquetes = false;
+                GameObject.Find("PanelPaquetes").SetActive(true);
+                GameObject.Find("PanelDescargas").SetActive(false);
             }
         }
     }
