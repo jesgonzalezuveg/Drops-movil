@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Development/Jesus/Scenes/Movil/LogoUvegStudio.unity
+    guid: be3d9c8e58e280a48ac60060039cd59e
+  - enabled: 1
     path: Assets/Development/Abraham/scenes/mainMenu.unity
     guid: 9d39fa2de49ac844facbea16c622e93a
   - enabled: 1
