@@ -80,7 +80,7 @@ public class paquetesManager : MonoBehaviour {
             StartCoroutine(getUserImg());
         }
 
-        //scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
+        scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
         setVisibleModal(false);
         manager.setBanderas(true);
         tabActivo = GameObject.Find("tabContentTodos");
