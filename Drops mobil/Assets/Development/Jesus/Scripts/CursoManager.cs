@@ -480,22 +480,26 @@ public class CursoManager : MonoBehaviour {
             switch (descripcionTipoEjercicio) {
                 case "Seleccion simple texto":
                     respuestaToLoad = respuestaTexto;
-                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(325.0f, 325.0f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(777f, 130f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 1;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
                     break;
                 case "Seleccion simple":
                     respuestaToLoad = respuestaNormal;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(325.0f, 325.0f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
                     break;
                 case "Seleccion Multiple":
                     respuestaToLoad = respuestaNormal;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(325.0f, 325.0f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
                     break;
                 case "Relacionar":
                     respuestaToLoad = respuestaRelacionar;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(200f, 200f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(100, 50);
                     break;
             }
