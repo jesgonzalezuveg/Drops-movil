@@ -18,6 +18,12 @@ public class paquetesManager : MonoBehaviour {
     private bool banderaTabs = false;
     public GameObject tabToInstantiate;
     public GameObject panelTabs;
+    public GameObject panelTabsBtn;
+    public GameObject panelPaquetes;
+    public GameObject panelDescargas;
+    //public GameObject tabTodos;
+
+    private RectTransform posTabContent;
 
     public GameObject tabContent;
 
@@ -51,7 +57,6 @@ public class paquetesManager : MonoBehaviour {
      * obtiene los datos de la BD local
      */
     private void Start() {
-        mascota = GameObject.Find("Mascota");
         if (manager.isOnline) {
             if (manager.isFirstLogin) {
                 manager.isFirstLogin = false;
@@ -79,10 +84,11 @@ public class paquetesManager : MonoBehaviour {
         setVisibleModal(false);
         manager.setBanderas(true);
         tabActivo = GameObject.Find("tabContentTodos");
+        posTabContent = GameObject.Find("tabContentTodos").GetComponent<RectTransform>();
         Debug.Log(manager.getNombre());
         GameObject.Find("Nombre").GetComponent<Text>().text = manager.getNombre();
         Debug.Log(manager.getUsuario());
-
+        GameObject.Find("Tabs").SetActive(false);
     }
 
     public void fillPackTabs() {
@@ -107,17 +113,23 @@ public class paquetesManager : MonoBehaviour {
     }
 
     void addTabEvent(GameObject tab, webServiceCategoria.categoriaData categoria) {
-        var contentTab = Instantiate(tabContent) as GameObject;
+        var contentTab = Instantiate(tabContent, GameObject.Find("PanelPaquetes").transform, true) as GameObject;
         contentTab.name = "tabContent" + categoria.descripcion;
-        contentTab.transform.SetParent(GameObject.Find("PanelPaquetes").transform);
         contentTab.transform.localScale = new Vector3(1, 1, 1);
-        contentTab.transform.localPosition = new Vector3(-0.154f, -0.5398f, 0);
+        contentTab.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+        contentTab.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+        contentTab.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+        contentTab.GetComponent<RectTransform>().position = posTabContent.position;
+        contentTab.GetComponent<RectTransform>().rotation = posTabContent.rotation;
+        contentTab.GetComponent<RectTransform>().localScale = posTabContent.localScale;
+        contentTab.GetComponent<RectTransform>().sizeDelta = posTabContent.sizeDelta;
         contentTab.SetActive(false);
         tab.GetComponentInChildren<Button>().onClick.AddListener(delegate {
             fillTabContent(contentTab, categoria);
             tabActivo.SetActive(false);
             contentTab.SetActive(true);
             tabActivo = contentTab;
+            controlPanel(1);
         });
     }
 
@@ -259,7 +271,7 @@ public class paquetesManager : MonoBehaviour {
         }
         fichaPaquete.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
-        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1.33f, 1.33f, 1.33f);
+        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
     }
 
@@ -279,7 +291,7 @@ public class paquetesManager : MonoBehaviour {
         }
         fichaPaquete.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
-        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1.33f, 1.33f, 1.33f);
+        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
     }
 
@@ -316,6 +328,7 @@ public class paquetesManager : MonoBehaviour {
             obj.transform.SetParent(contentTab.transform);
             obj.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             obj.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
+            obj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
             fillEmpty(contentTab);
         }
         contentTab.GetComponent<gridScrollLayout>().bandera = true;
@@ -414,6 +427,7 @@ public class paquetesManager : MonoBehaviour {
         tabActivo.SetActive(false);
         tabActivo = todos;
         tabActivo.SetActive(true);
+        controlPanel(1);
     }
 
     public void destruirObjetos(GameObject contentTab) {
@@ -458,5 +472,35 @@ public class paquetesManager : MonoBehaviour {
      */
     public void salir() {
         Application.Quit();
+    }
+
+    /**
+     * Funcion que se manda llamar para activar y desactivar paneles de paquetes, nuevos paquetes y tabs
+     * Modifica la fecha de termino del log en la base de datos local
+     */
+    public void controlPanel(int option) {
+        if (option == 1) {
+            panelPaquetes.SetActive(true);
+            panelDescargas.SetActive(false);
+            panelTabs.SetActive(false);
+            panelTabsBtn.SetActive(true);
+            setVisibleModal(false);
+        } else if (option == 2) {
+            panelPaquetes.SetActive(false);
+            panelDescargas.SetActive(true);
+            panelTabs.SetActive(false);
+            panelTabsBtn.SetActive(false);
+            setVisibleModal(false);
+        } else if (option == 3) {
+            panelPaquetes.SetActive(false);
+            panelDescargas.SetActive(false);
+            panelTabs.SetActive(true);
+            panelTabsBtn.SetActive(false);
+        } else {
+            panelPaquetes.SetActive(true);
+            panelDescargas.SetActive(false);
+            panelTabs.SetActive(false);
+            panelTabsBtn.SetActive(true);
+        }
     }
 }
