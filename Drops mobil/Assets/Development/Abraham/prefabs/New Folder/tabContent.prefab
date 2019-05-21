@@ -241,12 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2688d0905f9eb74c9bc296f2984cc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHorizontalTags: 6
-  scrollCount: 2
-  bandera: 1
-  isVertical: 1
+  "tama\xF1oScroll": 330
   estaAjustado: 0
-  rayCastersOn: 1
+  bandera: 1
 --- !u!1 &1571953037066564245
 GameObject:
   m_ObjectHideFlags: 0

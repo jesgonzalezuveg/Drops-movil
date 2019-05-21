@@ -320,7 +320,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6739480538605806746}
   m_HandleRect: {fileID: 6739480538605806747}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -402,8 +402,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.019989014, y: -0.000091552734}
-  m_SizeDelta: {x: 0, y: -0.05999756}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_SizeDelta: {x: 0, y: -0.02931556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6739480538776108834
 CanvasRenderer:
@@ -478,12 +478,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2688d0905f9eb74c9bc296f2984cc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHorizontalTags: 6
-  scrollCount: 2
-  bandera: 1
-  isVertical: 1
+  "tama\xF1oScroll": 330
   estaAjustado: 0
-  rayCastersOn: 1
+  bandera: 1
 --- !u!1 &6739480538813241655
 GameObject:
   m_ObjectHideFlags: 0
