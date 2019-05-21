@@ -29,7 +29,6 @@ public class gridScrollLayout : MonoBehaviour {
         hijos = gameObject.GetComponentsInChildren<packManager>();
         float columnasCount = layout.constraintCount;
         int rowCount = (int)Math.Ceiling(hijos.Length / columnasCount);
-        Debug.Log(rowCount);
         if (rowCount != 0) {
             if (!estaAjustado) {
                 gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0, (rowCount - 2) * tamañoScroll);
