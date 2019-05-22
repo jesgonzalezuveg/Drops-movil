@@ -57,6 +57,7 @@ public class SyncroManager : MonoBehaviour {
 
     public bool getDataUser(string user) {
         string data = webServiceUsuario.consultarUsuarioSqLite(user);
+        Debug.Log("Linea 60 SyncroManager");
         Debug.Log(data);
         if (data != "0") {
             dataUser = JsonUtility.FromJson<webServiceUsuario.userDataSqLite>(data);
