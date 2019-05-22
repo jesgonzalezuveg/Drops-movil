@@ -110,7 +110,7 @@ public class CursoManager : MonoBehaviour {
 
     void Start() {
         scoreFinal.SetActive(false);
-        
+
 
 
         bien = Resources.Load("audios/Great") as AudioClip;
@@ -181,7 +181,7 @@ public class CursoManager : MonoBehaviour {
                     }
                     break;
                 case "Seleccion Multiple":
-                    textoCompletado.text = "Preguntas faltantes " + (correctasAContestar - correctas);
+                    textoCompletado.text = "Respuestas faltantes " + (correctasAContestar - correctas);
                     if (correctas >= correctasAContestar) {
                         webServiceRegistro.validarAccionSqlite("Respondió correctamente(Seleccion Multiple)", manager.getUsuario(), "Respondió pregunta");
                         respuestaCorrecta();
@@ -329,7 +329,6 @@ public class CursoManager : MonoBehaviour {
         PanelRespuestas.SetActive(false);
         scoreFinal.SetActive(true);
         float promedio = (aciertos * 10.0f) / numPreguntas;
-        Debug.Log(promedio);
         string nota = "";
         string modificador = null;
         if (promedio == 10.0f) {
@@ -389,7 +388,6 @@ public class CursoManager : MonoBehaviour {
                 llenarRespuestas(respuestasOfQuestion.respuestas);
             }
         } else {
-            Debug.Log("No hay respuestas");
             countPreguntas = preguntas.Length;
             manager.cambiarEscena("menuCategorias", "menuCategorias");
         }
@@ -453,18 +451,30 @@ public class CursoManager : MonoBehaviour {
     IEnumerator deleteGrid() {
         yield return new WaitForSeconds(.3f);
         if (canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
-            Debug.Log("Borrar gridLayout");
             Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
         }
     }
 
     public void crearBotonLetra(char respuesta, float angle, float radius) {
+        var hijos = canvasParentOfAnswers.transform.childCount;
         canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100, 100f);
-        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 5;
+        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedRowCount;
+        if (hijos >= 21) {
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 5;
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
+        } else if (hijos >= 16 && hijos < 21) {
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 4;
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 80);
+        } else if (hijos >= 7 && hijos < 16) {
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 3;
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
+        } else if (hijos < 7) {
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
+        }
         var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
         x.AddComponent<clickManager>();
-        Debug.Log("Letras/letra-" + respuesta);
         var spriteObj = Resources.Load("Letras/letra-" + respuesta);
         var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
         Texture2D tex = spriteObj as Texture2D;
@@ -477,6 +487,7 @@ public class CursoManager : MonoBehaviour {
     public void crearBoton(webServiceRespuestas.respuestaData respuesta, float angle, float radius) {
         try {
             GameObject respuestaToLoad = respuestaNormal;
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             switch (descripcionTipoEjercicio) {
                 case "Seleccion simple texto":
                     respuestaToLoad = respuestaTexto;
@@ -507,8 +518,7 @@ public class CursoManager : MonoBehaviour {
             x.transform.SetParent(canvasParentOfAnswers.transform, false);
 
             if (descripcionTipoEjercicio != "Seleccion simple texto") {
-                Debug.Log(preguntas[countPreguntas].idPaquete);
-                if (Int32.Parse(preguntas[countPreguntas].idPaquete) > 4) {
+                if (Int32.Parse(preguntas[countPreguntas].idPaquete) > 10) {
                     var splitUrk = respuesta.urlImagen.Split('/');
                     var path = splitUrk[splitUrk.Length - 1];
                     byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
@@ -518,7 +528,6 @@ public class CursoManager : MonoBehaviour {
                     var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
                     x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>().sprite = sprite;
                 } else {
-                    Debug.Log("Carga de preloaded");
                     var splitUrl = respuesta.urlImagen.Split('.');
                     var spriteObj = Resources.Load("preloadedPacks/" + splitUrl[0]);
                     var imagen = x.GetComponentInChildren<Image>().gameObject.GetComponent<Image>();
@@ -528,7 +537,6 @@ public class CursoManager : MonoBehaviour {
                     imagen.sprite = sprite;
                 }
             } else {
-                Debug.Log("respuesta.descripcion: " + respuesta.descripcion);
                 x.GetComponentInChildren<Text>().text = respuesta.descripcion;
                 //llenar texto en base a la respuesta
             }

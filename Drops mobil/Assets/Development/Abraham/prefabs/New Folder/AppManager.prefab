@@ -60,11 +60,12 @@ MonoBehaviour:
   isFirstLogin: 1
   lastIdLog: 0
   mascotaActive: 1
-  fondo: 0
   musica:
   - {fileID: 8300000, guid: 49c6332223d49134b8b72deb8e37fb1f, type: 3}
   - {fileID: 8300000, guid: 97a265e8fcd77f24f9f810e77d8343c8, type: 3}
   - {fileID: 8300000, guid: e6ea6f5e473e0dc468ae5054cceb5968, type: 3}
+  anterior: 
+  actual: 
 --- !u!82 &1006487022833317865
 AudioSource:
   m_ObjectHideFlags: 0

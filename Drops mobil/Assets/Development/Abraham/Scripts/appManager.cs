@@ -224,27 +224,13 @@ public class appManager : MonoBehaviour {
      * 
      */
     #region funciones para consola in game
-    string myLog;
-    /*Queue myLogQueue = new Queue();
-    void OnEnable() {
-        Application.logMessageReceived += HandleLog;
-    }
-
-    void OnDisable() {
-        Application.logMessageReceived -= HandleLog;
-    }
+    /*string myLog;
+    Queue myLogQueue = new Queue();
 
     void HandleLog(string logString, string stackTrace, LogType type) {
-        if (type == LogType.Warning) {
-            return;
-        }
         myLog = logString;
-        string newString = "";
-        if (type == LogType.Error || type == LogType.Exception) {
-            newString += "\n*****************";
-        }
-
-        newString += "\n [" + type + "] : " + myLog;
+        Debug.Log("*************" + logString);
+        string newString = "\n [" + type + "] : " + myLog;
         myLogQueue.Enqueue(newString);
         if (type == LogType.Exception) {
             newString = "\n" + stackTrace;
@@ -254,7 +240,8 @@ public class appManager : MonoBehaviour {
         foreach (string mylog in myLogQueue) {
             myLog += mylog;
         }
-    }*/
+    }
+    */
     #endregion
 
     /**
@@ -278,9 +265,6 @@ public class appManager : MonoBehaviour {
         validarPreguntas();
         validarRespuestas();
 
-        /*if (OVRInput.Get(OVRInput.Button.Back)) {
-            StartCoroutine(cambiarEscena(anterior,actual));
-        }*/
 
     }
 
@@ -335,12 +319,6 @@ public class appManager : MonoBehaviour {
                         i.gameObject.SetActive(false);
                     }
                 }
-                /*if () {
-                    GameObject.Find("PanelPaquetes").SetActive(true);
-                }
-                if (GameObject.Find("PanelDescargas")) {
-                    GameObject.Find("PanelDescargas").SetActive(false);
-                }*/
             }
         }
     }

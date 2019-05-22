@@ -2297,6 +2297,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8261562418495395655, guid: d50579f2b622c7347a29ef2e9bbef19a,
+        type: 3}
+      propertyPath: consola
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50579f2b622c7347a29ef2e9bbef19a, type: 3}
 --- !u!1 &566247262
@@ -5051,7 +5056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2688d0905f9eb74c9bc296f2984cc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "tama\xF1oScroll": 0
+  "tama\xF1oScroll": 330
   estaAjustado: 0
   bandera: 1
 --- !u!1 &1384149935
@@ -7161,7 +7166,7 @@ PrefabInstance:
     - target: {fileID: 6739480538776108833, guid: aa0e365c0a0c777469b1cbea826d8503,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: -0.00003553178
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa0e365c0a0c777469b1cbea826d8503, type: 3}

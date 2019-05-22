@@ -32,7 +32,6 @@ public class gridScrollLayout : MonoBehaviour {
         if (rowCount != 0) {
             if (!estaAjustado) {
                 gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0, (rowCount - 2) * tamañoScroll);
-                Debug.Log(gameObject.GetComponent<RectTransform>().sizeDelta.y / 2);
                 gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, gameObject.GetComponent<RectTransform>().sizeDelta.y / -2);
                 estaAjustado = true;
             }
