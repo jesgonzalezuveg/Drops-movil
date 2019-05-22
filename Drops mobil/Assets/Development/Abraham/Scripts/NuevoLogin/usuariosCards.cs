@@ -12,7 +12,6 @@ public class usuariosCards : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         var usuarios = webServiceUsuario.consultarUsuariosSqLite();
-        Debug.Log(usuarios.Length);
         foreach (var usuario in usuarios) {
             var card = Instantiate(cardToInstantiate) as GameObject;
             card.name = usuario.nombre + "card";
@@ -39,7 +38,6 @@ public class usuariosCards : MonoBehaviour {
     void addcardEvent(GameObject card, webServiceUsuario.userDataSqLite usuario) {
         card.GetComponentInChildren<Button>().onClick.AddListener(delegate {
             if (usuario.nombre == "Invitado") {
-                Debug.Log("Click en invitado");
                 GameObject.FindObjectOfType<appManager>().setNombre("Invitado");
                 GameObject.FindObjectOfType<appManager>().setUsuario("Invitado");
                 GameObject.FindObjectOfType<appManager>().setGradoEstudios("");

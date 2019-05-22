@@ -532,7 +532,6 @@ public class appManager : MonoBehaviour {
                 splitDateDescarga[3] = Int32.Parse(splitDateDescarga[3]) + 12 + "";
             }
         }
-        Debug.Log(splitDateDescarga[3] + "");
         fechaDescarga = fechaDescarga.Remove(19, fechaDescarga.Length - 19);
         //Formato de fechaModificacion paquete = yyyy-MM-dd HH:mm:ss
         fechaModificacion = fechaModificacion.Replace('-', ' ');
@@ -541,8 +540,6 @@ public class appManager : MonoBehaviour {
 
         DateTime descarga = new DateTime(Int32.Parse(splitDateDescarga[año]), Int32.Parse(splitDateDescarga[mes]), Int32.Parse(splitDateDescarga[dia]), Int32.Parse(splitDateDescarga[3]), Int32.Parse(splitDateDescarga[4]), Int32.Parse(splitDateDescarga[5]));
         DateTime modificacion = new DateTime(Int32.Parse(splitDatePack[0]), Int32.Parse(splitDatePack[1]), Int32.Parse(splitDatePack[2]), Int32.Parse(splitDatePack[3]), Int32.Parse(splitDatePack[4]), Int32.Parse(splitDatePack[5]));
-        Debug.Log("Descarga: " + descarga);
-        Debug.Log("Modificacion: " + modificacion);
         if (descarga < modificacion) {
             return false;
         } else {
@@ -567,14 +564,16 @@ public class appManager : MonoBehaviour {
         }
     }
 
+    public GameObject cargando;
+
     public IEnumerator cambiarEscena(string nueva, string anterior) {
-        actual = nueva;
-        this.anterior = anterior;
-        if (GameObject.Find("Mascota")) {
-            GameObject.Find("Mascota").GetComponent<AudioSource>().Pause();
+        cargando.SetActive(true);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(nueva);
+
+        while (!operation.isDone) {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            yield return null;
         }
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(nueva);
     }
 
 }

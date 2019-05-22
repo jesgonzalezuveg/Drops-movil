@@ -9,6 +9,9 @@ public class mainMenuManager : MonoBehaviour {
 
     public void Start() {
         vistaActiva = vistas[0];
+        if (GameObject.FindObjectOfType<appManager>()) {
+            GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
+        }
     }
 
     /**

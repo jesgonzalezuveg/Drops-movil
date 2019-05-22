@@ -85,10 +85,11 @@ public class paquetesManager : MonoBehaviour {
         manager.setBanderas(true);
         tabActivo = GameObject.Find("tabContentTodos");
         posTabContent = GameObject.Find("tabContentTodos").GetComponent<RectTransform>();
-        Debug.Log(manager.getNombre());
         GameObject.Find("Nombre").GetComponent<Text>().text = manager.getNombre();
-        Debug.Log(manager.getUsuario());
         GameObject.Find("Tabs").SetActive(false);
+        if (GameObject.FindObjectOfType<appManager>()) {
+            GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
+        }
     }
 
     public void fillPackTabs() {
@@ -107,7 +108,7 @@ public class paquetesManager : MonoBehaviour {
                 }
                 banderaTabs = true;
             } else {
-                Debug.Log("CategoriasVacio");
+                //Debug.Log("CategoriasVacio");
             }
         }
     }
@@ -207,7 +208,6 @@ public class paquetesManager : MonoBehaviour {
      * no importa si inicio con Facebook o es usuario UVEG
      */
     IEnumerator getUserImg() {
-        Debug.Log("ARCHIVO paquetesManager linea 220");
         if (manager.GetComponent<appManager>().getImagen() != null) {
             string path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
             string url = manager.GetComponent<appManager>().getImagen();
@@ -217,13 +217,13 @@ public class paquetesManager : MonoBehaviour {
                 if (wwwImage.responseHeaders.Count > 0) {
                     foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
                         if (entry.Key == "STATUS") {
-                            Debug.Log(entry.Value);
+                            //Debug.Log(entry.Value);
                             if (entry.Value == "HTTP/1.1 404 Not Found") {
-                                Debug.Log("No se encontro la imagen");
+                                //Debug.Log("No se encontro la imagen");
                                 manager.GetComponent<appManager>().setImagen("http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png");
                                 path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
                             }
-                            Debug.Log(path);
+                            //Debug.Log(path);
                             if (File.Exists(Application.persistentDataPath + path)) {
                                 byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
                                 Texture2D texture = new Texture2D(8, 8);
