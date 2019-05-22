@@ -71,21 +71,25 @@ public class SyncroManager : MonoBehaviour {
         Debug.Log("Linea 69 SyncroManager");
         if (getDataUser(manager.getUsuario())) {
             manager.lastIdLog = webServiceLog.getLastLogSqLite(dataUser.id);
-            jsonGeneral += "{\"Usuarios\":[";
-            usuarioActual = dataUser.usuario;
-            idUsuarioActual = dataUser.id;
-            jsonPerUser += "{\"id\": \"" + validateData(dataUser.id) + "\",";
-            jsonPerUser += "\"usuario\": \"" + validateData(dataUser.usuario) + "\",";
-            jsonPerUser += "\"nombre\": \"" + validateData(dataUser.nombre) + "\",";
-            jsonPerUser += "\"rol\": \"" + validateData(dataUser.rol) + "\",";
-            jsonPerUser += "\"gradoEstudios\": \"" + validateData(dataUser.gradoEstudios) + "\",";
-            jsonPerUser += "\"programa\": \"" + validateData(dataUser.programa) + "\",";
-            jsonPerUser += "\"fechaRegistro\": \"" + validateData(dataUser.fechaRegistro) + "\",";
-            jsonPerUser += "\"status\": \"" + validateData(dataUser.status) + "\",";
-            //Obtenemos el ultimo log perteneciente al usuario en turno
-            getLogsUser(true);
-            jsonPerUser += "}";
-            jsonGeneral += jsonPerUser + "]}";
+            if (manager.lastIdLog != "0") {
+                jsonGeneral += "{\"Usuarios\":[";
+                usuarioActual = dataUser.usuario;
+                idUsuarioActual = dataUser.id;
+                jsonPerUser += "{\"id\": \"" + validateData(dataUser.id) + "\",";
+                jsonPerUser += "\"usuario\": \"" + validateData(dataUser.usuario) + "\",";
+                jsonPerUser += "\"nombre\": \"" + validateData(dataUser.nombre) + "\",";
+                jsonPerUser += "\"rol\": \"" + validateData(dataUser.rol) + "\",";
+                jsonPerUser += "\"gradoEstudios\": \"" + validateData(dataUser.gradoEstudios) + "\",";
+                jsonPerUser += "\"programa\": \"" + validateData(dataUser.programa) + "\",";
+                jsonPerUser += "\"fechaRegistro\": \"" + validateData(dataUser.fechaRegistro) + "\",";
+                jsonPerUser += "\"status\": \"" + validateData(dataUser.status) + "\",";
+                //Obtenemos el ultimo log perteneciente al usuario en turno
+                getLogsUser(true);
+                jsonPerUser += "}";
+                jsonGeneral += jsonPerUser + "]}";
+            } else {
+                jsonGeneral = null;
+            }
         } else {
             jsonGeneral = null;
         }
