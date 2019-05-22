@@ -301,9 +301,8 @@ public class appManager : MonoBehaviour {
                         var descargaLocal = webServiceDescarga.getDescargaByPaquete(pack.id);
                         if (descargaLocal == null) {
                             if (isOnline) {
-                                if (Int32.Parse(pack.id) > 2) {
-                                    paquetesManager.newCardDescarga(pack);
-                                }
+                                paquetesManager.newCardDescarga(pack);
+
                             } else {
 
                             }
@@ -312,9 +311,8 @@ public class appManager : MonoBehaviour {
                                 if (isActualized(descargaLocal.fechaDescarga, pack.fechaModificacion)) {
                                     paquetesManager.newCardJugar(pack, null);
                                 } else {
-                                    if (Int32.Parse(pack.id) > 2) {
-                                        paquetesManager.newCardActualizar(pack, null);
-                                    }
+                                    paquetesManager.newCardActualizar(pack, null);
+
                                 }
                             } else {
                                 paquetesManager.newCardJugar(pack, null);
@@ -326,9 +324,23 @@ public class appManager : MonoBehaviour {
                     }
                 }
                 paquetesManager.fillEmpty(null);
+                paquetesManager.fillEmpty(GameObject.Find("PanelDescargas").GetComponentInChildren<gridScrollLayout>().gameObject);
                 banderaPaquetes = false;
-                GameObject.Find("PanelPaquetes").SetActive(true);
-                GameObject.Find("PanelDescargas").SetActive(false);
+
+                foreach (var i in GameObject.Find("PanelCentral").GetComponentsInChildren<Transform>(true)) {
+                    if (i.gameObject.name == "PanelPaquetes") {
+                        i.gameObject.SetActive(true);
+                    }
+                    if (i.gameObject.name == "PanelDescargas") {
+                        i.gameObject.SetActive(false);
+                    }
+                }
+                /*if () {
+                    GameObject.Find("PanelPaquetes").SetActive(true);
+                }
+                if (GameObject.Find("PanelDescargas")) {
+                    GameObject.Find("PanelDescargas").SetActive(false);
+                }*/
             }
         }
     }
@@ -447,7 +459,7 @@ public class appManager : MonoBehaviour {
      * y se encarga de actulizar los paquetes en pantalla
      */
     public IEnumerator descargarImagenesPaquete() {
-        if (Int32.Parse(packToPlay.id) > 2) {
+        if (Int32.Parse(packToPlay.id) > 10) {
             foreach (var respuesta in respuestas) {
                 var descarga = webServiceDescarga.getDescargaByPaquete(packToPlay.id);
                 if (descarga != null) {

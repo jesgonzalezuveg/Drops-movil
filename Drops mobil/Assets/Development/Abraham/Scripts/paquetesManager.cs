@@ -322,7 +322,7 @@ public class paquetesManager : MonoBehaviour {
             contentTab = listaPaquetes;
         }
         var hijos = contentTab.GetComponentsInChildren<packManager>(true);
-        if (hijos.Length <= 5) {
+        if (hijos.Length <= 3) {
             var obj = Instantiate(Resources.Load("placeHolder")) as GameObject;
             obj.transform.position = new Vector3(0, 0, 0);
             obj.transform.SetParent(contentTab.transform);
