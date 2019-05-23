@@ -157,6 +157,9 @@ public class CursoManager : MonoBehaviour {
         webServiceIntento.insertarIntentoSqLite("0", manager.getUsuario());
         idIntento = webServiceIntento.consultarUltimoIdIntentoByIdLogSqLite(idLog);
         llamarPreguntas();
+        if (GameObject.FindObjectOfType<appManager>()) {
+            GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
+        }
     }
 
     private void Update() {
