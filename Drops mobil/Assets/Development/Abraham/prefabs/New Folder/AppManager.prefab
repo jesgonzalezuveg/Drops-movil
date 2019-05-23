@@ -205,7 +205,7 @@ RectTransform:
   m_GameObject: {fileID: 6655733473351678316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3752, y: 1.3752, z: 1.3752}
   m_Children:
   - {fileID: 4133153643603349681}
   m_Father: {fileID: 2336581708799068639}
@@ -314,10 +314,6 @@ MonoBehaviour:
   isFirstLogin: 1
   lastIdLog: 0
   mascotaActive: 1
-  musica:
-  - {fileID: 8300000, guid: 49c6332223d49134b8b72deb8e37fb1f, type: 3}
-  - {fileID: 8300000, guid: 97a265e8fcd77f24f9f810e77d8343c8, type: 3}
-  - {fileID: 8300000, guid: e6ea6f5e473e0dc468ae5054cceb5968, type: 3}
   anterior: 
   actual: 
   cargando: {fileID: 3390938004874699175}

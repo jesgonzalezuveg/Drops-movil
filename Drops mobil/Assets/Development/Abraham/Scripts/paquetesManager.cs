@@ -14,6 +14,7 @@ public class paquetesManager : MonoBehaviour {
     public GameObject listaPaquetesNuevos;  ///< listaPaquetesNuevos referencia al objeto que contiene los paquetes nuevos por descargar
     public GameObject configuracionModal;   ///< configuracionModal referencia al modal de configuracion de curso
     public GameObject scrollBar;            ///< scrollBar referencia al scrollbar para seleccionar el numero maximo de preguntas por curso
+    public Toggle audioBox;
     private bool bandera = true;            ///< bandera bandera que valida si ya se obtuo la imagen del usuario
     private bool banderaTabs = false;
     public GameObject tabToInstantiate;
@@ -81,6 +82,7 @@ public class paquetesManager : MonoBehaviour {
         }
 
         scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
+        audioBox.isOn = manager.mascotaActive;
         setVisibleModal(false);
         manager.setBanderas(true);
         tabActivo = GameObject.Find("tabContentTodos");
@@ -209,48 +211,29 @@ public class paquetesManager : MonoBehaviour {
      */
     IEnumerator getUserImg() {
         if (manager.GetComponent<appManager>().getImagen() != null) {
-            string path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
             string url = manager.GetComponent<appManager>().getImagen();
-            using (WWW wwwImage = new WWW(url)) {
-                yield return wwwImage;
-
-                if (wwwImage.responseHeaders.Count > 0) {
-                    foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
-                        if (entry.Key == "STATUS") {
-                            //Debug.Log(entry.Value);
-                            if (entry.Value == "HTTP/1.1 404 Not Found") {
-                                //Debug.Log("No se encontro la imagen");
-                                manager.GetComponent<appManager>().setImagen("http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png");
-                                path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
-                            }
-                            //Debug.Log(path);
-                            if (File.Exists(Application.persistentDataPath + path)) {
-                                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-                                Texture2D texture = new Texture2D(8, 8);
-                                texture.LoadImage(byteArray);
-                                Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                imagen.sprite = sprite;
-                            } else {
-                                if (manager.isOnline) {
-                                    WWW www = new WWW(manager.GetComponent<appManager>().getImagen());
-                                    yield return www;
-                                    Texture2D texture = www.texture;
-                                    byte[] bytes;
-                                    if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                                        bytes = texture.EncodeToJPG();
-                                    } else {
-                                        bytes = texture.EncodeToPNG();
-                                    }
-                                    File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-                                    Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                    var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                    imagen.sprite = sprite;
-                                }
-                            }
-                        }
-                    }
+            string path = url.Split('/')[url.Split('/').Length - 1];
+            if (File.Exists(Application.persistentDataPath + path)) {
+                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+                Texture2D texture = new Texture2D(8, 8);
+                texture.LoadImage(byteArray);
+                Rect rec = new Rect(0, 0, texture.width, texture.height);
+                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                imagen.GetComponent<Image>().sprite = sprite;
+            } else {
+                WWW www = new WWW(url);
+                yield return www;
+                Texture2D texture = www.texture;
+                byte[] bytes;
+                if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                    bytes = texture.EncodeToJPG();
+                } else {
+                    bytes = texture.EncodeToPNG();
                 }
+                File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                Rect rec = new Rect(0, 0, texture.width, texture.height);
+                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                imagen.GetComponent<Image>().sprite = sprite;
             }
         }
     }
@@ -342,6 +325,24 @@ public class paquetesManager : MonoBehaviour {
      * Muestra u oculta el modalConfiguracion
      * @isVisible bool que se encarga de activar o desactivar el modal
      */
+    public void setVisibleModal() {
+        configuracionModal.SetActive(!configuracionModal.active);
+        if (configuracionModal.active == false) {
+            foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
+                ray.enabled = true;
+            }
+            //gameObject.GetComponent<GraphicRaycaster>().enabled = true;
+            manager.numeroPreguntas = scrollBar.GetComponent<Slider>().value;
+            manager.mascotaActive = audioBox.isOn;
+            webServicePreferencias.updatePreferenciaSqlite(manager.getUsuario(), manager.numeroPreguntas, manager.mascotaActive, manager.getFondo());
+        } else {
+            foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
+                ray.enabled = false;
+            }
+            //gameObject.GetComponent<GraphicRaycaster>().enabled = false;
+        }
+    }
+
     public void setVisibleModal(bool isVisible) {
         configuracionModal.SetActive(isVisible);
         if (isVisible == false) {
@@ -350,6 +351,7 @@ public class paquetesManager : MonoBehaviour {
             }
             //gameObject.GetComponent<GraphicRaycaster>().enabled = true;
             manager.numeroPreguntas = scrollBar.GetComponent<Slider>().value;
+            manager.mascotaActive = audioBox.isOn;
             webServicePreferencias.updatePreferenciaSqlite(manager.getUsuario(), manager.numeroPreguntas, manager.mascotaActive, manager.getFondo());
         } else {
             foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
@@ -447,7 +449,10 @@ public class paquetesManager : MonoBehaviour {
 
     public void setFondo(int fondo) {
         manager.setFondo(fondo);
-        GameObject.FindObjectOfType<fondoManager>().cambiarFondo();
+        Debug.Log(fondo);
+        foreach(var i in GameObject.FindObjectsOfType<fondoManager>()){
+            i.cambiarFondo(0.5f);
+        }
     }
 
 
@@ -485,6 +490,7 @@ public class paquetesManager : MonoBehaviour {
             panelTabs.SetActive(false);
             panelTabsBtn.SetActive(true);
             setVisibleModal(false);
+            panelTabsBtn.GetComponent<Image>().color = panelTabsBtn.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         } else if (option == 2) {
             panelPaquetes.SetActive(false);
             panelDescargas.SetActive(true);
@@ -496,6 +502,9 @@ public class paquetesManager : MonoBehaviour {
             panelDescargas.SetActive(false);
             panelTabs.SetActive(true);
             panelTabsBtn.SetActive(false);
+            foreach (var i in panelTabs.GetComponentsInChildren<fondoManager>()) {
+                i.gameObject.GetComponent<Image>().color = i.colorArray[manager.getFondo()];
+            }
         } else {
             panelPaquetes.SetActive(true);
             panelDescargas.SetActive(false);

@@ -9,6 +9,7 @@ public class LogoUvegScene : MonoBehaviour {
     public RawImage rawImage;
     public VideoPlayer video;
     bool bandera = false;
+    bool cambiandoScene = false;
 
     public void Update() {
         if (video.isPlaying) {
@@ -17,7 +18,10 @@ public class LogoUvegScene : MonoBehaviour {
         }
         if (bandera) {
             if (!video.isPlaying) {
-                StartCoroutine(changeScene());
+                if (!cambiandoScene) {
+                    cambiandoScene = true;
+                    StartCoroutine(changeScene());
+                }
             }
         }
 

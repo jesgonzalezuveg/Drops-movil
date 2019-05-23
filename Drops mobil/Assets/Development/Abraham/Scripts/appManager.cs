@@ -41,8 +41,6 @@ public class appManager : MonoBehaviour {
     public bool mascotaActive = true;
     private int fondo;
 
-    public AudioClip[] musica;
-
     public string anterior;
     public string actual;
 
@@ -99,10 +97,7 @@ public class appManager : MonoBehaviour {
         banderaRespuestas = valor;
     }
 
-    public void setMusica(int valor) {
-        gameObject.GetComponent<AudioSource>().clip = musica[valor];
-        gameObject.GetComponent<AudioSource>().Play();
-    }
+    
 
     /**
      * Regresa los datos del usuario correspondiente al usuario
@@ -203,8 +198,6 @@ public class appManager : MonoBehaviour {
     }
 
     public void Start() {
-        gameObject.GetComponent<AudioSource>().clip = musica[UnityEngine.Random.Range(0, musica.Length)];
-        gameObject.GetComponent<AudioSource>().Play();
         validarConexion();
     }
 
@@ -264,6 +257,16 @@ public class appManager : MonoBehaviour {
         validarEjercicios();
         validarPreguntas();
         validarRespuestas();
+
+        if (mascotaActive) {
+            foreach(var i in GameObject.FindObjectsOfType<AudioSource>()){
+                i.volume = 1;
+            }
+        } else {
+            foreach (var i in GameObject.FindObjectsOfType<AudioSource>()) {
+                i.volume = 0;
+            }
+        }
 
 
     }
