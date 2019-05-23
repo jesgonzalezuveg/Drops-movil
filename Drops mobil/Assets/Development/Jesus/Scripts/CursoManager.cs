@@ -336,28 +336,34 @@ public class CursoManager : MonoBehaviour {
         string modificador = null;
         if (promedio == 10.0f) {
             nota = "S";
+            modificador = null;
         } else if (promedio >= 9.5f && promedio < 10.0f) {
             nota = "A";
             modificador = "+";
         } else if (promedio >= 9.0f && promedio < 9.5f) {
             nota = "A";
+            modificador = null;
         } else if (promedio >= 8.5f && promedio < 9f) {
             nota = "B";
             modificador = "+";
         } else if (promedio >= 8.0f && promedio < 8.5f) {
             nota = "B";
+            modificador = null;
         } else if (promedio >= 7.5f && promedio < 8f) {
             nota = "C";
             modificador = "+";
         } else if (promedio >= 7.0f && promedio < 7.5f) {
             nota = "C";
+            modificador = null;
         } else if (promedio >= 6.5f && promedio < 7.0f) {
             nota = "D";
             modificador = "+";
         } else if (promedio >= 6.0f && promedio < 6.5f) {
             nota = "D";
+            modificador = null;
         } else if (promedio < 6.0f) {
             nota = "F";
+            modificador = null;
         }
         var imagenNota = GameObject.Find("letraNota").GetComponent<Image>();
         var spriteObjNota = Resources.Load("Letras/letra-" + nota);
