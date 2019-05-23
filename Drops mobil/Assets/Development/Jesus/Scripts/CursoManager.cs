@@ -379,6 +379,8 @@ public class CursoManager : MonoBehaviour {
             Rect recModificador = new Rect(0, 0, texModificador.width, texModificador.height);
             var spriteModificador = Sprite.Create(texModificador, recModificador, new Vector2(0.5f, 0.5f), 100);
             imagenModificador.sprite = spriteModificador;
+        } else {
+            GameObject.Find("modificadorNota").SetActive(false);
         }
 
     }
