@@ -6,12 +6,6 @@ using UnityEngine.EventSystems;
 
 public class clickManager : MonoBehaviour {
 
-    public bool cambiarDialogoMascota;
-    public bool isOnlyMesagge = false;
-    public string mensaje;
-    public AudioClip clipDialog;
-    public bool wasPlayed;
-
     private AudioClip click;        ///< click audioClip que almacena el audio de click 
     private AudioClip hover;        ///< hover audioClip que almacena el audio de hover
     private AudioSource source;     ///< source audioSource que reproducira los audioClips
@@ -29,7 +23,6 @@ public class clickManager : MonoBehaviour {
             gameObject.GetComponent<GraphicRaycaster>();
         }
 
-        wasPlayed = false;
         click = Resources.Load("Sounds/click_2") as AudioClip;
         hover = Resources.Load("Sounds/hover") as AudioClip;
 
@@ -44,48 +37,19 @@ public class clickManager : MonoBehaviour {
             trigger = gameObject.GetComponent<EventTrigger>();
         }
 
-        if (!isOnlyMesagge) {
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerDown;
-            entry.callback.AddListener((data) => {
-                source.clip = click;
-                source.Play();
-            });
-            trigger.triggers.Add(entry);
-        }
-
-        EventTrigger.Entry entry2 = new EventTrigger.Entry();
-        entry2.eventID = EventTriggerType.PointerEnter;
-        entry2.callback.AddListener((data) => {
-            if (cambiarDialogoMascota) {
-                if (GameObject.FindObjectOfType<appManager>().mascotaActive) {
-                    if (clipDialog) {
-                        if (GameObject.Find("Mascota").GetComponent<AudioSource>().clip != clipDialog) {
-                            GameObject.Find("Mascota").GetComponent<AudioSource>().clip = clipDialog;
-                            if (!wasPlayed) {
-                                GameObject.Find("Mascota").GetComponent<AudioSource>().Play();
-                                wasPlayed = true;
-                            }
-                            GameObject.Find("Mascota").GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-                            GameObject.Find("Mascota").GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
-                            GameObject.Find("Mascota").GetComponentInChildren<Text>().text = mensaje;
-                        }
-                    }
-                }
-            }
-            if (!isOnlyMesagge) {
-                source.clip = hover;
-                source.Play();
-            }
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerDown;
+        entry.callback.AddListener((data) => {
+            source.clip = click;
+            source.Play();
         });
-        trigger.triggers.Add(entry2);
+        trigger.triggers.Add(entry);
+
 
         EventTrigger.Entry entry3 = new EventTrigger.Entry();
         entry3.eventID = EventTriggerType.PointerExit;
         entry3.callback.AddListener((data) => {
-            if (!isOnlyMesagge) {
-                
-            }
+            
         });
         trigger.triggers.Add(entry3);
 
