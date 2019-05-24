@@ -467,6 +467,15 @@ public class CursoManager : MonoBehaviour {
     }
 
     public void crearBotonLetra(char respuesta, float angle, float radius) {
+        var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        x.transform.SetParent(canvasParentOfAnswers.transform, false);
+        x.AddComponent<clickManager>();
+        var spriteObj = Resources.Load("Letras/letra-" + respuesta);
+        var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
+        Texture2D tex = spriteObj as Texture2D;
+        Rect rec = new Rect(0, 0, tex.width, tex.height);
+        var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+        imagen.sprite = sprite;
         var hijos = canvasParentOfAnswers.transform.childCount;
         canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100, 100f);
         canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedRowCount;
@@ -481,17 +490,8 @@ public class CursoManager : MonoBehaviour {
             canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
         } else if (hijos < 7) {
             canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
+            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(100, 264);
         }
-        var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
-        x.transform.SetParent(canvasParentOfAnswers.transform, false);
-        x.AddComponent<clickManager>();
-        var spriteObj = Resources.Load("Letras/letra-" + respuesta);
-        var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
-        Texture2D tex = spriteObj as Texture2D;
-        Rect rec = new Rect(0, 0, tex.width, tex.height);
-        var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
-        imagen.sprite = sprite;
         addEvent(x, respuesta);
     }
 
@@ -520,9 +520,9 @@ public class CursoManager : MonoBehaviour {
                     break;
                 case "Relacionar":
                     respuestaToLoad = respuestaRelacionar;
-                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(200f, 200f);
-                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
-                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(100, 50);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(275f, 275f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 3;
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(20, 20);
                     break;
             }
             var x = Instantiate(respuestaToLoad, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
