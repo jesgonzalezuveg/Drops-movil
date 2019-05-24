@@ -97,7 +97,7 @@ public class appManager : MonoBehaviour {
         banderaRespuestas = valor;
     }
 
-    
+
 
     /**
      * Regresa los datos del usuario correspondiente al usuario
@@ -259,7 +259,7 @@ public class appManager : MonoBehaviour {
         validarRespuestas();
 
         if (mascotaActive) {
-            foreach(var i in GameObject.FindObjectsOfType<AudioSource>()){
+            foreach (var i in GameObject.FindObjectsOfType<AudioSource>()) {
                 i.volume = 1;
             }
         } else {
@@ -311,7 +311,9 @@ public class appManager : MonoBehaviour {
                     }
                 }
                 paquetesManager.fillEmpty(null);
-                paquetesManager.fillEmpty(GameObject.Find("PanelDescargas").GetComponentInChildren<gridScrollLayout>().gameObject);
+                if (GameObject.Find("PanelDescargas")) {
+                    paquetesManager.fillEmpty(GameObject.Find("PanelDescargas").GetComponentInChildren<gridScrollLayout>().gameObject);
+                }
                 banderaPaquetes = false;
 
                 foreach (var i in GameObject.Find("PanelCentral").GetComponentsInChildren<Transform>(true)) {
@@ -556,14 +558,16 @@ public class appManager : MonoBehaviour {
      * para despues llenarlos de nuevo con la informacion actualizada
      */
     void destruirObjetos() {
-        if (GameObject.Find("PanelNuevosPaquetes").transform.childCount > 0) {
-            for (var i = 0; i < GameObject.Find("PanelNuevosPaquetes").transform.childCount; i++) {
-                var objeto = GameObject.Find("PanelNuevosPaquetes").transform.GetChild(i);
-                DestroyImmediate(objeto.gameObject);
+        if (GameObject.Find("PanelNuevosPaquetes")) {
+            if (GameObject.Find("PanelNuevosPaquetes").transform.childCount > 0) {
+                for (var i = 0; i < GameObject.Find("PanelNuevosPaquetes").transform.childCount; i++) {
+                    var objeto = GameObject.Find("PanelNuevosPaquetes").transform.GetChild(i);
+                    DestroyImmediate(objeto.gameObject);
+                }
+                destruirObjetos();
+            } else {
+                return;
             }
-            destruirObjetos();
-        } else {
-            return;
         }
     }
 

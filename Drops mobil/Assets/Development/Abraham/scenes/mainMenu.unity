@@ -164,11 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1838292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,11 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &4728071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,11 +448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &13036344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,11 +827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &44615001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,11 +1050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &51765170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,11 +1350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &56051241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,11 +1492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &56346368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,11 +1634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &60102531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1816,11 +1776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &60147830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2044,11 +1999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &64012833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2191,11 +2141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &64219563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2417,11 +2362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &73818348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,11 +2583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &80848948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2869,11 +2804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &87515668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3400,11 +3330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: Si no cuentas con un usuario registrate
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &98991963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3486,6 +3411,7 @@ GameObject:
   - component: {fileID: 100265474}
   - component: {fileID: 100265473}
   - component: {fileID: 100265472}
+  - component: {fileID: 100265476}
   m_Layer: 5
   m_Name: InputNombre
   m_TagString: Untagged
@@ -3525,11 +3451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: Ingresa tu nombre
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &100265473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3631,6 +3552,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100265470}
   m_CullTransparentMesh: 0
+--- !u!114 &100265476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100265470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363afbc125c312245ac5aa6a14233a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: Nombre
 --- !u!1 &104244835
 GameObject:
   m_ObjectHideFlags: 0
@@ -3841,11 +3775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &117508289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4067,11 +3996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &134524233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4214,11 +4138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &141473135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4361,11 +4280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &142424402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4748,11 +4662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: "Reg\xEDstrate para guardar tus datos de juego y preferencias"
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &159655035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4873,11 +4782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &160475190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5020,11 +4924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &164278991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5246,11 +5145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &178876178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5393,11 +5287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &184524718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5619,11 +5508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &200148086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5766,11 +5650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &200964105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5913,11 +5792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &214529301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6139,11 +6013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &230413240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6286,11 +6155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &230639425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6433,11 +6297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &234517942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6580,11 +6439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &251415927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6727,11 +6581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &254282026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7134,11 +6983,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &281152020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7755,11 +7599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &288158780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7902,11 +7741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &288991706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8049,11 +7883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &293375099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8297,11 +8126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &314393041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8844,11 +8668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &331663120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8991,11 +8810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &333639020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9402,6 +9216,7 @@ GameObject:
   - component: {fileID: 353676425}
   - component: {fileID: 353676424}
   - component: {fileID: 353676423}
+  - component: {fileID: 353676427}
   m_Layer: 5
   m_Name: inputCorreo
   m_TagString: Untagged
@@ -9441,11 +9256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: Ingresa tu correo electronico o nombre de usuario
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &353676424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9547,6 +9357,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353676421}
   m_CullTransparentMesh: 0
+--- !u!114 &353676427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353676421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363afbc125c312245ac5aa6a14233a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: Correo o usuario
 --- !u!1 &354398969
 GameObject:
   m_ObjectHideFlags: 0
@@ -9700,11 +9523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &358800372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10027,11 +9845,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &367126018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10174,11 +9987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &367151157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10627,11 +10435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &383593500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10774,11 +10577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &387572398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10921,11 +10719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &390551268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11147,11 +10940,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &404889043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11452,11 +11240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &419296811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11678,11 +11461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &426872223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11904,11 +11682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &428586831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12051,11 +11824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &428788805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12277,11 +12045,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &430648290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12424,11 +12187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &433439762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12570,11 +12328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &437601248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12695,11 +12448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &453627555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12921,11 +12669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &461842261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13384,11 +13127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &480529629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13770,11 +13508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &540398018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13917,11 +13650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &541413514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14064,11 +13792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &552938762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14285,11 +14008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &562549671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14511,11 +14229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &569467569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14658,11 +14371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &571949253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14805,11 +14513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &571975385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15110,11 +14813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &578229118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15415,11 +15113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &588104711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15562,11 +15255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &591843901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15790,11 +15478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &598492554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16016,11 +15699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &619556288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16163,11 +15841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &624593798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16310,11 +15983,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &627774275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16536,11 +16204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &643844804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16841,11 +16504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &660629443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16988,11 +16646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &669504198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17135,11 +16788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &680960935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17464,11 +17112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &724724794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17690,11 +17333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &727294681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17837,11 +17475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &728220773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18163,11 +17796,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &745409177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18468,11 +18096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &762886706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18615,11 +18238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &765233234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18762,11 +18380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &765493366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19067,11 +18680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &784901521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19530,11 +19138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &804997834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19677,11 +19280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &810270421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19913,11 +19511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &816436652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20060,11 +19653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &817541218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20334,11 +19922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &819935981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20459,11 +20042,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &821016907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20764,11 +20342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &829769500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20990,11 +20563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &845028956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21137,11 +20705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &845197485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21284,11 +20847,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &855059366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21431,11 +20989,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &856442404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21736,11 +21289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &891184549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21883,11 +21431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &892088277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22465,11 +22008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: "Si tu usuario no se encuentra aqui inicia sesi\xF3n con el."
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &929347642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22553,11 +22091,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &931949619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22768,11 +22301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &938076899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22915,11 +22443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &938933630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23181,6 +22704,7 @@ GameObject:
   - component: {fileID: 954160778}
   - component: {fileID: 954160777}
   - component: {fileID: 954160776}
+  - component: {fileID: 954160780}
   m_Layer: 5
   m_Name: "inputCotrase\xF1a"
   m_TagString: Untagged
@@ -23220,11 +22744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: "Ingresa tu contrase\xF1a UVEG"
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &954160777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23326,6 +22845,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954160774}
   m_CullTransparentMesh: 0
+--- !u!114 &954160780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954160774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363afbc125c312245ac5aa6a14233a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: "Ingresa tu contrase\xF1a"
 --- !u!1 &954273419
 GameObject:
   m_ObjectHideFlags: 0
@@ -23536,11 +23068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &959255332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23683,11 +23210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &970441702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23830,11 +23352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &970535764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24056,11 +23573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &977297787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24203,11 +23715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &977798554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24745,11 +24252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1005095672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24971,11 +24473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1011512975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25276,11 +24773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1035752912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25660,11 +25152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1048705762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25807,11 +25294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1049191489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26033,11 +25515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1055700685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26259,11 +25736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1059188532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26564,11 +26036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1065436189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26790,11 +26257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1068901139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27090,11 +26552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1088077903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27237,11 +26694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1093595405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27384,11 +26836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1095729825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27531,11 +26978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1097980539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27678,11 +27120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1107372874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27904,11 +27341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1130290294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28051,11 +27483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1132644776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28277,11 +27704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1150814119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28603,11 +28025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1175336051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28750,11 +28167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1176978159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28897,11 +28309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1184348469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29197,11 +28604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1188564866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29344,11 +28746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1193139779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29491,11 +28888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1194312575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29680,6 +29072,7 @@ GameObject:
   - component: {fileID: 1196376828}
   - component: {fileID: 1196376827}
   - component: {fileID: 1196376826}
+  - component: {fileID: 1196376830}
   m_Layer: 5
   m_Name: inputMatricula
   m_TagString: Untagged
@@ -29719,11 +29112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: Ingresa tu matricula o usuario UVEG
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1196376827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29825,6 +29213,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196376824}
   m_CullTransparentMesh: 0
+--- !u!114 &1196376830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196376824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363afbc125c312245ac5aa6a14233a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: Correo o usuario
 --- !u!1 &1198330875
 GameObject:
   m_ObjectHideFlags: 0
@@ -29953,11 +29354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1202480129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30258,11 +29654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1223963295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30800,11 +30191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1240533347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31016,11 +30402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: "Da clic aqu\xED para continuar"
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!1 &1245622075
 GameObject:
   m_ObjectHideFlags: 0
@@ -31152,11 +30533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1246811648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31299,11 +30675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1257691092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31446,11 +30817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1266261320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31593,11 +30959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1267273657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31740,11 +31101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1269671286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31968,11 +31324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1273254241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32194,11 +31545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1277528793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32657,11 +32003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1299662496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32765,6 +32106,7 @@ GameObject:
   - component: {fileID: 1308845724}
   - component: {fileID: 1308845723}
   - component: {fileID: 1308845722}
+  - component: {fileID: 1308845726}
   m_Layer: 5
   m_Name: "inputCotrase\xF1a"
   m_TagString: Untagged
@@ -32804,11 +32146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: "Ingresa tu contrase\xF1a"
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1308845723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32910,6 +32247,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308845720}
   m_CullTransparentMesh: 0
+--- !u!114 &1308845726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308845720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363afbc125c312245ac5aa6a14233a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: "Ingresa tu contrase\xF1a"
 --- !u!1 &1312697476
 GameObject:
   m_ObjectHideFlags: 0
@@ -33184,11 +32534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1338560013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33563,11 +32908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1363328900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33710,11 +33050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1367780540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34015,11 +33350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1384030273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34557,11 +33887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1404576059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35405,11 +34730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1465525002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35552,11 +34872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1467859846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35778,11 +35093,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1469973463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35925,11 +35235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1477510392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36072,11 +35377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1489583996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36298,11 +35598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1492799588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36445,11 +35740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1493661299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36666,11 +35956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1502389590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36892,11 +36177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1509930759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37039,11 +36319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1513030801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37186,11 +36461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1513532417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37491,11 +36761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1527075495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37712,11 +36977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1539990652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38017,11 +37277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1553014572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38267,11 +37522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1558849416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38414,11 +37664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1566859744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38601,6 +37846,7 @@ GameObject:
   - component: {fileID: 1589065167}
   - component: {fileID: 1589065166}
   - component: {fileID: 1589065165}
+  - component: {fileID: 1589065169}
   m_Layer: 5
   m_Name: "inputCotrase\xF1a2"
   m_TagString: Untagged
@@ -38640,11 +37886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 1
-  isOnlyMesagge: 0
-  mensaje: "Confirma tu contrase\xF1a"
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1589065166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38746,6 +37987,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589065163}
   m_CullTransparentMesh: 0
+--- !u!114 &1589065169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589065163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363afbc125c312245ac5aa6a14233a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: "Confirma tu contrase\xF1a"
 --- !u!1 &1600042624
 GameObject:
   m_ObjectHideFlags: 0
@@ -38877,11 +38131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1602226074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39024,11 +38273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1603024792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39324,11 +38568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1605636253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39550,11 +38789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1612401677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39697,11 +38931,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1615711993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39844,11 +39073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1621079776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40070,11 +39294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1647960687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40217,11 +39436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1654297630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40522,11 +39736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1676581301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40669,11 +39878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1690566997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41211,11 +40415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1708367065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41674,11 +40873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1724378086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42058,11 +41252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1739228243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42204,11 +41393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1752810561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42329,11 +41513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1753878239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42476,11 +41655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1755089991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42723,11 +41897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1764060809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42870,11 +42039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1764246100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43096,11 +42260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1776384576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43322,11 +42481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1788231800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43550,11 +42704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1795188914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43697,11 +42846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1795212404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43923,11 +43067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1816937532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44534,11 +43673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1840828537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44681,11 +43815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1842116821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45060,11 +44189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1847172968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45678,11 +44802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1896040724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45825,11 +44944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1900238791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45972,11 +45086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1906935926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46119,11 +45228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1920556444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46266,11 +45370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1925640493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46413,11 +45512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1929673937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46560,11 +45654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1931823809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46786,11 +45875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1940756423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46933,11 +46017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1941206530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47398,11 +46477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1986138883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47545,11 +46619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &1990902429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47766,11 +46835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2001524766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48150,11 +47214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2023865040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48297,11 +47356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2026358726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48703,11 +47757,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2037444076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48850,11 +47899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2042818780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48997,11 +48041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2046879194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49223,11 +48262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2065798547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49370,11 +48404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2075308408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49754,11 +48783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2093786402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50219,11 +49243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2123881013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50445,11 +49464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &2133993189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50631,11 +49645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &227375107887900976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50648,11 +49657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!114 &227375108353530338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50665,11 +49669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cambiarDialogoMascota: 0
-  isOnlyMesagge: 0
-  mensaje: 
-  clipDialog: {fileID: 0}
-  wasPlayed: 0
 --- !u!1 &3706790673968737024
 GameObject:
   m_ObjectHideFlags: 0
