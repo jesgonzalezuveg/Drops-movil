@@ -310,6 +310,9 @@ public class appManager : MonoBehaviour {
                         paquetesManager.newCardDescarga(pack);
                     }
                 }
+                if (GameObject.FindObjectOfType<appManager>()) {
+                    GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
+                }
                 paquetesManager.fillEmpty(null);
                 if (GameObject.Find("PanelDescargas")) {
                     paquetesManager.fillEmpty(GameObject.Find("PanelDescargas").GetComponentInChildren<gridScrollLayout>().gameObject);
