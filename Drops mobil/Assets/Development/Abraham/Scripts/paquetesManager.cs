@@ -89,9 +89,7 @@ public class paquetesManager : MonoBehaviour {
         posTabContent = GameObject.Find("tabContentTodos").GetComponent<RectTransform>();
         GameObject.Find("Nombre").GetComponent<Text>().text = manager.getNombre();
         GameObject.Find("Tabs").SetActive(false);
-        if (GameObject.FindObjectOfType<appManager>()) {
-            GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
-        }
+        
     }
 
     public void fillPackTabs() {
