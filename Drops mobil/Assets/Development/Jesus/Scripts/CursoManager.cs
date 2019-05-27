@@ -52,6 +52,10 @@ public class CursoManager : MonoBehaviour {
     public GameObject PanelPregunta;
     public GameObject PanelRespuestas;
 
+    private List<GameObject> objsRespuestas = new List<GameObject>();
+    private List<string> relacionesPares = new List<string>();
+    private List<int> posRespuestas = new List<int>();
+
     public Image imagenPack;
 
     webServicePreguntas.preguntaData[] preguntas = null;
@@ -177,9 +181,8 @@ public class CursoManager : MonoBehaviour {
                     if (fraseCompletada == fraseACompletar) {
                         webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
                         fraseCompletada = "";
-                        fraseACompletar = "l";
                         webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
-                        textoCompletado.text = "";
+                        textoCompletado.text = fraseACompletar;
                         respuestaCorrecta();
                     }
                     break;
@@ -235,7 +238,8 @@ public class CursoManager : MonoBehaviour {
                     break;
             }
         } else if (correctas < 0) {
-            textoCompletado.text = "";
+            textoCompletado.text = "Respuesta: " + fraseACompletar;
+            textoPuntajeObtenido.text = "";
             webServiceRegistro.validarAccionSqlite("Respondió incorrectamente(" + descripcionTipoEjercicio + ")", manager.getUsuario(), "Respondió pregunta");
             countPreguntas++;
             correctas = 0;
@@ -244,6 +248,7 @@ public class CursoManager : MonoBehaviour {
             textoRacha.text = "";
             textoMultiplicador.text = "";
             StartCoroutine(activaObjeto(incorrectoimg));
+            descripcionTipoEjercicio = "";
             webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
             webServiceDetalleIntento.insertarDetalleIntentoSqLite("False", idPregunta, idRespuesta, idIntento);
             //panelCompletarPalabra.SetActive(false);
@@ -256,9 +261,9 @@ public class CursoManager : MonoBehaviour {
         correctas = 0;
         verificarRacha();
         StartCoroutine(activaObjeto(correctoimg));
+        descripcionTipoEjercicio = "";
         webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
         //panelCompletarPalabra.SetActive(false);
-        textoCompletado.text = "";
     }
 
     public void verificarRacha() {
@@ -527,7 +532,6 @@ public class CursoManager : MonoBehaviour {
             }
             var x = Instantiate(respuestaToLoad, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
             x.transform.SetParent(canvasParentOfAnswers.transform, false);
-
             if (descripcionTipoEjercicio != "Seleccion simple texto") {
                 if (Int32.Parse(preguntas[countPreguntas].idPaquete) > 10) {
                     var splitUrk = respuesta.urlImagen.Split('/');
@@ -568,7 +572,7 @@ public class CursoManager : MonoBehaviour {
             if (fraseCompletada[fraseCompletada.Length - 1] == fraseACompletar[fraseCompletada.Length - 1]) {
 
             } else {
-                textoCompletado.text = "";
+                textoCompletado.text = "Respuesta: "+ fraseACompletar;
                 webServiceRegistro.validarAccionSqlite("Respondió incorrectamente: " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
                 correctas = -1;
                 racha = 0;
@@ -581,30 +585,62 @@ public class CursoManager : MonoBehaviour {
     }
 
     void addEvent(GameObject obj, webServiceRespuestas.respuestaData respuesta) {
+        objsRespuestas.Add(obj);
+        if (respuesta.correcto == "True") {
+            posRespuestas.Add(1);
+        } else {
+            posRespuestas.Add(0);
+        }
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
             idRespuesta = respuesta.id;
             if (respuesta.correcto == "True") {
                 webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, respuesta.id, idIntento);
                 correctas++;
+                Color color = Color.green;
+                color.a = 0.5f;
+                obj.GetComponentInChildren<Button>().GetComponentInChildren<Image>().color = color;
+                obj.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
             } else {
                 correctas = -1;
             }
-            Destroy(obj);
+            //Destroy(obj);
         });
     }
 
     void addEventPares(GameObject obj, webServiceRespuestas.respuestaData respuesta) {
+        objsRespuestas.Add(obj);
+        relacionesPares.Add(respuesta.relacion);
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
             idRespuesta = respuesta.id;
             if (seleccion) {
                 parDos = respuesta.relacion;
-            } else {
+                if (respuesta.relacion == "1") {
+                    colorRespuestas(obj, Color.blue);
+                } else if (respuesta.relacion == "2") {
+                    colorRespuestas(obj, Color.yellow);
+                } else if (respuesta.relacion == "3") {
+                    colorRespuestas(obj, Color.green);
+                } else {
+                    Debug.Log("CursoManager line 628");
+                    Debug.Log("Error al momento de asignar la relacion de un par.");
+                }
+            } else { 
+                if (respuesta.relacion == "1") {
+                    colorRespuestas(obj, Color.blue);
+                }else if (respuesta.relacion == "2") {
+                    colorRespuestas(obj, Color.yellow);
+                } else if (respuesta.relacion == "3") {
+                    colorRespuestas(obj, Color.green);
+                } else {
+                    Debug.Log("CursoManager line 628");
+                    Debug.Log("Error al momento de asignar la relacion de un par.");
+                }
                 parUno = respuesta.relacion;
                 webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
                 seleccion = true;
             }
             idRespuesta = respuesta.id;
-            Destroy(obj);
+            //Destroy(obj);
         });
     }
 
@@ -675,12 +711,45 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
+    void colorRespuestas(GameObject obj, Color color) {
+        color.a = 0.5f;
+        obj.GetComponentInChildren<Button>().GetComponentInChildren<Image>().color = color;
+        obj.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
+    }
+
     IEnumerator activaObjeto(GameObject objeto) {
-        textoCompletado.text = "";
-        destroyChildrens();
+        if (descripcionTipoEjercicio != "Completar palabra" && descripcionTipoEjercicio != "Relacionar") {
+            int pos = 0;
+            foreach (GameObject obj in objsRespuestas) {
+                if (posRespuestas[pos] == 1) {
+                    colorRespuestas(obj, Color.green);
+                    pos++;
+                } else {
+                    colorRespuestas(obj, Color.red);
+                    pos++;
+                }
+            }
+        } else if(descripcionTipoEjercicio == "Relacionar"){
+            int pos2 = 0;
+            foreach (GameObject obj in objsRespuestas) {
+                if (relacionesPares[pos2] == "1") {
+                    colorRespuestas(obj, Color.blue);
+                    pos2++;
+                }else if(relacionesPares[pos2] == "2") {
+                    colorRespuestas(obj, Color.yellow);
+                    pos2++;
+                }else if (relacionesPares[pos2] == "3") {
+                    colorRespuestas(obj, Color.green);
+                    pos2++;
+                } else {
+                    Debug.Log("CursoManager line 749");
+                    Debug.Log("Error al momento mostrar las respuestas de la pregunta de tipo relacion.");
+                }
+            }
+        }
+        textoCompletado.text = "Respuesta: " + fraseACompletar;
         valAudio(objeto);
         objeto.SetActive(true);
-        //valAudio(objeto);
         objeto.GetComponentInChildren<AudioSource>().Play();
         yield return new WaitUntil(() => objeto.GetComponentInChildren<AudioSource>().isPlaying == false);
         //yield return new WaitForSeconds(0.8f);
@@ -688,6 +757,14 @@ public class CursoManager : MonoBehaviour {
         objeto.SetActive(false);
         correctasAContestar = 0;
         textoPuntajeObtenido.text = "";
+        fraseACompletar = "";
+        //Variables control de retroalimentacion
+
+        objsRespuestas.Clear();
+        relacionesPares.Clear();
+        posRespuestas.Clear();
+        ////////
+        destroyChildrens();
         llamarPreguntas();
     }
 
