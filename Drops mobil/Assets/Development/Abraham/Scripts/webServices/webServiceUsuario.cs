@@ -496,7 +496,7 @@ public class webServiceUsuario : MonoBehaviour {
                                 GameObject.FindObjectOfType<keyboardManager>().setPassword2("");
                                 GameObject.FindObjectOfType<PlayerManager>().setMensaje(false, "");
                                 GameObject.FindObjectOfType<mainMenuManager>().cambiarVista(2);
-                                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Tu usuario se registro con éxito";
+                                //GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Tu usuario se registro con éxito";
                             }
                         }
                     }
