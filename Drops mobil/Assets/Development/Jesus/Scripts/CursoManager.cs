@@ -115,8 +115,6 @@ public class CursoManager : MonoBehaviour {
     void Start() {
         scoreFinal.SetActive(false);
 
-
-
         bien = Resources.Load("audios/Great") as AudioClip;
         bienSp = Resources.Load("UserInterface/bien");
 
@@ -160,10 +158,22 @@ public class CursoManager : MonoBehaviour {
         var idLog = webServiceLog.getLastLogSqLite(idUsuario);
         webServiceIntento.insertarIntentoSqLite("0", manager.getUsuario());
         idIntento = webServiceIntento.consultarUltimoIdIntentoByIdLogSqLite(idLog);
+        loadImagenCategoria();
         llamarPreguntas();
         if (GameObject.FindObjectOfType<appManager>()) {
             GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
         }
+    }
+
+    void loadImagenCategoria() {
+        var categoria = webServiceCategoria.getCategoriaByIdSqLite(webServicePaquetes.getPaquetesByDescripcionSqLite(preguntas[0].descripcionPaquete).idCategoria).descripcion;
+        categoria = categoria.Replace(" ", string.Empty);
+        Debug.Log(categoria);
+        var textura = Resources.Load(categoria) as Texture2D;
+        Debug.Log(textura);
+        Rect rec = new Rect(0, 0, textura.width, textura.height);
+        var sprite = Sprite.Create(textura, rec, new Vector2(0.5f, 0.5f), 100);
+        PanelRespuestas.GetComponent<Image>().sprite = sprite;
     }
 
     private void Update() {
@@ -412,7 +422,7 @@ public class CursoManager : MonoBehaviour {
     public void llenarRespuestas(webServiceRespuestas.respuestaData[] respuestas) {
         var numberOfObjects = respuestas.Length;
         if (numberOfObjects == 6) {
-            gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 30, 0));
+            //gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 30, 0));
         }
         var radius = 4f;
         int p = 1;
@@ -467,7 +477,7 @@ public class CursoManager : MonoBehaviour {
     IEnumerator deleteGrid() {
         yield return new WaitForSeconds(.3f);
         if (canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
-            Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
+            //Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
         }
     }
 
@@ -525,7 +535,7 @@ public class CursoManager : MonoBehaviour {
                     break;
                 case "Relacionar":
                     respuestaToLoad = respuestaRelacionar;
-                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(275f, 275f);
+                    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(250f, 275f);
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 3;
                     canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(20, 20);
                     break;

@@ -34,22 +34,22 @@ public class keyboardManager : MonoBehaviour {
     private void Update() {
         if (isUsuario) {
             if (usuario.Length <= 0) {
-                inputActivo.GetComponentInChildren<Text>().text = "Correo o usuario";
+                inputActivo.GetComponentInChildren<InputField>().text = "Correo o usuario";
             }
         }
         if (isNombre) {
             if (nombre.Length <= 0) {
-                inputActivo.GetComponentInChildren<Text>().text = "Nombre";
+                inputActivo.GetComponentInChildren<InputField>().text = "Nombre";
             }
         }
         if (isPasswordInputActive) {
             if (password.Length <= 0) {
-                inputActivo.GetComponentInChildren<Text>().text = "Ingresa tu contraseña";
+                inputActivo.GetComponentInChildren<InputField>().text = "Ingresa tu contraseña";
             }
         }
         if (isSecondPassword) {
             if (password2.Length <= 0) {
-                inputActivo.GetComponentInChildren<Text>().text = "Confirma tu contraseña";
+                inputActivo.GetComponentInChildren<InputField>().text = "Confirma tu contraseña";
             }
         }
     }
@@ -106,26 +106,26 @@ public class keyboardManager : MonoBehaviour {
         }
         if (isUsuario) {
             usuario += key;
-            inputActivo.GetComponentInChildren<Text>().text = "";
-            inputActivo.GetComponentInChildren<Text>().text = usuario;
+            inputActivo.GetComponentInChildren<InputField>().text = "";
+            inputActivo.GetComponentInChildren<InputField>().text = usuario;
         }
         if (isNombre) {
             nombre += key;
-            inputActivo.GetComponentInChildren<Text>().text = "";
-            inputActivo.GetComponentInChildren<Text>().text = nombre;
+            inputActivo.GetComponentInChildren<InputField>().text = "";
+            inputActivo.GetComponentInChildren<InputField>().text = nombre;
         }
         if (isPasswordInputActive) {
             password += key;
-            inputActivo.GetComponentInChildren<Text>().text = "";
+            inputActivo.GetComponentInChildren<InputField>().text = "";
             for (int i = 0; i < password.Length; i++) {
-                inputActivo.GetComponentInChildren<Text>().text += "*";
+                inputActivo.GetComponentInChildren<InputField>().text += "*";
             }
         }
         if (isSecondPassword) {
             password2 += key;
-            inputActivo.GetComponentInChildren<Text>().text = "";
+            inputActivo.GetComponentInChildren<InputField>().text = "";
             for (int i = 0; i < password2.Length; i++) {
-                inputActivo.GetComponentInChildren<Text>().text += "*";
+                inputActivo.GetComponentInChildren<InputField>().text += "*";
             }
         }
     }
@@ -134,14 +134,14 @@ public class keyboardManager : MonoBehaviour {
      * @param
      */
     public void DeleteChar() {
-        if (inputActivo.GetComponentInChildren<Text>().text != "") {
-            inputActivo.GetComponentInChildren<Text>().text = inputActivo.GetComponentInChildren<Text>().text.Remove(inputActivo.GetComponentInChildren<Text>().text.Length - 1);
+        if (inputActivo.GetComponentInChildren<InputField>().text != "") {
+            inputActivo.GetComponentInChildren<InputField>().text = inputActivo.GetComponentInChildren<InputField>().text.Remove(inputActivo.GetComponentInChildren<InputField>().text.Length - 1);
             if (isUsuario) {
                 if (usuario.Length > 0) {
                     usuario = usuario.Remove(usuario.Length - 1);
                 }
                 if (usuario.Length <= 0) {
-                    inputActivo.GetComponentInChildren<Text>().text = "Correo o usuario";
+                    inputActivo.GetComponentInChildren<InputField>().text = "Correo o usuario";
                 }
             }
             if (isNombre) {
@@ -149,7 +149,7 @@ public class keyboardManager : MonoBehaviour {
                     nombre = nombre.Remove(nombre.Length - 1);
                 }
                 if (nombre.Length <= 0) {
-                    inputActivo.GetComponentInChildren<Text>().text = "Nombre";
+                    inputActivo.GetComponentInChildren<InputField>().text = "Nombre";
                 }
             }
             if (isPasswordInputActive) {
@@ -157,7 +157,7 @@ public class keyboardManager : MonoBehaviour {
                     password = password.Remove(password.Length - 1);
                 }
                 if (password.Length <= 0) {
-                    inputActivo.GetComponentInChildren<Text>().text = "Ingresa tu contraseña";
+                    inputActivo.GetComponentInChildren<InputField>().text = "Ingresa tu contraseña";
                 }
             }
             if (isSecondPassword) {
@@ -165,7 +165,7 @@ public class keyboardManager : MonoBehaviour {
                     password2 = password2.Remove(password2.Length - 1);
                 }
                 if (password2.Length <= 0) {
-                    inputActivo.GetComponentInChildren<Text>().text = "Confirma tu contraseña";
+                    inputActivo.GetComponentInChildren<InputField>().text = "Confirma tu contraseña";
                 }
             }
         }
@@ -178,11 +178,11 @@ public class keyboardManager : MonoBehaviour {
         isMinusculas = !isMinusculas;
 
         if (isMinusculas) {
-            foreach (Text t in teclasLetras.GetComponentsInChildren<Text>()) {
+            foreach (var t in teclasLetras.GetComponentsInChildren<InputField>()) {
                 t.text = t.text.ToLower();
             }
         } else {
-            foreach (Text t in teclasLetras.GetComponentsInChildren<Text>()) {
+            foreach (var t in teclasLetras.GetComponentsInChildren<InputField>()) {
                 t.text = t.text.ToUpper();
             }
         }
@@ -234,7 +234,9 @@ public class keyboardManager : MonoBehaviour {
         Debug.Log("Buscar en BD Local");
 
         // Consultar en BD local (sqlite)
-        var usuario = webServiceUsuario.consultarLoginUsuarioSqLite(inputs[0].GetComponentInChildren<Text>().text, password);
+        Debug.Log(inputs[0].GetComponentInChildren<InputField>().text + " - " + inputs[1].GetComponentInChildren<InputField>().text);
+        password = inputs[1].GetComponentInChildren<InputField>().text;
+        var usuario = webServiceUsuario.consultarLoginUsuarioSqLite(inputs[0].GetComponentInChildren<InputField>().text, password);
         if (usuario != null) {
             if (usuario.password != "") {
                 Debug.Log("usuario no es null");
@@ -249,11 +251,17 @@ public class keyboardManager : MonoBehaviour {
             }
         } else {
             // Consultar en SII ambas BD
-            StartCoroutine(webServiceUsuario.getUserData(inputs[0].GetComponentInChildren<Text>().text, password));
+            StartCoroutine(webServiceUsuario.getUserData(inputs[0].GetComponentInChildren<InputField>().text, password));
         }
     }
 
     public void registrar() {
+
+        usuario = this.inputs[0].GetComponentInChildren<InputField>().text;
+        nombre = this.inputs[1].GetComponentInChildren<InputField>().text;
+        password = this.inputs[2].GetComponentInChildren<InputField>().text;
+        password2 = this.inputs[3].GetComponentInChildren<InputField>().text;
+
         if (usuario == "" || nombre == "" || password == "") {
             Debug.Log("Faltan campos por llenar");
             return;
@@ -280,7 +288,7 @@ public class keyboardManager : MonoBehaviour {
         }
 
         foreach (var input in inputs) {
-            input.GetComponentInChildren<Text>().text = "";
+            input.GetComponentInChildren<InputField>().text = "";
         }
         usuario = usuario.ToLower();
         StartCoroutine(webServiceUsuario.insertUsuario(usuario, nombre, password));

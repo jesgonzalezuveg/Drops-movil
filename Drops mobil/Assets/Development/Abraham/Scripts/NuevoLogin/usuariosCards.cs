@@ -46,7 +46,7 @@ public class usuariosCards : MonoBehaviour {
                 StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena("menuCategorias", "mainMenu"));
             } else {
                 GetComponentInParent<mainMenuManager>().cambiarVista(2);
-                GameObject.Find("inputMatricula").GetComponentInChildren<Text>().text = usuario.usuario;
+                GameObject.Find("inputMatricula").GetComponentInChildren<InputField>().text = usuario.usuario;
                 GameObject.Find("Teclado").GetComponent<keyboardManager>().setUsuario(usuario.usuario);
             }
         });

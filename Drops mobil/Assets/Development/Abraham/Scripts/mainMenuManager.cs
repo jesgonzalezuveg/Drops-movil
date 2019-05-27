@@ -6,9 +6,11 @@ public class mainMenuManager : MonoBehaviour {
 
     public GameObject[] vistas;
     GameObject vistaActiva;
+    GameObject mascota;
 
     public void Start() {
         vistaActiva = vistas[0];
+        mascota = GameObject.Find("Mascota");
         if (GameObject.FindObjectOfType<appManager>()) {
             GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
         }
@@ -19,6 +21,11 @@ public class mainMenuManager : MonoBehaviour {
      * 
      */
     public void cambiarVista(int vista) {
+        if (vista == 3) {
+            mascota.SetActive(false);
+        } else {
+            mascota.SetActive(true);
+        }
         vistaActiva.SetActive(false);
         vistas[vista].SetActive(true);
         vistaActiva = vistas[vista];
@@ -28,7 +35,7 @@ public class mainMenuManager : MonoBehaviour {
             GameObject.FindObjectOfType<keyboardManager>().setPassword("");
             GameObject.FindObjectOfType<keyboardManager>().setPassword2("");
             foreach (var input in GameObject.FindObjectOfType<keyboardManager>().inputs) {
-                input.GetComponentInChildren<Text>().text = "";
+                input.GetComponentInChildren<InputField>().text = "";
             }
         }
     }
