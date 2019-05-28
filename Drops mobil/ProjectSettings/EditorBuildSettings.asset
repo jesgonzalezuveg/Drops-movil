@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Development/Jesus/Scenes/Movil/salon.unity
     guid: d80e240d03d711741b34922b2ead589d
+  - enabled: 1
+    path: Assets/Development/Jesus/Scenes/Movil/mainMenuSesion.unity
+    guid: 23b39de2dfdbc814087c0d50409982e1
   m_configObjects: {}

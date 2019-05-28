@@ -42,6 +42,7 @@ public class webServiceUsuario : MonoBehaviour {
         public string syncroStatus = "";
         public string password = "";
         public string imagen = "";
+        public string sesion = "";
     }
 
     /**
@@ -118,6 +119,17 @@ public class webServiceUsuario : MonoBehaviour {
         string query = "SELECT * FROM usuario WHERE usuario = '" + usuario + "';";
         var result = conexionDB.selectGeneral(query);
         return result;
+    }
+
+    public static userDataSqLite consultarUsuarioSqLiteLogueado() {
+        string query = "SELECT * FROM usuario WHERE usuario != 'Invitado' and sesion = 1 LIMIT 1;";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            userDataSqLite data = JsonUtility.FromJson<userDataSqLite>(result);
+            return data;
+        } else {
+            return null;
+        }
     }
 
     public static userDataSqLite[] consultarUsuariosSqLite() {
@@ -212,6 +224,27 @@ public class webServiceUsuario : MonoBehaviour {
         }
     }
 
+    public static int updateSesionStatusSqlite(string usuario, int sesionStatus) {
+        string query = "UPDATE usuario SET sesion = " + sesionStatus + " WHERE usuario = '" + usuario + "'";
+        var result = conexionDB.alterGeneral(query);
+
+        if (result == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int updateAllSesionStatusSqlite(int sesionStatus) {
+        string query = "UPDATE usuario SET sesion = " + sesionStatus;
+        var result = conexionDB.alterGeneral(query);
+
+        if (result == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     /** Función que verifica di el usuario existe
      * @param usuario matricula o correo electronico del usuario
      */
@@ -267,6 +300,11 @@ public class webServiceUsuario : MonoBehaviour {
                             insertarUsuarioSqLite(data.data.Usuario, nombreCompleto, "usuarioUveg", data.data.ProgramaAcademico, data.data.ProgramaEstudio, contraseña, data.data.Imagen);
                         }
                         webServiceLog.insertarLogSqLite(data.data.Usuario);
+                        int res = webServiceUsuario.updateSesionStatusSqlite(data.data.Usuario, 1);
+                        if (res == 0) {
+                            Debug.Log("Error en webServiceUsuario en linea 352");
+                            Debug.Log("Error al modificar el status de sesion del usuario");
+                        }
                         webServiceRegistro.validarAccionSqlite("Login teclado", data.data.Usuario, "Login");
                         SceneManager.LoadScene("menuCategorias");
                     } else {
@@ -314,6 +352,11 @@ public class webServiceUsuario : MonoBehaviour {
                                     insertarUsuarioSqLite(myObject.usuario, myObject.nombre, "usuarioApp", myObject.programa, myObject.programa, myObject.password, "http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png");
                                 }
                                 webServiceLog.insertarLogSqLite(myObject.usuario);
+                                int res = webServiceUsuario.updateSesionStatusSqlite(myObject.usuario, 1);
+                                if (res == 0) {
+                                    Debug.Log("Error en webServiceUsuario en linea 352");
+                                    Debug.Log("Error al modificar el status de sesion del usuario");
+                                }
                                 webServiceRegistro.validarAccionSqlite("Login teclado", myObject.usuario, "Login");
                                 SceneManager.LoadScene("menuCategorias");
                             }

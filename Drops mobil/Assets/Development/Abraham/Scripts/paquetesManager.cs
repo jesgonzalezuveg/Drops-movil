@@ -465,6 +465,11 @@ public class paquetesManager : MonoBehaviour {
         manager.setCorreo(null);
         manager.setImagen(null);
         manager.setGradoEstudios(null);
+        int res = webServiceUsuario.updateAllSesionStatusSqlite(0);
+        if (res == 0) {
+            Debug.Log("Error en paquetesManager en linea 470");
+            Debug.Log("Error al modificar los status de sesion de los usuarios");
+        }
         webServiceRegistro.validarAccionSqlite("Logout", manager.getUsuario(), "Cerrar sesión");
         StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena("mainMenu", "mainMenu"));
     }

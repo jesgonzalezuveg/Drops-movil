@@ -244,6 +244,11 @@ public class keyboardManager : MonoBehaviour {
                 GameObject.FindObjectOfType<appManager>().setUsuario(usuario.usuario);
                 GameObject.FindObjectOfType<appManager>().setGradoEstudios(usuario.programa);
                 GameObject.FindObjectOfType<appManager>().setImagen(usuario.imagen);
+                int res = webServiceUsuario.updateSesionStatusSqlite(usuario.usuario, 1);
+                if (res == 0) {
+                    Debug.Log("Error en keyboardManager en linea 249");   
+                    Debug.Log("Error al modificar el status de sesion del usuario");   
+                }
                 StartCoroutine(GameObject.FindObjectOfType<appManager>().cambiarEscena("menuCategorias", "mainMenu"));
             } else {
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
