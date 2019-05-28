@@ -7,6 +7,11 @@ using System;
 
 public class CursoManager : MonoBehaviour {
 
+    private float time = 15.0f;
+    private float tiempo;
+    private bool aumento = false;
+    private bool comenzarPregunta = false;
+    public Text Tiempo;
     SyncroManager sicroManager;
     // public GameObject panelCompletarPalabra;
     public Text textoRachaMax;
@@ -44,6 +49,8 @@ public class CursoManager : MonoBehaviour {
     public GameObject respuestaNormal;
     public GameObject respuestaRelacionar;
     public GameObject respuestaCompletar;
+    public GameObject respuestaCompletarNueva;
+    public GameObject btnValidarPalabra;
     public GameObject respuestaTexto;
     public GameObject canvasParentOfAnswers;
 
@@ -51,6 +58,10 @@ public class CursoManager : MonoBehaviour {
     public GameObject PanelScore;
     public GameObject PanelPregunta;
     public GameObject PanelRespuestas;
+
+    private List<GameObject> objsRespuestas = new List<GameObject>();
+    private List<string> relacionesPares = new List<string>();
+    private List<int> posRespuestas = new List<int>();
 
     public Image imagenPack;
 
@@ -82,6 +93,8 @@ public class CursoManager : MonoBehaviour {
     string idPregunta = "";
     string idRespuesta = "";
 
+
+
     IEnumerator putImagenPack(string urlImagen) {
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
         if (File.Exists(Application.persistentDataPath + path)) {
@@ -106,6 +119,10 @@ public class CursoManager : MonoBehaviour {
             var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
             imagenPack.sprite = sprite;
         }
+    }
+
+    private void Awake() {
+        tiempo = time;
     }
 
     void Start() {
@@ -173,6 +190,28 @@ public class CursoManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (comenzarPregunta == true) {
+
+            if (tiempo > 0) {
+                tiempo -= Time.deltaTime;
+            }
+
+            if (tiempo <= (time / 3)) {
+                Tiempo.color = Color.red;
+            } else if(tiempo < ((time / 3) * 2) && tiempo > (time / 3)){
+                Tiempo.color = Color.yellow;
+            } else if(tiempo >= ((time / 3) * 2)){
+                Tiempo.color = Color.green;
+            }
+            Tiempo.text = "" + Mathf.Round(tiempo).ToString();
+
+            if (tiempo <= 0.1f) {
+                idRespuesta = "0";
+                correctas = -1;
+                comenzarPregunta = false;
+            }
+        }
+
         if (correctas >= 0 && countPreguntas < preguntas.Length) {
             switch (descripcionTipoEjercicio) {
                 case "Seleccion simple":
@@ -183,15 +222,14 @@ public class CursoManager : MonoBehaviour {
                     break;
                 case "Completar palabra":
                     //panelCompletarPalabra.SetActive(true);
-                    textoCompletado.text = fraseCompletada;
-                    if (fraseCompletada == fraseACompletar) {
-                        webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
-                        fraseCompletada = "";
-                        fraseACompletar = "l";
-                        webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
-                        textoCompletado.text = "";
-                        respuestaCorrecta();
-                    }
+                    //textoCompletado.text = fraseCompletada;
+                    //if (fraseCompletada == fraseACompletar) {
+                    //    webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
+                    //    fraseCompletada = "";
+                    //    webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
+                    //    textoCompletado.text = fraseACompletar;
+                    //    respuestaCorrecta();
+                    //}
                     break;
                 case "Seleccion Multiple":
                     textoCompletado.text = "Respuestas faltantes " + (correctasAContestar - correctas);
@@ -245,7 +283,8 @@ public class CursoManager : MonoBehaviour {
                     break;
             }
         } else if (correctas < 0) {
-            textoCompletado.text = "";
+            textoCompletado.text = "Respuesta: " + fraseACompletar;
+            textoPuntajeObtenido.text = "";
             webServiceRegistro.validarAccionSqlite("Respondió incorrectamente(" + descripcionTipoEjercicio + ")", manager.getUsuario(), "Respondió pregunta");
             countPreguntas++;
             correctas = 0;
@@ -254,6 +293,7 @@ public class CursoManager : MonoBehaviour {
             textoRacha.text = "";
             textoMultiplicador.text = "";
             StartCoroutine(activaObjeto(incorrectoimg));
+            descripcionTipoEjercicio = "";
             webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
             webServiceDetalleIntento.insertarDetalleIntentoSqLite("False", idPregunta, idRespuesta, idIntento);
             //panelCompletarPalabra.SetActive(false);
@@ -266,9 +306,9 @@ public class CursoManager : MonoBehaviour {
         correctas = 0;
         verificarRacha();
         StartCoroutine(activaObjeto(correctoimg));
+        descripcionTipoEjercicio = "";
         webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
         //panelCompletarPalabra.SetActive(false);
-        textoCompletado.text = "";
     }
 
     public void verificarRacha() {
@@ -323,6 +363,7 @@ public class CursoManager : MonoBehaviour {
                 default:
                     break;
             }
+            comenzarPregunta = true;
         } else {
             destroyChildrens();
             textoPuntaje.text = "";
@@ -444,6 +485,31 @@ public class CursoManager : MonoBehaviour {
         StartCoroutine(deleteGrid());
     }
 
+    //public void llenarLetras(string palabra) {
+    //    palabra = palabra.ToUpper();
+    //    var letras = shuffleArray(palabra);
+    //    var numberOfObjects = palabra.Length;
+    //    var radius = 4f;
+    //    int p = 1;
+    //    int i = 0;
+    //    if (!canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
+    //        var x = canvasParentOfAnswers.AddComponent<GridLayoutGroup>();
+    //        x.padding.top = 25;
+    //        x.cellSize = new Vector2(325, 325);
+    //        x.spacing = new Vector2(50, 50);
+    //        x.startAxis = GridLayoutGroup.Axis.Horizontal;
+    //        x.childAlignment = TextAnchor.UpperCenter;
+    //        x.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+    //        x.constraintCount = 2;
+    //    }
+    //    foreach (char caratcter in letras) {
+    //        float angle = i * Mathf.PI * 2 / numberOfObjects;
+    //        crearBotonLetra(caratcter, angle, radius);
+    //        i++;
+    //    }
+    //    StartCoroutine(deleteGrid());
+    //}
+
     public void llenarLetras(string palabra) {
         palabra = palabra.ToUpper();
         var letras = shuffleArray(palabra);
@@ -453,19 +519,15 @@ public class CursoManager : MonoBehaviour {
         int i = 0;
         if (!canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
             var x = canvasParentOfAnswers.AddComponent<GridLayoutGroup>();
-            x.padding.top = 25;
-            x.cellSize = new Vector2(325, 325);
-            x.spacing = new Vector2(50, 50);
+            x.padding.top = 50;
+            x.cellSize = new Vector2(700, 100);
+            x.spacing = new Vector2(20, 20);
             x.startAxis = GridLayoutGroup.Axis.Horizontal;
             x.childAlignment = TextAnchor.UpperCenter;
             x.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-            x.constraintCount = 2;
+            x.constraintCount = 1;
         }
-        foreach (char caratcter in letras) {
-            float angle = i * Mathf.PI * 2 / numberOfObjects;
-            crearBotonLetra(caratcter, angle, radius);
-            i++;
-        }
+        crearBotonLetra();
         StartCoroutine(deleteGrid());
     }
 
@@ -476,34 +538,45 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
-    public void crearBotonLetra(char respuesta, float angle, float radius) {
-        var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+    public void crearBotonLetra() {
+        var x = Instantiate(respuestaCompletarNueva, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
         x.AddComponent<clickManager>();
-        var spriteObj = Resources.Load("Letras/letra-" + respuesta);
-        var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
-        Texture2D tex = spriteObj as Texture2D;
-        Rect rec = new Rect(0, 0, tex.width, tex.height);
-        var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
-        imagen.sprite = sprite;
-        var hijos = canvasParentOfAnswers.transform.childCount;
-        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100, 100f);
-        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedRowCount;
-        if (hijos >= 21) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 5;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
-        } else if (hijos >= 16 && hijos < 21) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 4;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 80);
-        } else if (hijos >= 7 && hijos < 16) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 3;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
-        } else if (hijos < 7) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(100, 264);
-        }
-        addEvent(x, respuesta);
+
+        var y = Instantiate(btnValidarPalabra, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        y.transform.SetParent(canvasParentOfAnswers.transform, false);
+        y.AddComponent<clickManager>();
+        addEvent(x, y);
     }
+
+    //public void crearBotonLetra(char respuesta, float angle, float radius) {
+    //    var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+    //    x.transform.SetParent(canvasParentOfAnswers.transform, false);
+    //    x.AddComponent<clickManager>();
+    //    var spriteObj = Resources.Load("Letras/letra-" + respuesta);
+    //    var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
+    //    Texture2D tex = spriteObj as Texture2D;
+    //    Rect rec = new Rect(0, 0, tex.width, tex.height);
+    //    var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+    //    imagen.sprite = sprite;
+    //    var hijos = canvasParentOfAnswers.transform.childCount;
+    //    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100, 100f);
+    //    canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedRowCount;
+    //    if (hijos >= 21) {
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 5;
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
+    //    } else if (hijos >= 16 && hijos < 21) {
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 4;
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 80);
+    //    } else if (hijos >= 7 && hijos < 16) {
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 3;
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
+    //    } else if (hijos < 7) {
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
+    //        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(100, 264);
+    //    }
+    //    addEvent(x, respuesta);
+    //}
 
     public void crearBoton(webServiceRespuestas.respuestaData respuesta, float angle, float radius) {
         try {
@@ -537,7 +610,6 @@ public class CursoManager : MonoBehaviour {
             }
             var x = Instantiate(respuestaToLoad, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
             x.transform.SetParent(canvasParentOfAnswers.transform, false);
-
             if (descripcionTipoEjercicio != "Seleccion simple texto") {
                 if (Int32.Parse(preguntas[countPreguntas].idPaquete) > 10) {
                     var splitUrk = respuesta.urlImagen.Split('/');
@@ -572,13 +644,17 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
-    void addEvent(GameObject obj, char caracter) {
-        obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
-            fraseCompletada += caracter;
-            if (fraseCompletada[fraseCompletada.Length - 1] == fraseACompletar[fraseCompletada.Length - 1]) {
-
+    void addEvent(GameObject objInput, GameObject objBtn) {
+        objBtn.GetComponentInChildren<Button>().onClick.AddListener(delegate {
+            fraseCompletada = objInput.GetComponentInChildren<InputField>().text.ToUpper();
+            if (fraseCompletada == fraseACompletar) {
+                webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
+                fraseCompletada = "";
+                webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
+                textoCompletado.text = fraseACompletar;
+                respuestaCorrecta();
             } else {
-                textoCompletado.text = "";
+                textoCompletado.text = "Respuesta: " + fraseACompletar;
                 webServiceRegistro.validarAccionSqlite("Respondió incorrectamente: " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
                 correctas = -1;
                 racha = 0;
@@ -586,35 +662,84 @@ public class CursoManager : MonoBehaviour {
                 textoRacha.text = "";
                 textoMultiplicador.text = "";
             }
-            Destroy(obj);
         });
     }
 
+    //void addEvent(GameObject obj, char caracter) {
+    //    obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
+    //        fraseCompletada += caracter;
+    //        if (fraseCompletada[fraseCompletada.Length - 1] == fraseACompletar[fraseCompletada.Length - 1]) {
+
+    //        } else {
+    //            textoCompletado.text = "Respuesta: "+ fraseACompletar;
+    //            webServiceRegistro.validarAccionSqlite("Respondió incorrectamente: " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
+    //            correctas = -1;
+    //            racha = 0;
+    //            multiplicador = 1;
+    //            textoRacha.text = "";
+    //            textoMultiplicador.text = "";
+    //        }
+    //        Destroy(obj);
+    //    });
+    //}
+
     void addEvent(GameObject obj, webServiceRespuestas.respuestaData respuesta) {
+        objsRespuestas.Add(obj);
+        if (respuesta.correcto == "True") {
+            posRespuestas.Add(1);
+        } else {
+            posRespuestas.Add(0);
+        }
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
             idRespuesta = respuesta.id;
             if (respuesta.correcto == "True") {
                 webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, respuesta.id, idIntento);
                 correctas++;
+                Color color = Color.green;
+                color.a = 0.5f;
+                obj.GetComponentInChildren<Button>().GetComponentInChildren<Image>().color = color;
+                obj.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
             } else {
                 correctas = -1;
             }
-            Destroy(obj);
+            //Destroy(obj);
         });
     }
 
     void addEventPares(GameObject obj, webServiceRespuestas.respuestaData respuesta) {
+        objsRespuestas.Add(obj);
+        relacionesPares.Add(respuesta.relacion);
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
             idRespuesta = respuesta.id;
             if (seleccion) {
                 parDos = respuesta.relacion;
-            } else {
+                if (respuesta.relacion == "1") {
+                    colorRespuestas(obj, Color.blue);
+                } else if (respuesta.relacion == "2") {
+                    colorRespuestas(obj, Color.yellow);
+                } else if (respuesta.relacion == "3") {
+                    colorRespuestas(obj, Color.green);
+                } else {
+                    Debug.Log("CursoManager line 628");
+                    Debug.Log("Error al momento de asignar la relacion de un par.");
+                }
+            } else { 
+                if (respuesta.relacion == "1") {
+                    colorRespuestas(obj, Color.blue);
+                }else if (respuesta.relacion == "2") {
+                    colorRespuestas(obj, Color.yellow);
+                } else if (respuesta.relacion == "3") {
+                    colorRespuestas(obj, Color.green);
+                } else {
+                    Debug.Log("CursoManager line 628");
+                    Debug.Log("Error al momento de asignar la relacion de un par.");
+                }
                 parUno = respuesta.relacion;
                 webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
                 seleccion = true;
             }
             idRespuesta = respuesta.id;
-            Destroy(obj);
+            //Destroy(obj);
         });
     }
 
@@ -685,12 +810,45 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
+    void colorRespuestas(GameObject obj, Color color) {
+        color.a = 0.5f;
+        obj.GetComponentInChildren<Button>().GetComponentInChildren<Image>().color = color;
+        obj.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
+    }
+
     IEnumerator activaObjeto(GameObject objeto) {
-        textoCompletado.text = "";
-        destroyChildrens();
+        if (descripcionTipoEjercicio != "Completar palabra" && descripcionTipoEjercicio != "Relacionar") {
+            int pos = 0;
+            foreach (GameObject obj in objsRespuestas) {
+                if (posRespuestas[pos] == 1) {
+                    colorRespuestas(obj, Color.green);
+                    pos++;
+                } else {
+                    colorRespuestas(obj, Color.red);
+                    pos++;
+                }
+            }
+        } else if(descripcionTipoEjercicio == "Relacionar"){
+            int pos2 = 0;
+            foreach (GameObject obj in objsRespuestas) {
+                if (relacionesPares[pos2] == "1") {
+                    colorRespuestas(obj, Color.blue);
+                    pos2++;
+                }else if(relacionesPares[pos2] == "2") {
+                    colorRespuestas(obj, Color.yellow);
+                    pos2++;
+                }else if (relacionesPares[pos2] == "3") {
+                    colorRespuestas(obj, Color.green);
+                    pos2++;
+                } else {
+                    Debug.Log("CursoManager line 749");
+                    Debug.Log("Error al momento mostrar las respuestas de la pregunta de tipo relacion.");
+                }
+            }
+        }
+        textoCompletado.text = "Respuesta: " + fraseACompletar;
         valAudio(objeto);
         objeto.SetActive(true);
-        //valAudio(objeto);
         objeto.GetComponentInChildren<AudioSource>().Play();
         yield return new WaitUntil(() => objeto.GetComponentInChildren<AudioSource>().isPlaying == false);
         //yield return new WaitForSeconds(0.8f);
@@ -698,6 +856,17 @@ public class CursoManager : MonoBehaviour {
         objeto.SetActive(false);
         correctasAContestar = 0;
         textoPuntajeObtenido.text = "";
+        fraseACompletar = "";
+        //Variables control de retroalimentacion
+        objsRespuestas.Clear();
+        relacionesPares.Clear();
+        posRespuestas.Clear();
+        ////////
+        ///Variables para control del tiempo
+        comenzarPregunta = false;
+        tiempo = time;
+        //////
+        destroyChildrens();
         llamarPreguntas();
     }
 
