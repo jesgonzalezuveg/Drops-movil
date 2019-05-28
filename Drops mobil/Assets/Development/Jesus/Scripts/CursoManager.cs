@@ -7,6 +7,11 @@ using System;
 
 public class CursoManager : MonoBehaviour {
 
+    private float time = 10.0f;
+    private float tiempo;
+    private bool aumento = false;
+    private bool comenzarPregunta = false;
+    public Text Tiempo;
     SyncroManager sicroManager;
     // public GameObject panelCompletarPalabra;
     public Text textoRachaMax;
@@ -86,6 +91,8 @@ public class CursoManager : MonoBehaviour {
     string idPregunta = "";
     string idRespuesta = "";
 
+
+
     IEnumerator putImagenPack(string urlImagen) {
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
         if (File.Exists(Application.persistentDataPath + path)) {
@@ -110,6 +117,10 @@ public class CursoManager : MonoBehaviour {
             var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
             imagenPack.sprite = sprite;
         }
+    }
+
+    private void Awake() {
+        tiempo = time;
     }
 
     void Start() {
@@ -177,6 +188,26 @@ public class CursoManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (comenzarPregunta == true) {
+
+            if (tiempo > 0) {
+                tiempo -= Time.deltaTime;
+            }
+
+            if (tiempo <= 5.0f) {
+                Tiempo.color = Color.red;
+            } else {
+                Tiempo.color = Color.green;
+            }
+            Tiempo.text = "" + Mathf.Round(tiempo).ToString();
+
+            if (tiempo <= 0.1f) {
+                idRespuesta = "0";
+                correctas = -1;
+                comenzarPregunta = false;
+            }
+        }
+
         if (correctas >= 0 && countPreguntas < preguntas.Length) {
             switch (descripcionTipoEjercicio) {
                 case "Seleccion simple":
@@ -328,6 +359,7 @@ public class CursoManager : MonoBehaviour {
                 default:
                     break;
             }
+            comenzarPregunta = true;
         } else {
             destroyChildrens();
             textoPuntaje.text = "";
@@ -477,7 +509,7 @@ public class CursoManager : MonoBehaviour {
     IEnumerator deleteGrid() {
         yield return new WaitForSeconds(.3f);
         if (canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
-            //Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
+            Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
         }
     }
 
@@ -769,11 +801,14 @@ public class CursoManager : MonoBehaviour {
         textoPuntajeObtenido.text = "";
         fraseACompletar = "";
         //Variables control de retroalimentacion
-
         objsRespuestas.Clear();
         relacionesPares.Clear();
         posRespuestas.Clear();
         ////////
+        ///Variables para control del tiempo
+        comenzarPregunta = false;
+        tiempo = time;
+        //////
         destroyChildrens();
         llamarPreguntas();
     }
