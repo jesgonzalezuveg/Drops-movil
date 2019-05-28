@@ -2462,6 +2462,10 @@ MonoBehaviour:
     type: 3}
   respuestaCompletar: {fileID: 525256352099266023, guid: a6719d57ada22c543abad9ca10215d12,
     type: 3}
+  respuestaCompletarNueva: {fileID: 2464513916011458490, guid: 75799d6534e0bc14e8e63cdce213d2c3,
+    type: 3}
+  btnValidarPalabra: {fileID: 5642836440765457870, guid: 0b9fc596551d3ea418598c6ca0cac6ce,
+    type: 3}
   respuestaTexto: {fileID: 6535893433170059835, guid: cde90951e0433e04681a0c92400c7d7a,
     type: 3}
   canvasParentOfAnswers: {fileID: 1762246766}
@@ -3910,12 +3914,12 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 25
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 275, y: 275}
+  m_CellSize: {x: 700, y: 100}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 1
