@@ -234,6 +234,7 @@ public class CursoManager : MonoBehaviour {
                 case "Seleccion Multiple":
                     textoCompletado.text = "Respuestas faltantes " + (correctasAContestar - correctas);
                     if (correctas >= correctasAContestar) {
+                        comenzarPregunta = false;
                         webServiceRegistro.validarAccionSqlite("Respondió correctamente(Seleccion Multiple)", manager.getUsuario(), "Respondió pregunta");
                         respuestaCorrecta();
                     }
@@ -266,6 +267,7 @@ public class CursoManager : MonoBehaviour {
                             }
                         }
                         if (correctas >= correctasAContestar / 2) {
+                            comenzarPregunta = false;
                             webServiceRegistro.validarAccionSqlite("Respondió correctamente(Relacionar)", manager.getUsuario(), "Respondió pregunta");
                             seleccion = false;
                             respuestaCorrecta();
@@ -291,7 +293,7 @@ public class CursoManager : MonoBehaviour {
             racha = 0;
             multiplicador = 1;
             textoRacha.text = "";
-            textoMultiplicador.text = "";
+            textoMultiplicador.text = "X1";
             StartCoroutine(activaObjeto(incorrectoimg));
             descripcionTipoEjercicio = "";
             webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
@@ -646,6 +648,7 @@ public class CursoManager : MonoBehaviour {
 
     void addEvent(GameObject objInput, GameObject objBtn) {
         objBtn.GetComponentInChildren<Button>().onClick.AddListener(delegate {
+            comenzarPregunta = false;
             fraseCompletada = objInput.GetComponentInChildren<InputField>().text.ToUpper();
             if (fraseCompletada == fraseACompletar) {
                 webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
@@ -660,8 +663,9 @@ public class CursoManager : MonoBehaviour {
                 racha = 0;
                 multiplicador = 1;
                 textoRacha.text = "";
-                textoMultiplicador.text = "";
+                textoMultiplicador.text = "X1";
             }
+            objBtn.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
         });
     }
 
@@ -691,6 +695,9 @@ public class CursoManager : MonoBehaviour {
             posRespuestas.Add(0);
         }
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
+            if (descripcionTipoEjercicio != "Seleccion Multiple") {
+                comenzarPregunta = false;
+            }
             idRespuesta = respuesta.id;
             if (respuesta.correcto == "True") {
                 webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, respuesta.id, idIntento);
