@@ -472,7 +472,7 @@ public class CursoManager : MonoBehaviour {
     IEnumerator deleteGrid() {
         yield return new WaitForSeconds(.3f);
         if (canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
-            //Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
+            Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
         }
     }
 

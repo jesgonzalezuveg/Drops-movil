@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.IO;
 using UnityEngine.SceneManagement;
 
 public class usuariosCards : MonoBehaviour {
@@ -19,16 +20,18 @@ public class usuariosCards : MonoBehaviour {
             card.transform.localPosition = new Vector3(0, 0, 0);
             card.GetComponentsInChildren<Text>()[0].text = usuario.nombre;
             card.GetComponentsInChildren<Text>()[1].text = usuario.usuario;
+            Debug.Log(usuario.imagen);
+            StartCoroutine(getUserImg(usuario.imagen, card));
             if (usuario.nombre == "Invitado") {
                 card.GetComponentsInChildren<Text>()[0].text = "Nueva partida";
                 card.GetComponentsInChildren<Text>()[1].text = "(No se guardan tus datos)";
             }
-            byte[] b = new byte[4];
-            for (int j = 0; j < 4; j++) {
-                var i = UnityEngine.Random.Range(0, 255);
-                b[j] = Convert.ToByte(i);
-            }
-            card.GetComponentsInChildren<Image>()[1].color = new Color32(b[0], b[1], b[2], 255);
+            //byte[] b = new byte[4];
+            //for (int j = 0; j < 4; j++) {
+            //    var i = UnityEngine.Random.Range(0, 255);
+            //    b[j] = Convert.ToByte(i);
+            //}
+            //card.GetComponentsInChildren<Image>()[1].color = new Color32(b[0], b[1], b[2], 255);
             card.transform.localScale = new Vector3(1, 1, 1);
             card.transform.localRotation = Quaternion.Euler(0, 0, 0);
             addcardEvent(card, usuario);
@@ -51,4 +54,31 @@ public class usuariosCards : MonoBehaviour {
             }
         });
     }
+
+    IEnumerator getUserImg(string url, GameObject card) {
+        string path = url.Split('/')[url.Split('/').Length - 1];
+        if (File.Exists(Application.persistentDataPath + path)) {
+            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+            Texture2D texture = new Texture2D(8, 8);
+            texture.LoadImage(byteArray);
+            Rect rec = new Rect(0, 0, texture.width, texture.height);
+            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            card.GetComponentsInChildren<Image>()[1].sprite = sprite;
+        } else {
+            WWW www = new WWW(url);
+            yield return www;
+            Texture2D texture = www.texture;
+            byte[] bytes;
+            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                bytes = texture.EncodeToJPG();
+            } else {
+                bytes = texture.EncodeToPNG();
+            }
+            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+            Rect rec = new Rect(0, 0, texture.width, texture.height);
+            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            card.GetComponentsInChildren<Image>()[1].sprite = sprite;
+        }
+    }
+
 }

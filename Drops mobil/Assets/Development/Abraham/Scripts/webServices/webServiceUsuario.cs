@@ -242,7 +242,9 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
+                if (GameObject.Find("Mensaje")) {
+                    GameObject.Find("Mensaje").GetComponent<Text>().text = "Se requiere conexión a Internet";
+                }
                 Debug.Log(www.error + " 224 WSUsu");
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
             } else {
@@ -272,6 +274,9 @@ public class webServiceUsuario : MonoBehaviour {
                         //GameObject.FindObjectOfType<keyboardManager>().mensaje.text = "Contraseña incorrecta";
                         GameObject.FindObjectOfType<PlayerManager>().setMensaje(false, "");
                         Debug.Log("Contraseña incorrecta 252 WSUsu");
+                        if (GameObject.Find("Mensaje")) {
+                            GameObject.Find("Mensaje").GetComponent<Text>().text = "Contraseña incorrecta";
+                        }
                     }
                 } else {
                     //Preguntas si existe en la BD del SII.unity
@@ -316,6 +321,9 @@ public class webServiceUsuario : MonoBehaviour {
                     }
                     GameObject.FindObjectOfType<PlayerManager>().setMensaje(false, "");
                     Debug.Log("El usuario no existe" + " 296 WSUsu");
+                    if (GameObject.Find("Mensaje")) {
+                        GameObject.Find("Mensaje").GetComponent<Text>().text = "El usuario no existe";
+                    }
                 }
             }
         }
