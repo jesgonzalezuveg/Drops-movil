@@ -247,7 +247,9 @@ public class keyboardManager : MonoBehaviour {
                 StartCoroutine(GameObject.FindObjectOfType<appManager>().cambiarEscena("menuCategorias", "mainMenu"));
             } else {
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
-                Debug.Log("Contraseña incorrecta");
+                if (GameObject.Find("Mensaje")) {
+                    GameObject.Find("Mensaje").GetComponent<Text>().text = "Contraseña incorrecta";
+                }
             }
         } else {
             // Consultar en SII ambas BD
@@ -268,6 +270,9 @@ public class keyboardManager : MonoBehaviour {
         }
         if (usuario.Length < 8 || usuario.Length > 35) {
             Debug.Log("El usuario debe tener entre 8 y 35 caracteres");
+            if (GameObject.Find("Mensaje")) {
+                GameObject.Find("Mensaje").GetComponent<Text>().text = "El usuario debe tener entre 8 y 35 caracteres";
+            }
             return;
         }
         string[] charAEliminar = { " ", "!", "\"", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "ñ", "Ñ" };
@@ -275,15 +280,24 @@ public class keyboardManager : MonoBehaviour {
             string charPosition = caracter + "";
             if (password.Contains(charPosition)) {
                 Debug.Log("La contraseña contiene caracteres invalidos");
+                if (GameObject.Find("Mensaje")) {
+                    GameObject.Find("Mensaje").GetComponent<Text>().text = "La contraseña contiene caracteres invalidos: " + caracter;
+                }
                 return;
             }
         }
         if (password.Length < 8 || password.Length > 50) {
             Debug.Log("La contraseña debe tener entre 8 y 50 caracteres");
+            if (GameObject.Find("Mensaje")) {
+                GameObject.Find("Mensaje").GetComponent<Text>().text = "La contraseña debe tener entre 8 y 50 caracteres";
+            }
             return;
         }
         if (password != password2) {
             Debug.Log("Las contraseñas no coinciden");
+            if (GameObject.Find("Mensaje")) {
+                GameObject.Find("Mensaje").GetComponent<Text>().text = "Las contraseñas no coinciden";
+            }
             return;
         }
 
