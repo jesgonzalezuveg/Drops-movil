@@ -16,9 +16,9 @@ public class packManager : MonoBehaviour {
     public void Start() {
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
-        if (GetComponentInChildren<Text>()) {
+        /*if (GetComponentInChildren<Text>()) {
             GetComponentInChildren<Text>().text = paquete.descripcion;
-        }
+        }*/
     }
 
     /**

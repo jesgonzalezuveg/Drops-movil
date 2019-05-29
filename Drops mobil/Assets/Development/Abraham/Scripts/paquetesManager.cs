@@ -366,7 +366,7 @@ public class paquetesManager : MonoBehaviour {
      * @urlImagen imagen del paquete que se inserta
      */
     IEnumerator llenarFicha(GameObject ficha, string descripcion, string urlImagen) {
-        ficha.transform.GetChild(1).GetComponent<Text>().text = descripcion;
+        ficha.GetComponentsInChildren<Text>()[0].text = descripcion;
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
         if (File.Exists(Application.persistentDataPath + path)) {
             byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
