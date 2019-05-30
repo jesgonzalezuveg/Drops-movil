@@ -15,6 +15,8 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         startPosition = transform.position;
         startParent = transform.parent;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+        validarEstadoLetra(transform, "");
+        Debug.Log("Panel"+ transform.parent.name);
         Debug.Log("PRUEBA 1 ES SALIDA");
     }
 
@@ -37,8 +39,20 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (transform.parent == startParent) {
             transform.position = startPosition;
         }
+        validarEstadoLetra(transform, transform.name);
         Debug.Log("PRUEBA 3 ENTRO AL CUADRO");
     }
     
     #endregion
+
+    void validarEstadoLetra(Transform objLetra, string valorLetra) {
+        if (objLetra.parent.parent.name == "Respuesta") {
+            int index = objLetra.parent.transform.GetSiblingIndex();
+            CursoManager.letras[index] = valorLetra;
+            CursoManager.respuestaFraseCompletada = "";
+            foreach (string letra in CursoManager.letras) {
+                CursoManager.respuestaFraseCompletada += letra;
+            }
+        }
+    }
 }

@@ -7,7 +7,10 @@ using System;
 
 public class CursoManager : MonoBehaviour {
 
-    private float time = 15.0f;
+    public static string[] letras =  new string[25];
+    public static string respuestaFraseCompletada = "";
+
+    private float time = 999.0f;
     private float tiempo;
     private bool aumento = false;
     private bool comenzarPregunta = false;
@@ -53,6 +56,14 @@ public class CursoManager : MonoBehaviour {
     public GameObject btnValidarPalabra;
     public GameObject respuestaTexto;
     public GameObject canvasParentOfAnswers;
+
+    //Variables para prefabs Drag&Drop
+    public GameObject itemDrag;
+    public GameObject Slot;
+
+    //Variables para Paneles Drag&Drop
+    public GameObject Respuesta;
+    public GameObject PanelLetras;
 
     public GameObject scoreFinal;
     public GameObject PanelScore;
@@ -222,10 +233,22 @@ public class CursoManager : MonoBehaviour {
                     break;
                 case "Completar palabra":
                     //panelCompletarPalabra.SetActive(true);
-                    textoCompletado.text = fraseCompletada;
-                    if (fraseCompletada == fraseACompletar) {
-                        webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
-                        fraseCompletada = "";
+                    //Metodo original de ejercicio completar palabra
+                    //textoCompletado.text = fraseCompletada;
+                    //if (fraseCompletada == fraseACompletar) {
+                    //    webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + fraseCompletada, manager.getUsuario(), "Respondió pregunta");
+                    //    fraseCompletada = "";
+                    //    webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
+                    //    textoCompletado.text = fraseACompletar;
+                    //    comenzarPregunta = false;
+                    //    respuestaCorrecta();
+                    //}
+
+                    textoCompletado.text = respuestaFraseCompletada;
+                    if (respuestaFraseCompletada == fraseACompletar) {
+                        webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + respuestaFraseCompletada, manager.getUsuario(), "Respondió pregunta");
+                        respuestaFraseCompletada = "";
+                        Array.Clear(letras, 0, letras.Length);
                         webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, idRespuesta, idIntento);
                         textoCompletado.text = fraseACompletar;
                         comenzarPregunta = false;
@@ -490,29 +513,38 @@ public class CursoManager : MonoBehaviour {
 
     public void llenarLetras(string palabra) {
         palabra = palabra.ToUpper();
-        var letras = shuffleArray(palabra);
-        var numberOfObjects = palabra.Length;
-        var radius = 4f;
-        int p = 1;
-        int i = 0;
-        if (!canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
-            var x = canvasParentOfAnswers.AddComponent<GridLayoutGroup>();
-            x.padding.top = 25;
-            x.cellSize = new Vector2(325, 325);
-            x.spacing = new Vector2(50, 50);
-            x.startAxis = GridLayoutGroup.Axis.Horizontal;
-            x.childAlignment = TextAnchor.UpperCenter;
-            x.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-            x.constraintCount = 2;
-        }
-        foreach (char caratcter in letras) {
-            float angle = i * Mathf.PI * 2 / numberOfObjects;
-            crearBotonLetra(caratcter, angle, radius);
-            i++;
-        }
+        crearPanelRespuesta(palabra);
+        crearPanelLetras(palabra);
         StartCoroutine(deleteGrid());
     }
 
+    //Metodo Original Completar Palabra
+    //public void llenarLetras(string palabra) {
+    //    palabra = palabra.ToUpper();
+    //    var letras = shuffleArray(palabra);
+    //    var numberOfObjects = palabra.Length;
+    //    var radius = 4f;
+    //    int p = 1;
+    //    int i = 0;
+    //    if (!canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
+    //        var x = canvasParentOfAnswers.AddComponent<GridLayoutGroup>();
+    //        x.padding.top = 25;
+    //        x.cellSize = new Vector2(325, 325);
+    //        x.spacing = new Vector2(50, 50);
+    //        x.startAxis = GridLayoutGroup.Axis.Horizontal;
+    //        x.childAlignment = TextAnchor.UpperCenter;
+    //        x.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+    //        x.constraintCount = 2;
+    //    }
+    //    foreach (char caratcter in letras) {
+    //        float angle = i * Mathf.PI * 2 / numberOfObjects;
+    //        crearBotonLetra(caratcter, angle, radius);
+    //        i++;
+    //    }
+    //    StartCoroutine(deleteGrid());
+    //}
+
+    //Metodo Teclado Completar palabra
     //public void llenarLetras(string palabra) {
     //    palabra = palabra.ToUpper();
     //    var letras = shuffleArray(palabra);
@@ -541,6 +573,7 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
+    //Metodo Teclado Completar palabra
     //public void crearBotonLetra() {
     //    var x = Instantiate(respuestaCompletarNueva, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
     //    x.transform.SetParent(canvasParentOfAnswers.transform, false);
@@ -552,33 +585,104 @@ public class CursoManager : MonoBehaviour {
     //    addEvent(x, y);
     //}
 
-    public void crearBotonLetra(char respuesta, float angle, float radius) {
-        var x = Instantiate(respuestaCompletar, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+    public void crearPanelRespuesta(string palabra) {
+        var x = Instantiate(Respuesta, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
-        x.AddComponent<clickManager>();
-        var spriteObj = Resources.Load("Letras/letra-" + respuesta);
-        var imagen = x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>();
-        Texture2D tex = spriteObj as Texture2D;
-        Rect rec = new Rect(0, 0, tex.width, tex.height);
-        var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
-        imagen.sprite = sprite;
-        var hijos = canvasParentOfAnswers.transform.childCount;
-        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100, 100f);
-        canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedRowCount;
-        if (hijos >= 21) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 5;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 50);
-        } else if (hijos >= 16 && hijos < 21) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 4;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 80);
-        } else if (hijos >= 7 && hijos < 16) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 3;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 132);
-        } else if (hijos < 7) {
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().constraintCount = 2;
-            canvasParentOfAnswers.GetComponent<GridLayoutGroup>().spacing = new Vector2(100, 264);
+        x.name = "Respuesta";
+        dividirPalabra(palabra, x, true);
+    }
+
+    public void crearPanelLetras(string palabra) {
+        var x = Instantiate(PanelLetras, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        x.transform.SetParent(canvasParentOfAnswers.transform, false);
+        x.name = "PanelRespuestas";
+        dividirPalabra(palabra, x, false);
+    }
+
+    public void dividirPalabra(string palabra, GameObject panel, bool onlySlot) {
+        var letras = shuffleArray(palabra);
+        var numberOfObjects = palabra.Length;
+        var radius = 4f;
+        int p = 1;
+        int i = 0;
+        foreach (char caratcter in letras) {
+            float angle = i * Mathf.PI * 2 / numberOfObjects;
+            crearBotonLetra(caratcter, angle, radius, panel, onlySlot);
+            i++;
         }
-        addEvent(x, respuesta);
+    }
+
+    public void crearBotonLetra(char respuesta, float angle, float radius, GameObject panel, bool onlySlot) {
+        var x = Instantiate(Slot, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        x.transform.SetParent(panel.transform, false);
+        x.AddComponent<clickManager>();
+        int index = x.transform.GetSiblingIndex();
+        if (!onlySlot) {
+            x.name = x.name +"L"+ index;
+            var img = Instantiate(itemDrag, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+            img.transform.SetParent(x.transform, false);
+            img.AddComponent<clickManager>();
+            var spriteObj = Resources.Load("Letras/letra-" + respuesta);
+            var imagen = img.gameObject.GetComponent<Image>();
+            Texture2D tex = spriteObj as Texture2D;
+            Rect rec = new Rect(0, 0, tex.width, tex.height);
+            var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+            imagen.sprite = sprite;
+            imagen.name = ""+respuesta;
+
+            var hijos = panel.transform.childCount;
+            panel.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedRowCount;
+            panel.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            if (hijos >= 21) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(70f, 70f);
+                panel.GetComponent<GridLayoutGroup>().constraintCount = 5;
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(70, 20);
+                x.GetComponent<GridLayoutGroup>().spacing = new Vector2(60f, 60f);
+            } else if (hijos >= 17 && hijos <= 20) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100f, 100f);
+                panel.GetComponent<GridLayoutGroup>().constraintCount = 4;
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(50, 20);
+                x.GetComponent<GridLayoutGroup>().spacing = new Vector2(90f, 90f);
+            } else if (hijos >= 13 && hijos <= 16) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100f, 100f);
+                panel.GetComponent<GridLayoutGroup>().constraintCount = 4;
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(70, 20);
+                x.GetComponent<GridLayoutGroup>().spacing = new Vector2(90f, 90f);
+            } else if (hijos >= 7 && hijos <= 12) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(150f, 150f);
+                panel.GetComponent<GridLayoutGroup>().constraintCount = 3;
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(20, 20);
+                x.GetComponent<GridLayoutGroup>().spacing = new Vector2(140f, 140f);
+            } else if (hijos < 7) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(200f, 200f);
+                panel.GetComponent<GridLayoutGroup>().constraintCount = 2;
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(20, 20);
+                x.GetComponent<GridLayoutGroup>().spacing = new Vector2(190f, 190f);
+            }
+        } else {
+            x.name = x.name + "R" + index;
+            var hijos = panel.transform.childCount;
+            panel.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.Flexible;
+            panel.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            if (hijos >= 14) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(40f, 40f);
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 10);
+            } else if (hijos >= 12 && hijos <= 13) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(50f, 50f);
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 10);
+            } else if (hijos >= 9 && hijos <= 11) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(60f, 60f);
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 10);
+            } else if (hijos >= 7 && hijos <= 8) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(80f, 80f);
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 10);
+            } else if (hijos < 7) {
+                panel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(100f, 100f);
+                panel.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 10);
+            }
+
+            //addEvent(x, respuesta);
+        }
     }
 
     public void crearBoton(webServiceRespuestas.respuestaData respuesta, float angle, float radius) {
@@ -647,6 +751,7 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
+    //Metodo Teclado Completar palabra
     //void addEvent(GameObject objInput, GameObject objBtn) {
     //    objBtn.GetComponentInChildren<Button>().onClick.AddListener(delegate {
     //        comenzarPregunta = false;
@@ -683,6 +788,7 @@ public class CursoManager : MonoBehaviour {
                 multiplicador = 1;
                 textoRacha.text = "";
                 textoMultiplicador.text = "";
+
             }
             Destroy(obj);
         });
@@ -880,11 +986,15 @@ public class CursoManager : MonoBehaviour {
 
     void destroyChildrens() {
         if (canvasParentOfAnswers.transform.childCount > 0) {
-            foreach (var obj in canvasParentOfAnswers.GetComponentsInChildren<Canvas>()) {
-                if (obj) {
-                    DestroyImmediate(obj.gameObject);
-                }
+            foreach (Transform child in canvasParentOfAnswers.transform) {
+                Destroy(child.gameObject);
             }
+            //Destroy childs Abraham
+            //foreach (var obj in canvasParentOfAnswers.GetComponentsInChildren<Canvas>()) {
+            //    if (obj) {
+            //        DestroyImmediate(obj.gameObject);
+            //    }
+            //}
         }
     }
 

@@ -25,6 +25,12 @@ public class Slot : MonoBehaviour, IDropHandler
         //Debug.Log("Nombre del item "+item.name);
         if (item.transform.parent.parent.name == "Respuesta") {
             item.transform.localScale = this.gameObject.GetComponent<Transform>().transform.lossyScale;
+            int index = item.transform.parent.transform.GetSiblingIndex();
+            CursoManager.letras[index] = item.name;
+            CursoManager.respuestaFraseCompletada = "";
+            foreach (string letra in CursoManager.letras) {
+                CursoManager.respuestaFraseCompletada += letra;
+            }
             // Debug.Log("Es el panel respuesta");
             //Debug.Log("ORDEN DEL ITEM: " + item.transform.parent.transform.GetSiblingIndex());
         } else {
