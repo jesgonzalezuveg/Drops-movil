@@ -26,6 +26,11 @@ public class usuariosCards : MonoBehaviour {
                 card.GetComponentsInChildren<Text>()[0].text = "Nueva partida";
                 card.GetComponentsInChildren<Text>()[1].text = "(No se guardan tus datos)";
             }
+            if (card.GetComponentsInChildren<Text>()[0].text.Length > 20) {
+                var texto = card.GetComponentsInChildren<Text>()[0].text.Remove(19, card.GetComponentsInChildren<Text>()[0].text.Length - 19);
+                texto += "...";
+                card.GetComponentsInChildren<Text>()[0].text = texto;
+            }
             //byte[] b = new byte[4];
             //for (int j = 0; j < 4; j++) {
             //    var i = UnityEngine.Random.Range(0, 255);
