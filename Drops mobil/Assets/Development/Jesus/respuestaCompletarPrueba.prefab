@@ -110,11 +110,11 @@ GameObject:
   - component: {fileID: 4354871248153588179}
   - component: {fileID: 1017592011882521063}
   - component: {fileID: 7983244397717479407}
-  - component: {fileID: 2892792003762755051}
-  - component: {fileID: 3031493441107216585}
-  - component: {fileID: 5566437507580154834}
+  - component: {fileID: 3362272440234066116}
+  - component: {fileID: 1197534549663613712}
+  - component: {fileID: 1469803657701093553}
   m_Layer: 5
-  m_Name: Button
+  m_Name: btnLetra
   m_TagString: Items
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &2892792003762755051
+--- !u!61 &3362272440234066116
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +256,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
---- !u!114 &3031493441107216585
+--- !u!114 &1197534549663613712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragging: 0
   collision: 0
---- !u!114 &5566437507580154834
+--- !u!114 &1469803657701093553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3031493441107216585}
+        - m_Target: {fileID: 1197534549663613712}
           m_MethodName: drag
           m_Mode: 1
           m_Arguments:
@@ -304,7 +304,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3031493441107216585}
+        - m_Target: {fileID: 1197534549663613712}
           m_MethodName: beginDrag
           m_Mode: 1
           m_Arguments:
@@ -321,7 +321,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3031493441107216585}
+        - m_Target: {fileID: 1197534549663613712}
           m_MethodName: drop
           m_Mode: 1
           m_Arguments:
