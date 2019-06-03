@@ -595,7 +595,7 @@ public class CursoManager : MonoBehaviour {
     public void crearPanelLetras(string palabra) {
         var x = Instantiate(PanelLetras, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
-        x.name = "PanelRespuestas";
+        x.name = "PanelLetras";
         dividirPalabra(palabra, x, false);
     }
 
@@ -615,13 +615,11 @@ public class CursoManager : MonoBehaviour {
     public void crearBotonLetra(char respuesta, float angle, float radius, GameObject panel, bool onlySlot) {
         var x = Instantiate(Slot, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(panel.transform, false);
-        x.AddComponent<clickManager>();
         int index = x.transform.GetSiblingIndex();
         if (!onlySlot) {
             x.name = x.name +"L"+ index;
             var img = Instantiate(itemDrag, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
             img.transform.SetParent(x.transform, false);
-            img.AddComponent<clickManager>();
             var spriteObj = Resources.Load("Letras/letra-" + respuesta);
             var imagen = img.gameObject.GetComponent<Image>();
             Texture2D tex = spriteObj as Texture2D;

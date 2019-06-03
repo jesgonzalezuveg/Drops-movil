@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
-    public Vector3 size;
     public GameObject item {
         get {
             if (transform.childCount>0) {
@@ -18,25 +17,14 @@ public class Slot : MonoBehaviour, IDropHandler
     #region IDropHandler implementation
 
     public void OnDrop(PointerEventData eventData) {
-        if (!item) {
+        if (item == null) {
             DragHandeler.itemBeingDragged.transform.SetParent(transform);
-        }
-        //Obtener nombre del item 
-        //Debug.Log("Nombre del item "+item.name);
-        if (item.transform.parent.parent.name == "Respuesta") {
-            item.transform.localScale = this.gameObject.GetComponent<Transform>().transform.lossyScale;
-            int index = item.transform.parent.transform.GetSiblingIndex();
-            CursoManager.letras[index] = item.name;
-            CursoManager.respuestaFraseCompletada = "";
-            foreach (string letra in CursoManager.letras) {
-                CursoManager.respuestaFraseCompletada += letra;
-            }
-            // Debug.Log("Es el panel respuesta");
-            //Debug.Log("ORDEN DEL ITEM: " + item.transform.parent.transform.GetSiblingIndex());
         } else {
-
+            if (item.transform.parent.name != DragHandeler.parentItemBeingDragged.name) {
+                item.transform.SetParent(DragHandeler.parentItemBeingDragged);
+                DragHandeler.itemBeingDragged.transform.SetParent(transform);
+            }
         }
-        //Debug.Log("Nombre del padre "+item.transform.parent.name);
     }
 
     #endregion
