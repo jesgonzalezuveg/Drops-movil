@@ -10,6 +10,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     Vector3 startPosition;
     Transform startParent;
 
+
     private void Update() {
 
         if (Input.touchCount > 0) {
@@ -38,6 +39,11 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         itemBeingDragged = gameObject;
         startPosition = transform.position;
         startParent = transform.parent;
+        GameObject anySlot = GameObject.Find("Respuesta");
+        float escala = anySlot.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width/ transform.gameObject.GetComponent<RectTransform>().rect.width;
+        if (transform.parent.parent.name != "Respuesta") {
+            transform.gameObject.GetComponent<RectTransform>().localScale = new Vector3(escala, escala, escala);
+        }
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         //validarEstadoLetra(transform, "");
         //Debug.Log("PRUEBA 1 ES SALIDA");
@@ -73,6 +79,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public static void validarEstadoLetra() {
         GameObject panelRes = GameObject.Find("PanelLetras");
         GameObject res = GameObject.Find("Respuesta");
+        //Debug.Log("La escala es respuesta: " + res.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width);
+        //Debug.Log("La escala es panel respuesta: " + panelRes.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width);
+        float escala = res.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width/ panelRes.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width;
         if (panelRes != null && res != null) {
             foreach (Transform hijo in panelRes.transform) {
                 if (hijo.gameObject.transform.childCount > 0) {
@@ -84,8 +93,10 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Array.Clear(CursoManager.letras, 0, CursoManager.letras.Length);
             foreach (Transform hijo in res.transform) {
                 if (hijo.gameObject.transform.childCount > 0) {
-
-                    hijo.gameObject.transform.GetChild(0).localScale = hijo.gameObject.transform.localScale;
+                    //Debug.Log("La escala es: "+escala);
+                    float escalaAjustada = escala + (escala*0.66f);
+                    hijo.gameObject.transform.GetChild(0).localScale = new Vector3(escalaAjustada, escalaAjustada, escalaAjustada);
+                    //hijo.gameObject.transform.GetChild(0).localScale = hijo.gameObject.transform.localScale;
                     string letraActual = hijo.gameObject.transform.GetChild(0).name;
                     int index = hijo.gameObject.transform.GetSiblingIndex();
                     CursoManager.letras[index] = letraActual;
