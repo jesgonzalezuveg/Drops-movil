@@ -35,6 +35,8 @@ public class appManager : MonoBehaviour {
     public bool isOnline = false;                           ///< isOnline bandera que sirve para validar si se encuentra conectado a internet o no
     public webServicePaquetes.paqueteData packToPlay;       ///< packToPlay estructura del paquete que se va a jugar, descargar o actualizar
     public bool isFirstLogin = true;
+    public bool mostrarAviso = true;
+    public int getOld = 0;
 
     public string lastIdLog = "0";
 
@@ -61,6 +63,13 @@ public class appManager : MonoBehaviour {
      */
     public void setUsuario(string Usuario) {
         this.Usuario = Usuario;
+    }
+    /**
+     * Asigna el valor del id del usuario
+     * @param IdUsuario String que contiene el id del Usuario
+     */
+    public void setIdUsuario(string idUsuario) {
+        this.idUsuario = idUsuario;
     }
     /**
      * Asigna el valor del nombre de la persona

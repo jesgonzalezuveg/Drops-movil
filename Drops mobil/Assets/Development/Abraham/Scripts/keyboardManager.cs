@@ -249,6 +249,7 @@ public class keyboardManager : MonoBehaviour {
                     Debug.Log("Error en keyboardManager en linea 249");   
                     Debug.Log("Error al modificar el status de sesion del usuario");   
                 }
+                GameObject.FindObjectOfType<appManager>().isFirstLogin = true;
                 StartCoroutine(GameObject.FindObjectOfType<appManager>().cambiarEscena("menuCategorias", "mainMenu"));
             } else {
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");

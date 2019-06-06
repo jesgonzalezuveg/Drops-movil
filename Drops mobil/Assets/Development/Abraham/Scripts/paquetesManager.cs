@@ -465,6 +465,8 @@ public class paquetesManager : MonoBehaviour {
         manager.setCorreo(null);
         manager.setImagen(null);
         manager.setGradoEstudios(null);
+        manager.mostrarAviso = true;
+        manager.getOld = 0;
         int res = webServiceUsuario.updateAllSesionStatusSqlite(0);
         if (res == 0) {
             Debug.Log("Error en paquetesManager en linea 470");

@@ -51,6 +51,8 @@ public class usuariosCards : MonoBehaviour {
                 GameObject.FindObjectOfType<appManager>().setGradoEstudios("");
                 GameObject.FindObjectOfType<appManager>().setImagen("http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png");
                 webServiceLog.insertarLogSqLite("Invitado");
+                GameObject.FindObjectOfType<appManager>().isFirstLogin = true;
+                GameObject.FindObjectOfType<appManager>().setIdUsuario("1");
                 StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena("menuCategorias", "mainMenu"));
             } else {
                 GetComponentInParent<mainMenuManager>().cambiarVista(2);
