@@ -20,7 +20,7 @@ public class usuariosCards : MonoBehaviour {
             card.transform.localPosition = new Vector3(0, 0, 0);
             card.GetComponentsInChildren<Text>()[0].text = usuario.nombre;
             card.GetComponentsInChildren<Text>()[1].text = usuario.usuario;
-            Debug.Log(usuario.imagen);
+            //Debug.Log(usuario.imagen);
             StartCoroutine(getUserImg(usuario.imagen, card));
             if (usuario.nombre == "Invitado") {
                 card.GetComponentsInChildren<Text>()[0].text = "Nueva partida";

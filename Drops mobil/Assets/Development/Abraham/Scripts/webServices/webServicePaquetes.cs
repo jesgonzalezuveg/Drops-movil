@@ -72,7 +72,6 @@ public class webServicePaquetes : MonoBehaviour{
 
     public static paqueteData[] getPaquetesByCategoriaSqLite(string categoriaId) {
         string query = "SELECT * FROM paquete WHERE idCategoria = '" + categoriaId + "';";
-        Debug.Log(query);
         var result = conexionDB.selectGeneral(query);
         if (result != "0") {
             result = "{\"paquete\":[" + result + "]}";

@@ -281,7 +281,7 @@ public class paquetesManager : MonoBehaviour {
      * Inserta la tarjeta fichaPaquete en listaPaquetesNuevos
      * @pack paqueteData estructura que tiene los datos del paquete a descargar
      */
-    public void newCardDescarga(webServicePaquetes.paqueteData pack) {
+    public void newCardDescarga(webServicePaquetes.paqueteData pack) { 
         var fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
         fichaPaquete.name = "fichaPack" + pack.id;
         StartCoroutine(llenarFicha(fichaPaquete, pack.descripcion, pack.urlImagen));
@@ -467,6 +467,7 @@ public class paquetesManager : MonoBehaviour {
         manager.setGradoEstudios(null);
         manager.mostrarAviso = true;
         manager.getOld = 0;
+        manager.paquetesPorDescargar = 0;
         int res = webServiceUsuario.updateAllSesionStatusSqlite(0);
         if (res == 0) {
             Debug.Log("Error en paquetesManager en linea 470");

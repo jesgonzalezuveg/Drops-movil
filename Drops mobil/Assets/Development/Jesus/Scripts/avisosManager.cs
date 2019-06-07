@@ -14,6 +14,9 @@ public class avisosManager : MonoBehaviour
     public Text titulo;
     public Text descripcion;
     public Image imagen;
+    public GameObject burbujaDescargas;
+    public GameObject avisoDinamico;
+    public GameObject avisoEstatico;
 
     public void setPaquetesMasNuevos(webServiceAvisos.paqueteDataNuevos[]newPacks) {
         paquetesRecientes = newPacks;
@@ -23,7 +26,9 @@ public class avisosManager : MonoBehaviour
         paquetesRecientes = null;
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         panelAvisos.SetActive(false);
-        StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("3"));
+        if (manager.isOnline) {
+            StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("3"));
+        }
     }
 
     // Start is called before the first frame update
@@ -34,11 +39,24 @@ public class avisosManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (manager.paquetesPorDescargar == 0) {
+            if (burbujaDescargas.active == true) {
+                burbujaDescargas.SetActive(false);
+            }
+        } else {
+            if (burbujaDescargas.active == false) {
+                burbujaDescargas.SetActive(true);
+            }
+            burbujaDescargas.transform.GetChild(0).gameObject.GetComponent<Text>().text = "" + manager.paquetesPorDescargar;
+        }
+
         if (manager.mostrarAviso == true) {
             mostrarAviso();
             if (manager.getOld == 1) {
                 manager.getOld = 2;
-                StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("90"));
+                if (manager.isOnline) {
+                    StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("90"));
+                }
             }
         }
     }
@@ -58,7 +76,7 @@ public class avisosManager : MonoBehaviour
                         //Debug.Log("El paquete " + paquete.descripcion + " ya fue mostrado en los ultimos 3 dias");
                     }
                 } else {
-                    Debug.Log("El paquete " + paquete.descripcion + " ya fue descargado");
+                    //Debug.Log("El paquete " + paquete.descripcion + " ya fue descargado");
                 }
             }
         } else {
@@ -81,12 +99,27 @@ public class avisosManager : MonoBehaviour
         } else {
             //Debug.Log("Se inserto el log del aviso mostrado");
         }
+        avisoDinamico.SetActive(true);
+        avisoEstatico.SetActive(false);
         panelAvisos.SetActive(true);
     }
 
     public void cerrarAvisos() {
         paquetesRecientes = null;
         panelAvisos.SetActive(false);
+    }
+
+    public void cambiarAviso() {
+        if (avisoDinamico.active == true) {
+            avisoDinamico.SetActive(false);
+            avisoEstatico.SetActive(true);
+        }else if (avisoEstatico.active == true) {
+            avisoDinamico.SetActive(true);
+            avisoEstatico.SetActive(false);
+        } else {
+            avisoDinamico.SetActive(true);
+            avisoEstatico.SetActive(false);
+        }
     }
 
     IEnumerator getImagenPaquete(string urlImagen) {

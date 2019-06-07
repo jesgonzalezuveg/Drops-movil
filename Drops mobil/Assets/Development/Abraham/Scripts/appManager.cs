@@ -37,6 +37,7 @@ public class appManager : MonoBehaviour {
     public bool isFirstLogin = true;
     public bool mostrarAviso = true;
     public int getOld = 0;
+    public int paquetesPorDescargar = 0;
 
     public string lastIdLog = "0";
 
@@ -290,6 +291,7 @@ public class appManager : MonoBehaviour {
             if (paquetes != null && banderaPaquetes) {
                 paquetesManager.destruirObjetos(null);
                 destruirObjetos();
+                paquetesPorDescargar = 0;
                 foreach (var pack in paquetes) {
                     var local = webServicePaquetes.getPaquetesByDescripcionSqLite(pack.descripcion);
                     if (local != null) {
@@ -297,6 +299,7 @@ public class appManager : MonoBehaviour {
                         var descargaLocal = webServiceDescarga.getDescargaByPaquete(pack.id);
                         if (descargaLocal == null) {
                             if (isOnline) {
+                                paquetesPorDescargar++;
                                 paquetesManager.newCardDescarga(pack);
 
                             } else {
