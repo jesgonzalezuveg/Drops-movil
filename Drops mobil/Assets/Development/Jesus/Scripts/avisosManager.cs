@@ -17,12 +17,14 @@ public class avisosManager : MonoBehaviour
     public GameObject burbujaDescargas;
     public GameObject avisoDinamico;
     public GameObject avisoEstatico;
+    public GameObject panelMenuPerfil;
 
     public void setPaquetesMasNuevos(webServiceAvisos.paqueteDataNuevos[]newPacks) {
         paquetesRecientes = newPacks;
     }
 
     private void Awake() {
+        panelMenuPerfil.SetActive(false);
         paquetesRecientes = null;
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         panelAvisos.SetActive(false);
@@ -119,6 +121,14 @@ public class avisosManager : MonoBehaviour
         } else {
             avisoDinamico.SetActive(true);
             avisoEstatico.SetActive(false);
+        }
+    }
+
+    public void menuPerfil() {
+        if (panelMenuPerfil.active == false) {
+            panelMenuPerfil.SetActive(true);
+        } else {
+            panelMenuPerfil.SetActive(false);
         }
     }
 
