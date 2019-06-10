@@ -69,4 +69,14 @@ public class packManager : MonoBehaviour {
         StartCoroutine(webServiceRespuestas.getRespuestasByPack(paquete.descripcion));
     }
 
+    public void showDeleteButton() {
+        Debug.Log("Entro a la funcion");
+        GameObject eliminar = this.gameObject.transform.GetChild(4).gameObject;
+        if (eliminar.active == true) {
+            eliminar.SetActive(false);
+        } else {
+            eliminar.SetActive(true);
+        }
+    }
+
 }

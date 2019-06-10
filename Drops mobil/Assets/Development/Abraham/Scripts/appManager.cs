@@ -309,12 +309,14 @@ public class appManager : MonoBehaviour {
                             if (isOnline) {
                                 if (isActualized(descargaLocal.fechaDescarga, pack.fechaModificacion)) {
                                     paquetesManager.newCardJugar(pack, null);
+                                    paquetesManager.newCardJugarLista(pack, null);
                                 } else {
                                     paquetesManager.newCardActualizar(pack, null);
 
                                 }
                             } else {
                                 paquetesManager.newCardJugar(pack, null);
+                                paquetesManager.newCardJugarLista(pack, null);
                             }
                         }
                     } else {

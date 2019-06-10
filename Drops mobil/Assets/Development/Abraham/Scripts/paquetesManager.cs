@@ -11,6 +11,7 @@ public class paquetesManager : MonoBehaviour {
     public Image imagen;                    ///< imagen referencia a la imagen que contendra la imagen del usuario
     public GameObject textoPaquetes;        ///< textoPaquetes referencia al objeto que se muestra u oculta dependiendo si existen paquetes por descargar
     public GameObject listaPaquetes;        ///< listaPaquetes referencia al objeto que contiene los paquetes ya instalados
+    public GameObject listaPaquetesLista;        ///< listaPaquetes referencia al objeto que contiene los paquetes ya instalados con vista de lista
     public GameObject listaPaquetesNuevos;  ///< listaPaquetesNuevos referencia al objeto que contiene los paquetes nuevos por descargar
     public GameObject configuracionModal;   ///< configuracionModal referencia al modal de configuracion de curso
     public GameObject scrollBar;            ///< scrollBar referencia al scrollbar para seleccionar el numero maximo de preguntas por curso
@@ -21,6 +22,7 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelTabs;
     public GameObject panelTabsBtn;
     public GameObject panelPaquetes;
+    public GameObject panelPaquetesLista;
     public GameObject panelDescargas;
     //public GameObject tabTodos;
 
@@ -73,6 +75,7 @@ public class paquetesManager : MonoBehaviour {
                 manager.setPaquetes(paquetesLocales.paquete);
             } else {
                 fillEmpty(listaPaquetes);
+                fillEmptyLista(listaPaquetesLista);
             }
             var categoriasLocal = webServiceCategoria.getCategoriasSql();
             if (categoriasLocal != null) {
@@ -256,6 +259,22 @@ public class paquetesManager : MonoBehaviour {
         fichaPaquete.GetComponent<packManager>().paquete = pack;
     }
 
+    public void newCardJugarLista(webServicePaquetes.paqueteData pack, GameObject lista) {
+        var fichaPaquete = Instantiate(Resources.Load("PaqueteLista") as GameObject);
+        fichaPaquete.name = "fichaPackLista" + pack.id;
+        StartCoroutine(llenarFichaLista(fichaPaquete, pack.urlImagen));
+        if (lista == null) {
+            fichaPaquete.transform.SetParent(listaPaquetesLista.transform);
+        } else {
+            fichaPaquete.transform.SetParent(lista.transform);
+        }
+        fichaPaquete.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
+        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        fichaPaquete.GetComponent<packManager>().paquete = pack;
+        fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
+    }
+
     /**
      * Funcion que se manda llamar al tener un paquete listo para jugar aunque es posible actualizarlo
      * Inserta la tarjeta fichaPaqueteActualizar en listaPaquetes
@@ -305,6 +324,25 @@ public class paquetesManager : MonoBehaviour {
         var hijos = contentTab.GetComponentsInChildren<packManager>(true);
         if (hijos.Length <= 3) {
             var obj = Instantiate(Resources.Load("placeHolder")) as GameObject;
+            obj.transform.position = new Vector3(0, 0, 0);
+            obj.transform.SetParent(contentTab.transform);
+            obj.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            obj.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
+            obj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+            fillEmpty(contentTab);
+        }
+        contentTab.GetComponent<gridScrollLayout>().bandera = true;
+        contentTab.GetComponent<gridScrollLayout>().estaAjustado = false;
+        listaPaquetesNuevos.GetComponent<gridScrollLayout>().bandera = true;
+    }
+
+    public void fillEmptyLista(GameObject contentTab) {
+        if (contentTab == null) {
+            contentTab = listaPaquetes;
+        }
+        var hijos = contentTab.GetComponentsInChildren<packManager>(true);
+        if (hijos.Length <= 3) {
+            var obj = Instantiate(Resources.Load("PaqueteListaEmpty")) as GameObject;
             obj.transform.position = new Vector3(0, 0, 0);
             obj.transform.SetParent(contentTab.transform);
             obj.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -420,6 +458,32 @@ public class paquetesManager : MonoBehaviour {
             Rect rec = new Rect(0, 0, texture.width, texture.height);
             var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
             ficha.GetComponent<Image>().sprite = sprite;
+        }
+    }
+
+    IEnumerator llenarFichaLista(GameObject ficha, string urlImagen) {
+        string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
+        if (File.Exists(Application.persistentDataPath + path)) {
+            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+            Texture2D texture = new Texture2D(8, 8);
+            texture.LoadImage(byteArray);
+            Rect rec = new Rect(0, 0, texture.width, texture.height);
+            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            ficha.transform.GetChild(0).GetComponent< Image>().sprite = sprite;
+        } else {
+            WWW www = new WWW(urlImagen);
+            yield return www;
+            Texture2D texture = www.texture;
+            byte[] bytes;
+            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                bytes = texture.EncodeToJPG();
+            } else {
+                bytes = texture.EncodeToPNG();
+            }
+            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+            Rect rec = new Rect(0, 0, texture.width, texture.height);
+            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            ficha.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
         }
     }
 
