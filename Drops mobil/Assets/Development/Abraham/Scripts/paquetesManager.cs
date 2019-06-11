@@ -11,7 +11,6 @@ public class paquetesManager : MonoBehaviour {
     public Image imagen;                    ///< imagen referencia a la imagen que contendra la imagen del usuario
     public GameObject textoPaquetes;        ///< textoPaquetes referencia al objeto que se muestra u oculta dependiendo si existen paquetes por descargar
     public GameObject listaPaquetes;        ///< listaPaquetes referencia al objeto que contiene los paquetes ya instalados
-    public GameObject listaPaquetesLista;        ///< listaPaquetes referencia al objeto que contiene los paquetes ya instalados con vista de lista
     public GameObject listaPaquetesNuevos;  ///< listaPaquetesNuevos referencia al objeto que contiene los paquetes nuevos por descargar
     public GameObject configuracionModal;   ///< configuracionModal referencia al modal de configuracion de curso
     public GameObject scrollBar;            ///< scrollBar referencia al scrollbar para seleccionar el numero maximo de preguntas por curso
@@ -22,7 +21,6 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelTabs;
     public GameObject panelTabsBtn;
     public GameObject panelPaquetes;
-    public GameObject panelPaquetesLista;
     public GameObject panelDescargas;
     //public GameObject tabTodos;
 
@@ -39,6 +37,8 @@ public class paquetesManager : MonoBehaviour {
      */
     private void Awake() {
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
+        manager.vistaLista = true;
+        ajustarGridLayout();
         var preferencias = webServicePreferencias.getPreferenciaSqLite(manager.getUsuario());
         if (preferencias == null) {
             webServicePreferencias.insertarPreferenciaSqLite(manager.getUsuario());
@@ -50,6 +50,42 @@ public class paquetesManager : MonoBehaviour {
             }
             manager.setFondo(Int32.Parse(preferencias.fondo));
             manager.numeroPreguntas = Int32.Parse(preferencias.numeroPreguntas);
+        }
+    }
+
+    public void ajustarGridLayout() {
+        if (manager.vistaLista != true) {
+            listaPaquetes.GetComponent<GridLayoutGroup>().padding.top = 50;
+            listaPaquetes.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            listaPaquetes.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+            listaPaquetes.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            listaPaquetes.GetComponent<GridLayoutGroup>().cellSize = new Vector2(280f, 280f);
+            listaPaquetes.GetComponent<GridLayoutGroup>().constraintCount = 2;
+            listaPaquetes.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
+
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().padding.top = 10;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().cellSize = new Vector2(280f, 280f);
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 2;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
+        } else {
+            listaPaquetes.GetComponent<GridLayoutGroup>().padding.top = 50;
+            listaPaquetes.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            listaPaquetes.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+            listaPaquetes.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            listaPaquetes.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
+            listaPaquetes.GetComponent<GridLayoutGroup>().constraintCount = 1;
+            listaPaquetes.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
+
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().padding.top = 10;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 1;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
         }
     }
 
@@ -74,8 +110,7 @@ public class paquetesManager : MonoBehaviour {
             if (paquetesLocales != null) {
                 manager.setPaquetes(paquetesLocales.paquete);
             } else {
-                fillEmpty(listaPaquetes);
-                fillEmptyLista(listaPaquetesLista);
+                newCardEmpty(listaPaquetes);
             }
             var categoriasLocal = webServiceCategoria.getCategoriasSql();
             if (categoriasLocal != null) {
@@ -92,6 +127,7 @@ public class paquetesManager : MonoBehaviour {
         posTabContent = GameObject.Find("tabContentTodos").GetComponent<RectTransform>();
         GameObject.Find("Nombre").GetComponent<Text>().text = manager.getNombre();
         GameObject.Find("Tabs").SetActive(false);
+        controlPanel(1);
         
     }
 
@@ -151,7 +187,7 @@ public class paquetesManager : MonoBehaviour {
                     }
                 }
             }
-            fillEmpty(content.GetComponentInChildren<gridScrollLayout>().gameObject);
+            newCardEmpty(content.GetComponentInChildren<gridScrollLayout>().gameObject);
         }
     }
 
@@ -245,7 +281,12 @@ public class paquetesManager : MonoBehaviour {
      * @pack paqueteData estructura que tiene los datos del paquete a jugar
      */
     public void newCardJugar(webServicePaquetes.paqueteData pack, GameObject lista) {
-        var fichaPaquete = Instantiate(Resources.Load("fichaPaqueteJugar") as GameObject);
+        GameObject fichaPaquete;
+        if (manager.vistaLista == true) {
+            fichaPaquete = Instantiate(Resources.Load("PaqueteListaFix") as GameObject);
+        } else {
+            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteJugar") as GameObject);
+        }
         fichaPaquete.name = "fichaPack" + pack.id;
         StartCoroutine(llenarFicha(fichaPaquete, pack.urlImagen));
         if (lista == null) {
@@ -257,22 +298,11 @@ public class paquetesManager : MonoBehaviour {
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
         fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
-    }
-
-    public void newCardJugarLista(webServicePaquetes.paqueteData pack, GameObject lista) {
-        var fichaPaquete = Instantiate(Resources.Load("PaqueteLista") as GameObject);
-        fichaPaquete.name = "fichaPackLista" + pack.id;
-        StartCoroutine(llenarFichaLista(fichaPaquete, pack.urlImagen));
-        if (lista == null) {
-            fichaPaquete.transform.SetParent(listaPaquetesLista.transform);
-        } else {
-            fichaPaquete.transform.SetParent(lista.transform);
+        if (manager.vistaLista == true) {
+            fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
         }
-        fichaPaquete.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
-        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-        fichaPaquete.GetComponent<packManager>().paquete = pack;
-        fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
+
+        reajustarGridLayout(listaPaquetes);
     }
 
     /**
@@ -281,7 +311,12 @@ public class paquetesManager : MonoBehaviour {
      * @pack paqueteData estructura que tiene los datos del paquete a jugar
      */
     public void newCardActualizar(webServicePaquetes.paqueteData pack, GameObject lista) {
-        var fichaPaquete = Instantiate(Resources.Load("fichaPaqueteActualizar") as GameObject);
+        GameObject fichaPaquete;
+        if (manager.vistaLista == true) {
+            fichaPaquete = Instantiate(Resources.Load("PaqueteLista") as GameObject);
+        } else {
+            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteActualizar") as GameObject);
+        }
         fichaPaquete.name = "fichaPack" + pack.id;
         StartCoroutine(llenarFicha(fichaPaquete, pack.urlImagen));
         if (lista == null) {
@@ -293,6 +328,11 @@ public class paquetesManager : MonoBehaviour {
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
         fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
+        if (manager.vistaLista == true) {
+            fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
+        }
+
+        reajustarGridLayout(listaPaquetes);
     }
 
     /**
@@ -300,8 +340,13 @@ public class paquetesManager : MonoBehaviour {
      * Inserta la tarjeta fichaPaquete en listaPaquetesNuevos
      * @pack paqueteData estructura que tiene los datos del paquete a descargar
      */
-    public void newCardDescarga(webServicePaquetes.paqueteData pack) { 
-        var fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
+    public void newCardDescarga(webServicePaquetes.paqueteData pack) {
+        GameObject fichaPaquete;
+        if (manager.vistaLista == true) {
+            fichaPaquete = Instantiate(Resources.Load("PaqueteListaDescarga") as GameObject);
+        } else {
+            fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
+        }
         fichaPaquete.name = "fichaPack" + pack.id;
         StartCoroutine(llenarFicha(fichaPaquete, pack.descripcion, pack.urlImagen));
         fichaPaquete.transform.SetParent(listaPaquetesNuevos.transform);
@@ -309,6 +354,24 @@ public class paquetesManager : MonoBehaviour {
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
         fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
+
+        reajustarGridLayout(listaPaquetesNuevos);
+    }
+
+    public void newCardEmpty(GameObject obj) {
+        GameObject fichaPaquete;
+        if (manager.vistaLista == true) {
+            fichaPaquete = Instantiate(Resources.Load("PaqueteListaEmpty") as GameObject);
+        } else {
+            fichaPaquete = Instantiate(Resources.Load("placeHolder") as GameObject);
+        }
+        fichaPaquete.name = "fichaPackEmpty";
+        fichaPaquete.transform.SetParent(obj.transform);
+        fichaPaquete.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
+        fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+
+        reajustarGridLayout(obj);
     }
 
     /**
@@ -317,43 +380,30 @@ public class paquetesManager : MonoBehaviour {
      * Llena los espacios vacios con placeHoldrs para que la cuadricula se vea bien.
      * (Solo se utiliza en en objeto listaPaquetes)
      */
-    public void fillEmpty(GameObject contentTab) {
-        if (contentTab == null) {
-            contentTab = listaPaquetes;
-        }
-        var hijos = contentTab.GetComponentsInChildren<packManager>(true);
-        if (hijos.Length <= 3) {
-            var obj = Instantiate(Resources.Load("placeHolder")) as GameObject;
-            obj.transform.position = new Vector3(0, 0, 0);
-            obj.transform.SetParent(contentTab.transform);
-            obj.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            obj.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
-            obj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-            fillEmpty(contentTab);
-        }
-        contentTab.GetComponent<gridScrollLayout>().bandera = true;
-        contentTab.GetComponent<gridScrollLayout>().estaAjustado = false;
-        listaPaquetesNuevos.GetComponent<gridScrollLayout>().bandera = true;
-    }
+    //public void fillEmpty(GameObject contentTab) {
+    //    if (contentTab == null) {
+    //        contentTab = listaPaquetes;
+    //    }
+    //    var hijos = contentTab.GetComponentsInChildren<packManager>(true);
+    //    if (hijos.Length <= 3) {
+    //        var obj = Instantiate(Resources.Load("placeHolder")) as GameObject;
+    //        obj.transform.position = new Vector3(0, 0, 0);
+    //        obj.transform.SetParent(contentTab.transform);
+    //        obj.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    //        obj.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
+    //        obj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+    //        fillEmpty(contentTab);
+    //    }
 
-    public void fillEmptyLista(GameObject contentTab) {
-        if (contentTab == null) {
-            contentTab = listaPaquetes;
-        }
-        var hijos = contentTab.GetComponentsInChildren<packManager>(true);
-        if (hijos.Length <= 3) {
-            var obj = Instantiate(Resources.Load("PaqueteListaEmpty")) as GameObject;
-            obj.transform.position = new Vector3(0, 0, 0);
-            obj.transform.SetParent(contentTab.transform);
-            obj.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            obj.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
-            obj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-            fillEmpty(contentTab);
-        }
-        contentTab.GetComponent<gridScrollLayout>().bandera = true;
-        contentTab.GetComponent<gridScrollLayout>().estaAjustado = false;
-        listaPaquetesNuevos.GetComponent<gridScrollLayout>().bandera = true;
-    }
+    //    if (manager.vistaLista == true) {
+    //        contentTab.GetComponent<gridScrollLayout>().tamañoScroll = 100;
+    //    } else {
+    //        contentTab.GetComponent<gridScrollLayout>().tamañoScroll = 330;
+    //    }
+    //    contentTab.GetComponent<gridScrollLayout>().bandera = true;
+    //    contentTab.GetComponent<gridScrollLayout>().estaAjustado = false;
+    //    listaPaquetesNuevos.GetComponent<gridScrollLayout>().bandera = true;
+    //}
 
     /**
      * Funcion que se manda llamar al hacer click en el btnConfiguracion
@@ -405,14 +455,14 @@ public class paquetesManager : MonoBehaviour {
      */
     IEnumerator llenarFicha(GameObject ficha, string descripcion, string urlImagen) {
         ficha.GetComponentsInChildren<Text>()[0].text = descripcion;
+        Sprite sprite;
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
         if (File.Exists(Application.persistentDataPath + path)) {
             byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
             Texture2D texture = new Texture2D(8, 8);
             texture.LoadImage(byteArray);
             Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            ficha.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
         } else {
             WWW www = new WWW(urlImagen);
             yield return www;
@@ -425,9 +475,9 @@ public class paquetesManager : MonoBehaviour {
             }
             File.WriteAllBytes(Application.persistentDataPath + path, bytes);
             Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            ficha.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
         }
+        ficha.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
     }
 
     /**
@@ -437,13 +487,13 @@ public class paquetesManager : MonoBehaviour {
      */
     IEnumerator llenarFicha(GameObject ficha, string urlImagen) {
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
+        Sprite sprite;
         if (File.Exists(Application.persistentDataPath + path)) {
             byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
             Texture2D texture = new Texture2D(8, 8);
             texture.LoadImage(byteArray);
             Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            ficha.GetComponent<Image>().sprite = sprite;
+            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
         } else {
             WWW www = new WWW(urlImagen);
             yield return www;
@@ -456,34 +506,12 @@ public class paquetesManager : MonoBehaviour {
             }
             File.WriteAllBytes(Application.persistentDataPath + path, bytes);
             Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            ficha.GetComponent<Image>().sprite = sprite;
+            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
         }
-    }
-
-    IEnumerator llenarFichaLista(GameObject ficha, string urlImagen) {
-        string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
-        if (File.Exists(Application.persistentDataPath + path)) {
-            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-            Texture2D texture = new Texture2D(8, 8);
-            texture.LoadImage(byteArray);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            ficha.transform.GetChild(0).GetComponent< Image>().sprite = sprite;
-        } else {
-            WWW www = new WWW(urlImagen);
-            yield return www;
-            Texture2D texture = www.texture;
-            byte[] bytes;
-            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                bytes = texture.EncodeToJPG();
-            } else {
-                bytes = texture.EncodeToPNG();
-            }
-            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+        if (manager.vistaLista == true) {
             ficha.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+        } else {
+            ficha.GetComponent<Image>().sprite = sprite;
         }
     }
 
@@ -581,5 +609,34 @@ public class paquetesManager : MonoBehaviour {
             panelTabs.SetActive(false);
             panelTabsBtn.SetActive(true);
         }
+    }
+
+    public void cambiarVistaPaquetes(bool vista) {
+        bool panelActivo = panelDescargas.active;
+        manager.vistaLista = vista;
+        for (var i = 0; i < listaPaquetesNuevos.transform.childCount; i++) {
+            var objeto = listaPaquetesNuevos.transform.GetChild(i);
+            DestroyImmediate(objeto.gameObject);
+        }
+        panelDescargas.SetActive(true);
+        panelPaquetes.SetActive(true);
+        ajustarGridLayout();
+        manager.banderaPaquetes = true;
+        if (panelActivo == true) {
+            controlPanel(2);
+        } else {
+            controlPanel(1);
+        }
+    }
+
+    public void reajustarGridLayout(GameObject obj) {
+        if (manager.vistaLista == true) {
+            obj.GetComponent<gridScrollLayout>().tamañoScroll = 100;
+        } else {
+            obj.GetComponent<gridScrollLayout>().tamañoScroll = 330;
+        }
+        obj.GetComponent<gridScrollLayout>().bandera = true;
+        obj.GetComponent<gridScrollLayout>().estaAjustado = false;
+        obj.GetComponent<gridScrollLayout>().bandera = true;
     }
 }

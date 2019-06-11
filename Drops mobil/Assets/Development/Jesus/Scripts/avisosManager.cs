@@ -18,6 +18,8 @@ public class avisosManager : MonoBehaviour
     public GameObject avisoDinamico;
     public GameObject avisoEstatico;
     public GameObject panelMenuPerfil;
+    public GameObject modalPerfil;
+    public GameObject modalVista;
 
     public void setPaquetesMasNuevos(webServiceAvisos.paqueteDataNuevos[]newPacks) {
         paquetesRecientes = newPacks;
@@ -127,9 +129,23 @@ public class avisosManager : MonoBehaviour
     public void menuPerfil() {
         if (panelMenuPerfil.active == false) {
             panelMenuPerfil.SetActive(true);
+            modalPerfil.SetActive(true);
+            modalVista.SetActive(false);
         } else {
             panelMenuPerfil.SetActive(false);
         }
+    }
+
+    public void mostrarModalVista() {
+        modalPerfil.SetActive(false);
+        modalVista.SetActive(true);
+        //if (manager.vistaLista == true) {
+        //    modalVista.GetComponentsInChildren<Image>()[0].color = new Color(123f, 114f, 114f, 0f);
+        //    modalVista.GetComponentsInChildren<Image>()[1].color = new Color(123f, 114f, 114f, 100f);
+        //} else {
+        //    modalVista.GetComponentsInChildren<Image>()[0].color = new Color(123f, 114f, 114f, 100f);
+        //    modalVista.GetComponentsInChildren<Image>()[1].color = new Color(123f, 114f, 114f, 0f);
+        //}
     }
 
     IEnumerator getImagenPaquete(string urlImagen) {

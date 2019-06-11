@@ -17,7 +17,7 @@ public class appManager : MonoBehaviour {
     private string Imagen = null;             ///< Imagen almacena la imagen, ya sea de facebook o bien de UVEG de la persona que utiliza la aplicación
     private string gradoEstudios = null;      ///< gradoEstudios almacena el grado de estudios de la cuenta esta vinculada
     private webServicePaquetes.paqueteData[] paquetes = null;       ///< paquetes arreglo de estructura paqueteData, almacena los paquetes que existen en la BD del SII
-    private bool banderaPaquetes = true;                            ///< banderaPaquetes verifica si ya se recorrio el arreglo paquetes
+    public bool banderaPaquetes = true;                            ///< banderaPaquetes verifica si ya se recorrio el arreglo paquetes
     private webServiceCategoria.categoriaData[] categorias = null;  ///< categorias arreglo de estructura categoriasData, almacena las categorias que existen en la BD del SII
     private bool banderaCategorias = true;                          ///< banderaCategorias verifica si ya se recorrio el arreglo categorias
     private webServiceAcciones.accionData[] acciones = null;        ///< acciones arreglo de estructura accionesData, almacena las acciones que existen en la BD del SII
@@ -42,6 +42,7 @@ public class appManager : MonoBehaviour {
     public string lastIdLog = "0";
 
     public bool mascotaActive = true;
+    public bool vistaLista = false;
     private int fondo;
 
     public string anterior;
@@ -308,15 +309,13 @@ public class appManager : MonoBehaviour {
                         } else {
                             if (isOnline) {
                                 if (isActualized(descargaLocal.fechaDescarga, pack.fechaModificacion)) {
+
                                     paquetesManager.newCardJugar(pack, null);
-                                    paquetesManager.newCardJugarLista(pack, null);
                                 } else {
                                     paquetesManager.newCardActualizar(pack, null);
-
                                 }
                             } else {
                                 paquetesManager.newCardJugar(pack, null);
-                                paquetesManager.newCardJugarLista(pack, null);
                             }
                         }
                     } else {
@@ -327,20 +326,20 @@ public class appManager : MonoBehaviour {
                 if (GameObject.FindObjectOfType<appManager>()) {
                     GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
                 }
-                paquetesManager.fillEmpty(null);
-                if (GameObject.Find("PanelDescargas")) {
-                    paquetesManager.fillEmpty(GameObject.Find("PanelDescargas").GetComponentInChildren<gridScrollLayout>().gameObject);
+
+                int emptyObj;
+                if (vistaLista== true) {
+                    emptyObj = 5 - paquetesManager.listaPaquetesNuevos.transform.childCount;
+                } else {
+                    emptyObj = 4 - paquetesManager.listaPaquetesNuevos.transform.transform.childCount;
+                }
+
+                if (emptyObj>0) {
+                    for (int i = 0; i < emptyObj; i++) {
+                        paquetesManager.newCardEmpty(paquetesManager.listaPaquetesNuevos);
+                    }
                 }
                 banderaPaquetes = false;
-
-                foreach (var i in GameObject.Find("PanelCentral").GetComponentsInChildren<Transform>(true)) {
-                    if (i.gameObject.name == "PanelPaquetes") {
-                        i.gameObject.SetActive(true);
-                    }
-                    if (i.gameObject.name == "PanelDescargas") {
-                        i.gameObject.SetActive(false);
-                    }
-                }
             }
         }
     }
