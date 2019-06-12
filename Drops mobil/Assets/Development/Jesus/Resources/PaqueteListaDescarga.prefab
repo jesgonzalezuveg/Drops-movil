@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6544802, b: 0.9245283, a: 1}
+  m_Color: {r: 0, g: 0.654902, b: 0.9254902, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -122,6 +122,8 @@ MonoBehaviour:
     idCategoria: 
     idServer: 
     descripcionCategoria: 
+  respuestasPaquete:
+    respuestas: []
 --- !u!1 &5263398045118497578
 GameObject:
   m_ObjectHideFlags: 0

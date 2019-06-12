@@ -53,6 +53,20 @@ public class webServiceRespuestas : MonoBehaviour {
         }
     }
 
+    public static Data getRespuestasByPaqueteSqLite(string idPaquete) {
+        string query = "SELECT * FROM respuesta INNER JOIN pregunta ON respuesta.idPregunta = pregunta.id WHERE pregunta.idPaquete = "+idPaquete+";";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            result = "{\"respuestas\":" + "[" + result + "]}";
+            Data respuesta = JsonUtility.FromJson<Data>(result);
+            return respuesta;
+        } else {
+            return null;
+        }
+    }
+
+
+
     /*public static respuestaData getRespuestaByDescripcionSqLite(string descripcion) {
         string query = "SELECT * FROM respuesta WHERE descripcion = '" + descripcion + "';";
         var result = conexionDB.selectGeneral(query);

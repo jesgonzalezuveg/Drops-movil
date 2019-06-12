@@ -22,6 +22,9 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelTabsBtn;
     public GameObject panelPaquetes;
     public GameObject panelDescargas;
+
+    public GameObject panelLog;
+    public Text Log;
     //public GameObject tabTodos;
 
     private RectTransform posTabContent;
@@ -36,6 +39,7 @@ public class paquetesManager : MonoBehaviour {
      * Inicializa la referencia del appManager
      */
     private void Awake() {
+        panelLog.SetActive(false);
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         manager.vistaLista = true;
         ajustarGridLayout();
@@ -614,12 +618,14 @@ public class paquetesManager : MonoBehaviour {
     public void cambiarVistaPaquetes(bool vista) {
         bool panelActivo = panelDescargas.active;
         manager.vistaLista = vista;
-        for (var i = 0; i < listaPaquetesNuevos.transform.childCount; i++) {
-            var objeto = listaPaquetesNuevos.transform.GetChild(i);
-            DestroyImmediate(objeto.gameObject);
-        }
         panelDescargas.SetActive(true);
         panelPaquetes.SetActive(true);
+        while (listaPaquetesNuevos.transform.childCount>0) {
+            for (var i = 0; i < listaPaquetesNuevos.transform.childCount; i++) {
+                var objeto = listaPaquetesNuevos.transform.GetChild(i);
+                DestroyImmediate(objeto.gameObject);
+            }
+        }
         ajustarGridLayout();
         manager.banderaPaquetes = true;
         if (panelActivo == true) {

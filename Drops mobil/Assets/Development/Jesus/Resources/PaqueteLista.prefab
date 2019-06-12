@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6544802, b: 0.9245283, a: 1}
+  m_Color: {r: 0, g: 0.654902, b: 0.9254902, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -124,6 +124,8 @@ MonoBehaviour:
     idCategoria: 
     idServer: 
     descripcionCategoria: 
+  respuestasPaquete:
+    respuestas: []
 --- !u!1 &5263398045118497578
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +591,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7143863325743753414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4453348003603154962}
+        m_MethodName: actualizarPaquete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &7143863325743753464
@@ -863,7 +876,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4453348003603154962}
-        m_MethodName: showDeleteButton
+        m_MethodName: eliminarPaquete
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

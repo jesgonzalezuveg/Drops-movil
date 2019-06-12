@@ -327,18 +327,27 @@ public class appManager : MonoBehaviour {
                     GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
                 }
 
-                int emptyObj;
-                if (vistaLista== true) {
-                    emptyObj = 5 - paquetesManager.listaPaquetesNuevos.transform.childCount;
+                int emptyObj = paquetesManager.listaPaquetesNuevos.transform.childCount;
+                if (emptyObj>0) {
+                    if (vistaLista == true) {
+                        emptyObj = 5 - emptyObj;
+                    } else {
+                        emptyObj = 4 - emptyObj;
+                    }
+
+                    if (emptyObj > 0) {
+                        //paquetesManager.panelDescargas.transform.GetChild(0).gameObject.SetActive(true);
+                        paquetesManager.panelDescargas.transform.GetChild(1).gameObject.SetActive(false);
+                        for (int i = 0; i < emptyObj; i++) {
+                            paquetesManager.newCardEmpty(paquetesManager.listaPaquetesNuevos);
+                        }
+                    }
                 } else {
-                    emptyObj = 4 - paquetesManager.listaPaquetesNuevos.transform.transform.childCount;
+                    //paquetesManager.panelDescargas.transform.GetChild(0).gameObject.SetActive(false);
+                    paquetesManager.panelDescargas.transform.GetChild(1).gameObject.SetActive(true);
+                    paquetesManager.panelDescargas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "No hay paquetes por descargar.";
                 }
 
-                if (emptyObj>0) {
-                    for (int i = 0; i < emptyObj; i++) {
-                        paquetesManager.newCardEmpty(paquetesManager.listaPaquetesNuevos);
-                    }
-                }
                 banderaPaquetes = false;
             }
         }

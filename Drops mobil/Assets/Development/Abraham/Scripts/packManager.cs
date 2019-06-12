@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.IO;
 
 public class packManager : MonoBehaviour {
 
     public webServicePaquetes.paqueteData paquete = null;       ///< paquete estructura paqueteData que almacena los datos del paquete al que pertenese esta tarjeta
+    public webServiceRespuestas.Data respuestasPaquete = null;       ///< paquete estructura Data que almacena los datos de las respuestas del paquete
     private appManager manager;         ///< manager AppManager 
 
     /**
@@ -54,6 +56,17 @@ public class packManager : MonoBehaviour {
     }
 
     /**
+     * Funcion que se manda llamar cuando el boton eliminar paquete es clickeado
+     * Enciende el mensaje eliminando paquete y elimina todo el contenido del paquete
+     */
+    public void eliminarPaquete() {
+        //GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Eliminando paquete");
+        //webServiceRegistro.validarAccionSqlite("Eliminar : " + paquete.descripcion, manager.getUsuario(), "Borrar paquete");
+        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().panelLog.SetActive(true);
+        borrarDatos();
+    }
+
+    /**
      * Funcion que se manda llamar al momento de clickear en descargar o actulizar paquete
      * Apaga los botones activos, consulta las preguntas y respuestas desde el SII
      * inserta los nuevos datos y la descarga en local
@@ -69,13 +82,60 @@ public class packManager : MonoBehaviour {
         StartCoroutine(webServiceRespuestas.getRespuestasByPack(paquete.descripcion));
     }
 
+    /**
+     * Funcion que se manda llamar al momento de clickear en eliminar paquete
+     * elimina los nuevos datos y la descarga en local
+     */
+    void borrarDatos() {
+        manager.setPreguntas(null);
+        manager.setRespuestas(null);
+        transform.GetComponentsInChildren<Button>()[1].interactable = false;
+        transform.GetComponentsInChildren<Button>()[2].interactable = false;
+        manager.packToPlay = paquete;
+        var res = webServiceDescarga.deleteDescargaSqLite(paquete.id);
+        if (res == 1) {
+            Debug.Log("Se borro correctamente el paquete");
+            var paquetesManager = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>();
+            borrarImagenes(paquete.id);
+            paquetesManager.cambiarVistaPaquetes(manager.vistaLista);
+        } else {
+            Debug.Log("Error al borrar paquete");
+            transform.GetComponentsInChildren<Button>()[1].interactable = true;
+            transform.GetComponentsInChildren<Button>()[2].interactable = true;
+        }
+    }
+
+    void borrarImagenes(string idPaquete) {
+        respuestasPaquete = webServiceRespuestas.getRespuestasByPaqueteSqLite(idPaquete);
+        if (respuestasPaquete!= null) {
+            foreach (var respuesta in respuestasPaquete.respuestas) {
+                if (respuesta.urlImagen != null && respuesta.urlImagen != "") {
+                    string filePath = respuesta.urlImagen.Split('/')[respuesta.urlImagen.Split('/').Length - 1];
+                    filePath = Application.persistentDataPath + filePath;
+                    if (File.Exists(filePath)) {
+                        File.Delete(filePath);
+                        Debug.Log("La imagen " + filePath + " fue eliminada.");
+                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + filePath + " fue eliminada. -----";
+                    } else {
+                        Debug.Log("La imagen " + filePath + " no existe.");
+                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + filePath + " no existe. -----";
+                    }
+                }
+            }
+        }
+    }
+
     public void showDeleteButton() {
         Debug.Log("Entro a la funcion");
         GameObject eliminar = this.gameObject.transform.GetChild(4).gameObject;
         if (eliminar.active == true) {
             eliminar.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(2).gameObject.SetActive(true);
         } else {
             eliminar.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 
