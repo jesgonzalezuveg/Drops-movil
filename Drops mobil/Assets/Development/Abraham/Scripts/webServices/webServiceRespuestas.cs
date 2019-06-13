@@ -54,7 +54,7 @@ public class webServiceRespuestas : MonoBehaviour {
     }
 
     public static Data getRespuestasByPaqueteSqLite(string idPaquete) {
-        string query = "SELECT * FROM respuesta INNER JOIN pregunta ON respuesta.idPregunta = pregunta.id WHERE pregunta.idPaquete = "+idPaquete+";";
+        string query = "SELECT * FROM respuesta INNER JOIN pregunta ON respuesta.idPregunta = pregunta.id WHERE pregunta.idPaquete = " + idPaquete + ";";
         var result = conexionDB.selectGeneral(query);
         if (result != "0") {
             result = "{\"respuestas\":" + "[" + result + "]}";
@@ -62,6 +62,16 @@ public class webServiceRespuestas : MonoBehaviour {
             return respuesta;
         } else {
             return null;
+        }
+    }
+
+    public static int deleteRespuestasByPaqueteSqLite(string idPaquete) {
+        string query = "DELETE FROM respuesta WHERE id IN (SELECT respuesta.id FROM respuesta INNER JOIN pregunta ON respuesta.idPregunta = pregunta.id WHERE pregunta.idPaquete = "+idPaquete+");";
+        var result = conexionDB.alterGeneral(query);
+        if (result > 0) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 

@@ -50,7 +50,7 @@ public class webServiceLog : MonoBehaviour {
         string query = "DELETE FROM log WHERE id = " + id + "";
         var result = conexionDB.alterGeneral(query);
 
-        if (result == 1) {
+        if (result > 0) {
             return 1;
         } else {
             return 0;

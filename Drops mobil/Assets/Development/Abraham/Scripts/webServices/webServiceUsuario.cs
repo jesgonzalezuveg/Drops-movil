@@ -146,6 +146,20 @@ public class webServiceUsuario : MonoBehaviour {
         }
     }
 
+    public static usersAllDataSqLite consultarUsuariosSincroSqLite() {
+        string query = "SELECT * FROM usuario;";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            byte[] bytes = Encoding.Default.GetBytes(result);
+            result = Encoding.UTF8.GetString(bytes);
+            result = "{\"usuarios\":[" + result + "]}";
+            usersAllDataSqLite data = JsonUtility.FromJson<usersAllDataSqLite>(result);
+            return data;
+        } else {
+            return null;
+        }
+    }
+
     /** Función que consulta el id del usuario
      * @param usuario matricula o correo electronico del usuario
      */

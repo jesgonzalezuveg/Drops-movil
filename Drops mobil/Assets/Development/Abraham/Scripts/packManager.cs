@@ -62,7 +62,6 @@ public class packManager : MonoBehaviour {
     public void eliminarPaquete() {
         //GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Eliminando paquete");
         //webServiceRegistro.validarAccionSqlite("Eliminar : " + paquete.descripcion, manager.getUsuario(), "Borrar paquete");
-        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().panelLog.SetActive(true);
         borrarDatos();
     }
 
@@ -115,10 +114,8 @@ public class packManager : MonoBehaviour {
                     if (File.Exists(file)) {
                         File.Delete(file);
                         Debug.Log("La imagen " + file + " fue eliminada.");
-                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + path + " fue eliminada. -----";
                     } else {
                         Debug.Log("La imagen " + file + " no existe.");
-                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + path + " no existe. -----";
                     }
                 }
             }

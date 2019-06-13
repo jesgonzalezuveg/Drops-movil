@@ -23,8 +23,6 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelPaquetes;
     public GameObject panelDescargas;
 
-    public GameObject panelLog;
-    public Text Log;
     //public GameObject tabTodos;
 
     private RectTransform posTabContent;
@@ -39,7 +37,6 @@ public class paquetesManager : MonoBehaviour {
      * Inicializa la referencia del appManager
      */
     private void Awake() {
-        panelLog.SetActive(false);
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         manager.vistaLista = true;
         ajustarGridLayout();

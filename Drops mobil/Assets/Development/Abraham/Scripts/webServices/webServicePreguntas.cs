@@ -101,6 +101,28 @@ public class webServicePreguntas : MonoBehaviour {
         }
     }
 
+    public static Data getPreguntasByPaqueteSqLite(string ipPaquete) {
+        string query = "SELECT * FROM pregunta WHERE idPaquete = " + ipPaquete + ";";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            result = "{\"preguntas\":[" + result + "]}";
+            Data preguntas = JsonUtility.FromJson<Data>(result);
+            return preguntas;
+        } else {
+            return null;
+        }
+    }
+
+    public static int deletePreguntasByPaqueteSqLite(string idPaquete) {
+        string query = "DELETE FROM pregunta WHERE idPaquete = " + idPaquete + ";";
+        var result = conexionDB.alterGeneral(query);
+        if (result > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 
     public static preguntaData[] getPreguntasByPackSqLiteCurso(string ipPaquete, float limite) {
         string query = "SELECT a.*, c.descripcion AS descripcionEjercicio, d.descripcion AS descripcionPaquete FROM pregunta AS a INNER JOIN catalogoEjercicio AS c INNER JOIN paquete AS d ON a.idTipoEjercicio = c.id AND a.idPaquete = d.id WHERE d.id = '" + ipPaquete + "' ORDER BY random() LIMIT " + limite + ";";

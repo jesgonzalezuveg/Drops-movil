@@ -8,6 +8,7 @@ public class SyncroManager : MonoBehaviour {
     appManager manager;
     public string jsonGeneral;
     public string jsonPerUser;
+    webServicePaquetes.Data paquetes = null;
     webServiceUsuario.userDataSqLite dataUser = null;
     webServiceUsuario.userDataSqLite[] dataUsers = null;
     webServiceLog.logData[] logs = null;
@@ -22,7 +23,7 @@ public class SyncroManager : MonoBehaviour {
     void Awake() {
         scene = SceneManager.GetActiveScene();
         if (scene.name == "menuCategorias") {
-        //if (scene.name == "prueba") {
+            //if (scene.name == "prueba") {
             manager = GameObject.Find("AppManager").GetComponent<appManager>();
             if (manager.isFirstLogin == true && manager.isOnline == true) {
                 string user = manager.getUsuario();
@@ -33,10 +34,23 @@ public class SyncroManager : MonoBehaviour {
                 validarJson(jsonGeneral, false);
                 return;
             }
+        } else if (scene.name == "mainMenu") {
+            if (UnityEngine.Application.internetReachability != NetworkReachability.NotReachable) {
+                sincronizacionUsuarios();
+                validarJson(jsonGeneral, false);
+                return;
+            }
         }
     }
 
-    public void synchronizationInRealTime(){
+    void Update() {
+        if (scene.name == "mainMenu" && SyncroManager.respuestaWsSincro == "1") {
+            SyncroManager.respuestaWsSincro = "0";
+            borrarPaquetes();
+        }
+    }
+
+    public void synchronizationInRealTime() {
         jsonGeneral = "";
         jsonPerUser = "";
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
@@ -48,10 +62,11 @@ public class SyncroManager : MonoBehaviour {
 
 
     public void validarJson(string json, bool realTime) {
-        if (json!=null && json != "{\"Usuarios\":[]}") {
+        if (json != null && json != "{\"Usuarios\":[]}") {
             StartCoroutine(webServiceSincronizacion.SincroData(json, realTime));
         } else {
             Debug.Log("No hay datos para sincronizar");
+            SyncroManager.respuestaWsSincro = "1";
         }
     }
 
@@ -90,12 +105,13 @@ public class SyncroManager : MonoBehaviour {
         } else {
             jsonGeneral = null;
         }
-        Debug.Log(jsonGeneral);
+        //Debug.Log(jsonGeneral);
     }
 
     public void sincronizacionUsuarios() {
         //string user = manager.getUsuario();
         dataUsers = webServiceUsuario.consultarUsuariosSqLite();
+
         if (dataUsers != null) {
             //Continuamos generando el json agregando los logs del usuario
             jsonGeneral += "{\"Usuarios\":[";
@@ -132,14 +148,18 @@ public class SyncroManager : MonoBehaviour {
         if (last == true) {
             logs = webServiceLog.getLastLogByUser(idUsuarioActual, manager.lastIdLog);
         } else {
-            logs = webServiceLog.getLogsByUser(idUsuarioActual, manager.lastIdLog);
+            if (scene.name == "mainMenu") {
+                logs = webServiceLog.getLogsByUser(idUsuarioActual, "0");
+            } else {
+                logs = webServiceLog.getLogsByUser(idUsuarioActual, manager.lastIdLog);
+            }
         }
-        if (logs!=null){
+        if (logs != null) {
             //Continuamos generando el json agregando los logs del usuario
             jsonPerUser += "\"logs\":[";
             for (var i = 0; i < logs.Length; i++) {
-                jsonPerUser += "{\"id\": \""+ validateData(logs[i].id) + "\",";
-                jsonPerUser += "\"fechaInicio\": \""+ validateData(logs[i].fechaInicio) + "\",";
+                jsonPerUser += "{\"id\": \"" + validateData(logs[i].id) + "\",";
+                jsonPerUser += "\"fechaInicio\": \"" + validateData(logs[i].fechaInicio) + "\",";
                 jsonPerUser += "\"fechaTermino\": \"" + validateData(logs[i].fechaTermino) + "\",";
                 jsonPerUser += "\"dispositivo\": \"" + validateData(logs[i].dispositivo) + "\",";
                 jsonPerUser += "\"idServer\": \"" + validateData(logs[i].idServer) + "\",";
@@ -149,7 +169,7 @@ public class SyncroManager : MonoBehaviour {
                 getRegistrosUser(logs[i].id);
                 //Obtenemos los intentos pertenecientes al log en turno
                 getIntentosUser(logs[i].id);
-                if ((logs.Length-i)!=1) {
+                if ((logs.Length - i) != 1) {
                     jsonPerUser += "},";
                 } else {
                     jsonPerUser += "}";
@@ -165,7 +185,7 @@ public class SyncroManager : MonoBehaviour {
     public void getRegistrosUser(string idLog) {
         //Obtenemos los registros del log
         registros = webServiceRegistro.getRegistrossByLog(idLog);
-        if (registros!=null) {
+        if (registros != null) {
             jsonPerUser += "\"registros\":[";
             //Continuamos generando el json agregando los registros del log
             for (var i = 0; i < registros.Length; i++) {
@@ -234,7 +254,7 @@ public class SyncroManager : MonoBehaviour {
                 if (idServerPregunta != "0") {
                     jsonPerUser += "\"idPregunta\": \"" + idServerPregunta + "\",";
                 } else {
-                    jsonPerUser += "\"idPregunta\": \""+ detalleIntento[i].idPregunta + "\",";
+                    jsonPerUser += "\"idPregunta\": \"" + detalleIntento[i].idPregunta + "\",";
                 }
 
                 if (idServerRespuesta != "0") {
@@ -257,10 +277,41 @@ public class SyncroManager : MonoBehaviour {
     }
 
     public string validateData(string data) {
-        if (data!=null && data !="") {
+        if (data != null && data != "") {
             return data;
         } else {
             return "";
+        }
+    }
+
+    public void borrarPaquetes() {
+        if (scene.name == "mainMenu") {
+            paquetes = webServicePaquetes.getPaquetesBorradosSqLite();
+            if (paquetes != null) {
+                foreach (var paquete in paquetes.paquete) {
+                    Debug.Log(paquete.id);
+                    Debug.Log(paquete.descripcion);
+                    var res = webServiceRespuestas.deleteRespuestasByPaqueteSqLite(paquete.id);
+                    if (res == 1) {
+                        res = webServicePreguntas.deletePreguntasByPaqueteSqLite(paquete.id);
+                        if (res == 1) {
+                            Debug.Log("Se borraron las respuestas y preguntas del paquete " + paquete.id);
+                            //res = webServicePaquetes.deletePaqueteSqLite(paquete.id);
+                            //if (res == 1) {
+                            //    Debug.Log("Se borro por completo el paquete " + paquete.id);
+                            //} else {
+                            //    Debug.Log("Error al borrar el paquete");
+                            //}
+                        } else {
+                            Debug.Log("Se borraron las respuestas del paquete " + paquete.id + "(error al borrar las preguntas)");
+                        }
+                    } else {
+                        Debug.Log("Error al borrar las respuestas del paquete " + paquete.id);
+                    }
+                }
+            } else {
+                Debug.Log("No encontro paquetes borrados");
+            }
         }
     }
 }

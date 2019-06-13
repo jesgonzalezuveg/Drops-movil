@@ -46,12 +46,23 @@ public class webServiceDescarga : MonoBehaviour {
     }
 
     public static int deleteDescargaSqLite(string idPaquete) {
-        string query = "DELETE FROM descarga WHERE idPaquete = "+idPaquete+";";
+        string query = "DELETE FROM descarga WHERE idPaquete = " + idPaquete + ";";
         var result = conexionDB.alterGeneral(query);
         if (result == 1) {
             return 1;
         } else {
             return 0;
+        }
+    }
+
+    public static Data getDescargas() {
+        string query = "SELECT * FROM descarga ORDER BY fechaDescarga;";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            Data descarga = JsonUtility.FromJson<Data>(result);
+            return descarga;
+        } else {
+            return null;
         }
     }
 }

@@ -82,6 +82,18 @@ public class webServicePaquetes : MonoBehaviour{
         }
     }
 
+    public static Data getPaquetesBorradosSqLite() {
+        string query = "SELECT p.id, p.clave, p.descripcion, p.fechaRegistro, p.fechaModificacion, p.urlImagen, p.idCategoria, p.idServer FROM paquete p LEFT JOIN descarga d ON p.id  = d.idPaquete WHERE d.id IS NULL";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            result = "{\"paquete\":[" + result + "]}";
+            Data paquete = JsonUtility.FromJson<Data>(result);
+            return paquete;
+        } else {
+            return null;
+        }
+    }
+
     public static int insertarPaqueteSqLite(paqueteData paquete) {
         //clave, descripcion, fechaRegistro, fechaModificacion, urlImagen, idCategoria, idServer
         var categoriaData = webServiceCategoria.getCategoriaByDescripcionSqLite(paquete.descripcionCategoria);
@@ -99,6 +111,16 @@ public class webServicePaquetes : MonoBehaviour{
             }
         }
         return 0;
+    }
+
+    public static int deletePaqueteSqLite(string idPaquete) {
+        string query = "DELETE FROM paquete WHERE id = " + idPaquete + ";";
+        var result = conexionDB.alterGeneral(query);
+        if (result > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 
