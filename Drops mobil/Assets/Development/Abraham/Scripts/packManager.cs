@@ -110,15 +110,15 @@ public class packManager : MonoBehaviour {
         if (respuestasPaquete!= null) {
             foreach (var respuesta in respuestasPaquete.respuestas) {
                 if (respuesta.urlImagen != null && respuesta.urlImagen != "") {
-                    string filePath = respuesta.urlImagen.Split('/')[respuesta.urlImagen.Split('/').Length - 1];
-                    filePath = Application.persistentDataPath + filePath;
-                    if (File.Exists(filePath)) {
-                        File.Delete(filePath);
-                        Debug.Log("La imagen " + filePath + " fue eliminada.");
-                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + filePath + " fue eliminada. -----";
+                    string path = respuesta.urlImagen.Split('/')[respuesta.urlImagen.Split('/').Length - 1];
+                    string file = Application.persistentDataPath + path;
+                    if (File.Exists(file)) {
+                        File.Delete(file);
+                        Debug.Log("La imagen " + file + " fue eliminada.");
+                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + path + " fue eliminada. -----";
                     } else {
-                        Debug.Log("La imagen " + filePath + " no existe.");
-                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + filePath + " no existe. -----";
+                        Debug.Log("La imagen " + file + " no existe.");
+                        GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().Log.text + "La imagen " + path + " no existe. -----";
                     }
                 }
             }
