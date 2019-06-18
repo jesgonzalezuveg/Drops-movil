@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 2851208469405673052}
   - component: {fileID: 134498682897624969}
   - component: {fileID: 8387873671465133591}
-  - component: {fileID: 7832884578828379014}
   m_Layer: 5
   m_Name: imgPaquete
   m_TagString: Untagged
@@ -242,18 +241,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &7832884578828379014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5263398045118497578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6057694482281686242
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +332,8 @@ GameObject:
   - component: {fileID: 7143863326223816177}
   - component: {fileID: 7143863326223816176}
   - component: {fileID: 7143863326223816179}
-  - component: {fileID: 7143863326223816178}
+  - component: {fileID: 4931104328010216840}
+  - component: {fileID: 4555580309217867903}
   m_Layer: 5
   m_Name: btnIcon
   m_TagString: Untagged
@@ -462,7 +450,28 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &7143863326223816178
+--- !u!223 &4931104328010216840
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7143863326223816180}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &4555580309217867903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -471,9 +480,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7143863326223816180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da3ef70edc895643b68d2cab6e9c66c, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &8148550468433866384
 GameObject:
   m_ObjectHideFlags: 0

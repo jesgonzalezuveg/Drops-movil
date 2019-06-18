@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI;
 
 public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
     public static GameObject itemBeingDragged;
@@ -18,17 +19,22 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
             if (touch.phase == TouchPhase.Moved) {
                 this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                //GameObject.Find("TextLog").GetComponent<Text>().text = "Moviendo";
                 Debug.Log("Moviendo");
+            } else {
+                this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+                //GameObject.Find("TextLog").GetComponent<Text>().text = "Levanto movimiento";
             }
 
-            if (Input.touchCount == 2) {
-                touch = Input.GetTouch(1);
+            //if (Input.touchCount == 2) {
+            //    touch = Input.GetTouch(1);
 
-                if (touch.phase == TouchPhase.Ended) {
-                    this.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                    Debug.Log("Levanto movimiento");
-                }
-            }
+            //    if (touch.phase == TouchPhase.Ended) {
+            //        this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            //        GameObject.Find("TextLog").GetComponent<Text>().text = "Levanto movimiento";
+            //        Debug.Log("Levanto movimiento");
+            //    }
+            //}
         }
     }
 

@@ -132,11 +132,15 @@ public class CursoManager : MonoBehaviour {
         }
     }
 
-    private void Awake() {
+    void Awake() {
+        respuestaFraseCompletada = "";
         tiempo = time;
+        fraseACompletar = "";
+        fraseCompletada = "";
     }
 
     void Start() {
+        textoCompletado.text = "-";
         scoreFinal.SetActive(false);
 
         bien = Resources.Load("audios/Great") as AudioClip;
@@ -724,7 +728,7 @@ public class CursoManager : MonoBehaviour {
                     texture.LoadImage(byteArray);
                     Rect rec = new Rect(0, 0, texture.width, texture.height);
                     var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                    x.GetComponentInChildren<Button>().gameObject.GetComponent<Image>().sprite = sprite;
+                    x.GetComponent<Image>().sprite = sprite;
                 } else {
                     var splitUrl = respuesta.urlImagen.Split('.');
                     var spriteObj = Resources.Load("preloadedPacks/" + splitUrl[0]);
@@ -732,7 +736,8 @@ public class CursoManager : MonoBehaviour {
                     Texture2D tex = spriteObj as Texture2D;
                     Rect rec = new Rect(0, 0, tex.width, tex.height);
                     var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
-                    imagen.sprite = sprite;
+                    //imagen.sprite = sprite;
+                    x.GetComponent<Image>().sprite = sprite;
                 }
             } else {
                 x.GetComponentInChildren<Text>().text = respuesta.descripcion;
