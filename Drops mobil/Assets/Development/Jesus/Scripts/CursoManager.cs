@@ -143,32 +143,32 @@ public class CursoManager : MonoBehaviour {
         textoCompletado.text = "-";
         scoreFinal.SetActive(false);
 
-        bien = Resources.Load("audios/Great") as AudioClip;
-        bienSp = Resources.Load("UserInterface/bien");
+        bien = Resources.Load("audios/Correct") as AudioClip;
+        bienSp = Resources.Load("UserInterface/Dab");
 
-        genial = Resources.Load("audios/genial") as AudioClip;
-        genialSp = Resources.Load("UserInterface/genial");
+        genial = Resources.Load("audios/Correct") as AudioClip;
+        genialSp = Resources.Load("UserInterface/Dab");
 
-        asombroso = Resources.Load("audios/Awesome") as AudioClip;
-        asombrosoSp = Resources.Load("UserInterface/asombroso");
+        asombroso = Resources.Load("audios/Correct") as AudioClip;
+        asombrosoSp = Resources.Load("UserInterface/Dab");
 
-        excelente = Resources.Load("audios/Excellent") as AudioClip;
-        excelenteSp = Resources.Load("UserInterface/excelente");
+        excelente = Resources.Load("audios/Correct") as AudioClip;
+        excelenteSp = Resources.Load("UserInterface/Dab");
 
-        perfect = Resources.Load("audios/Perfect") as AudioClip;
-        perfectSp = Resources.Load("UserInterface/perfecto");
+        perfect = Resources.Load("audios/Correct") as AudioClip;
+        perfectSp = Resources.Load("UserInterface/Dab");
 
-        woow = Resources.Load("audios/Woow") as AudioClip;
-        woowSp = Resources.Load("UserInterface/wooow");
+        woow = Resources.Load("audios/Correct") as AudioClip;
+        woowSp = Resources.Load("UserInterface/Dab");
 
-        increible = Resources.Load("audios/Increible") as AudioClip;
-        increibleSp = Resources.Load("UserInterface/increible");
+        increible = Resources.Load("audios/Correct") as AudioClip;
+        increibleSp = Resources.Load("UserInterface/Dab");
 
-        sigueAsi = Resources.Load("audios/sigueAsi") as AudioClip;
-        sigueAsiSp = Resources.Load("UserInterface/sigueasi");
+        sigueAsi = Resources.Load("audios/Correct") as AudioClip;
+        sigueAsiSp = Resources.Load("UserInterface/Dab");
 
-        ops = Resources.Load("audios/reiniciando") as AudioClip;
-        opsSp = Resources.Load("UserInterface/ops");
+        ops = Resources.Load("audios/wrong") as AudioClip;
+        opsSp = Resources.Load("UserInterface/mal");
 
         mayorRacha = 0;
         racha = 0;

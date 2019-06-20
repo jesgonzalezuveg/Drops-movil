@@ -7,6 +7,7 @@ public class mainMenuManager : MonoBehaviour {
     public GameObject[] vistas;
     GameObject vistaActiva;
     GameObject mascota;
+    public GameObject terminosCondiciones;
 
     public void Start() {
         vistaActiva = vistas[0];
@@ -51,5 +52,13 @@ public class mainMenuManager : MonoBehaviour {
     IEnumerator loadScene(string scene) {
         yield return new WaitUntil(() => this.GetComponent<AudioSource>().isPlaying == false);
         StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena(scene,"mainMenu"));
+    }
+
+    public void terminosCondicionesFunction() {
+        if (terminosCondiciones.active == true) {
+            terminosCondiciones.SetActive(false);
+        } else {
+            terminosCondiciones.SetActive(true);
+        }
     }
 }

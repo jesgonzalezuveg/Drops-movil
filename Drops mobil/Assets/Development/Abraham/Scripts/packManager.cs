@@ -123,9 +123,18 @@ public class packManager : MonoBehaviour {
     }
 
     public void showDeleteButton() {
-        Debug.Log("Entro a la funcion");
         GameObject eliminar = this.gameObject.transform.GetChild(4).gameObject;
-        if (eliminar.active == true) {
+        bool st = eliminar.active;
+        //foreach (var btns in GameObject.FindGameObjectsWithTag("btnPlayUpdate")) {
+        //    btns.SetActive(true);
+        //}
+        foreach (var btn in GameObject.FindGameObjectsWithTag("btnEliminar")) {
+            btn.SetActive(false);
+            btn.transform.parent.transform.GetChild(1).gameObject.SetActive(true);
+            btn.transform.parent.transform.GetChild(2).gameObject.SetActive(true);
+        }
+        Debug.Log("Entro a la funcion");
+        if (st == true) {
             eliminar.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
             transform.GetChild(2).gameObject.SetActive(true);

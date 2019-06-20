@@ -39,6 +39,8 @@ public class appManager : MonoBehaviour {
     public int getOld = 0;
     public int paquetesPorDescargar = 0;
 
+    public GameObject cargando;
+
     public string lastIdLog = "0";
 
     public bool mascotaActive = true;
@@ -206,6 +208,7 @@ public class appManager : MonoBehaviour {
     public void Awake() {
         fondo = 0;
         DontDestroyOnLoad(this.gameObject);
+        cargando.SetActive(false);
     }
 
     public void Start() {
@@ -292,6 +295,7 @@ public class appManager : MonoBehaviour {
             if (paquetes != null && banderaPaquetes) {
                 paquetesManager.destruirObjetos(null);
                 destruirObjetos();
+                paquetesManager.cambiarVistaPaquetes(vistaLista);
                 paquetesPorDescargar = 0;
                 foreach (var pack in paquetes) {
                     var local = webServicePaquetes.getPaquetesByDescripcionSqLite(pack.descripcion);
@@ -596,7 +600,6 @@ public class appManager : MonoBehaviour {
         }
     }
 
-    public GameObject cargando;
 
     public IEnumerator cambiarEscena(string nueva, string anterior) {
         cargando.SetActive(true);

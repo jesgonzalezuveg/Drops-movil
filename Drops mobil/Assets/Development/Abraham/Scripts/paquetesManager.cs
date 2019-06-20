@@ -23,6 +23,8 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelPaquetes;
     public GameObject panelDescargas;
 
+    public webServiceCategoria.categoriaData categoriaTab = null;
+
     //public GameObject tabTodos;
 
     private RectTransform posTabContent;
@@ -87,6 +89,26 @@ public class paquetesManager : MonoBehaviour {
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 1;
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
+        }
+
+        foreach (var panel in panelPaquetes.GetComponentsInChildren<GridLayoutGroup>()) {
+            if (manager.vistaLista != true) {
+                panel.padding.top = 50;
+                panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                panel.startAxis = GridLayoutGroup.Axis.Horizontal;
+                panel.cellSize = new Vector2(280f, 280f);
+                panel.constraintCount = 2;
+                panel.spacing = new Vector2(10, 20);
+            } else {
+                panel.padding.top = 50;
+                panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                panel.startAxis = GridLayoutGroup.Axis.Horizontal;
+                panel.cellSize = new Vector2(560f, 100f);
+                panel.constraintCount = 1;
+                panel.spacing = new Vector2(10, 20);
+            }
         }
     }
 
@@ -166,10 +188,12 @@ public class paquetesManager : MonoBehaviour {
         contentTab.GetComponent<RectTransform>().sizeDelta = posTabContent.sizeDelta;
         contentTab.SetActive(false);
         tab.GetComponentInChildren<Button>().onClick.AddListener(delegate {
+            categoriaTab = categoria;
             fillTabContent(contentTab, categoria);
             tabActivo.SetActive(false);
             contentTab.SetActive(true);
             tabActivo = contentTab;
+            ajustarGridLayout();
             controlPanel(1);
         });
     }
@@ -517,6 +541,7 @@ public class paquetesManager : MonoBehaviour {
     }
 
     public void activarTodos(GameObject todos) {
+        categoriaTab = null;
         tabActivo.SetActive(false);
         tabActivo = todos;
         tabActivo.SetActive(true);
@@ -617,6 +642,18 @@ public class paquetesManager : MonoBehaviour {
         manager.vistaLista = vista;
         panelDescargas.SetActive(true);
         panelPaquetes.SetActive(true);
+
+        while (panelPaquetes.GetComponentInChildren<GridLayoutGroup>().transform.childCount > 0) {
+            for (var i = 0; i < panelPaquetes.GetComponentInChildren<GridLayoutGroup>().transform.childCount; i++) {
+                var objeto = panelPaquetes.GetComponentInChildren<GridLayoutGroup>().transform.GetChild(i);
+                DestroyImmediate(objeto.gameObject);
+            }
+        }
+
+        if (categoriaTab != null) {
+            fillTabContent(tabActivo, categoriaTab);
+        }
+
         while (listaPaquetesNuevos.transform.childCount>0) {
             for (var i = 0; i < listaPaquetesNuevos.transform.childCount; i++) {
                 var objeto = listaPaquetesNuevos.transform.GetChild(i);

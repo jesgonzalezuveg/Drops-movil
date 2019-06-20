@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 4356950965567910828}
   m_Layer: 5
   m_Name: btnPlay
-  m_TagString: Untagged
+  m_TagString: btnPlayUpdate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 2010614481908909812}
   m_Layer: 5
   m_Name: btnUpdate
-  m_TagString: Untagged
+  m_TagString: btnPlayUpdate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -840,9 +840,10 @@ GameObject:
   - component: {fileID: 5297995372821877347}
   - component: {fileID: 5446213666191695918}
   - component: {fileID: 787337527986815397}
+  - component: {fileID: 5107248566535111283}
   m_Layer: 5
   m_Name: btnDelete
-  m_TagString: Untagged
+  m_TagString: btnEliminar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -995,3 +996,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &5107248566535111283
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148550468433866384}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: feb5b35bce1028e468cfec8f4dcd0c6f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
