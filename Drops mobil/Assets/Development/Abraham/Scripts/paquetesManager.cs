@@ -309,6 +309,7 @@ public class paquetesManager : MonoBehaviour {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
             fichaPaquete = Instantiate(Resources.Load("PaqueteListaFix") as GameObject);
+            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaqueteJugar") as GameObject);
         }
@@ -339,6 +340,7 @@ public class paquetesManager : MonoBehaviour {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
             fichaPaquete = Instantiate(Resources.Load("PaqueteLista") as GameObject);
+            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaqueteActualizar") as GameObject);
         }
@@ -369,6 +371,7 @@ public class paquetesManager : MonoBehaviour {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
             fichaPaquete = Instantiate(Resources.Load("PaqueteListaDescarga") as GameObject);
+            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
         }
@@ -387,6 +390,7 @@ public class paquetesManager : MonoBehaviour {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
             fichaPaquete = Instantiate(Resources.Load("PaqueteListaEmpty") as GameObject);
+            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         } else {
             fichaPaquete = Instantiate(Resources.Load("placeHolder") as GameObject);
         }
@@ -438,7 +442,12 @@ public class paquetesManager : MonoBehaviour {
      */
     public void setVisibleModal() {
         configuracionModal.SetActive(!configuracionModal.active);
+        configuracionModal.GetComponent<Image>().color = configuracionModal.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         if (configuracionModal.active == false) {
+            if (panelPaquetes.active == false) {
+                panelDescargas.SetActive(false);
+                panelPaquetes.SetActive(true);
+            }
             foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
                 ray.enabled = true;
             }
@@ -447,6 +456,11 @@ public class paquetesManager : MonoBehaviour {
             manager.mascotaActive = audioBox.isOn;
             webServicePreferencias.updatePreferenciaSqlite(manager.getUsuario(), manager.numeroPreguntas, manager.mascotaActive, manager.getFondo());
         } else {
+            if (panelDescargas.active == true) {
+                panelDescargas.SetActive(false);
+            } else if (panelPaquetes.active == true) {
+                panelPaquetes.SetActive(false);
+            }
             foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
                 ray.enabled = false;
             }
@@ -456,6 +470,7 @@ public class paquetesManager : MonoBehaviour {
 
     public void setVisibleModal(bool isVisible) {
         configuracionModal.SetActive(isVisible);
+        configuracionModal.GetComponent<Image>().color = configuracionModal.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         if (isVisible == false) {
             foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
                 ray.enabled = true;
@@ -615,12 +630,27 @@ public class paquetesManager : MonoBehaviour {
             panelTabsBtn.SetActive(true);
             setVisibleModal(false);
             panelTabsBtn.GetComponent<Image>().color = panelTabsBtn.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            foreach (var i in listaPaquetes.GetComponentsInChildren<fondoManager>()) {
+                i.gameObject.GetComponent<Image>().color = i.colorArray[manager.getFondo()];
+            }
+            foreach (var btn in GameObject.FindGameObjectsWithTag("btnEliminar")) {
+                btn.SetActive(false);
+                btn.transform.parent.transform.GetChild(1).gameObject.SetActive(true);
+                btn.transform.parent.transform.GetChild(2).gameObject.SetActive(true);
+            }
+            Color col = new Color(panelPaquetes.GetComponentInChildren<Image>().color.r, panelPaquetes.GetComponentInChildren<Image>().color.g, panelPaquetes.GetComponentInChildren<Image>().color.b, 0f);
+            panelPaquetes.GetComponentInChildren<Image>().color = col;
         } else if (option == 2) {
             panelPaquetes.SetActive(false);
             panelDescargas.SetActive(true);
             panelTabs.SetActive(false);
             panelTabsBtn.SetActive(false);
             setVisibleModal(false);
+            foreach (var i in listaPaquetesNuevos.GetComponentsInChildren<fondoManager>()) {
+                i.gameObject.GetComponent<Image>().color = i.colorArray[manager.getFondo()];
+            }
+            Color col = new Color(panelDescargas.GetComponentInChildren<Image>().color.r, panelDescargas.GetComponentInChildren<Image>().color.g, panelDescargas.GetComponentInChildren<Image>().color.b, 0f);
+            panelDescargas.GetComponentInChildren<Image>().color = col;
         } else if (option == 3) {
             panelPaquetes.SetActive(false);
             panelDescargas.SetActive(false);

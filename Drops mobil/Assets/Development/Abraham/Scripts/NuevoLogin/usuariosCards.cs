@@ -14,32 +14,35 @@ public class usuariosCards : MonoBehaviour {
     void Start() {
         var usuarios = webServiceUsuario.consultarUsuariosSqLite();
         foreach (var usuario in usuarios) {
-            var card = Instantiate(cardToInstantiate) as GameObject;
-            card.name = usuario.nombre + "card";
-            card.transform.SetParent(this.transform);
-            card.transform.localPosition = new Vector3(0, 0, 0);
-            card.GetComponentsInChildren<Text>()[0].text = usuario.nombre;
-            card.GetComponentsInChildren<Text>()[1].text = usuario.usuario;
-            //Debug.Log(usuario.imagen);
-            StartCoroutine(getUserImg(usuario.imagen, card));
+            //Validacion que solo permite crear la tarjeta Invitados( quitar en caso de que se quieran crear las demas tarjetas ).
             if (usuario.nombre == "Invitado") {
-                card.GetComponentsInChildren<Text>()[0].text = "Nueva partida";
-                card.GetComponentsInChildren<Text>()[1].text = "(No se guardan tus datos)";
+                var card = Instantiate(cardToInstantiate) as GameObject;
+                card.name = usuario.nombre + "card";
+                card.transform.SetParent(this.transform);
+                card.transform.localPosition = new Vector3(0, 0, 0);
+                card.GetComponentsInChildren<Text>()[0].text = usuario.nombre;
+                card.GetComponentsInChildren<Text>()[1].text = usuario.usuario;
+                //Debug.Log(usuario.imagen);
+                StartCoroutine(getUserImg(usuario.imagen, card));
+                if (usuario.nombre == "Invitado") {
+                    card.GetComponentsInChildren<Text>()[0].text = "Nueva partida";
+                    card.GetComponentsInChildren<Text>()[1].text = "(No se guardan tus datos)";
+                }
+                if (card.GetComponentsInChildren<Text>()[0].text.Length > 20) {
+                    var texto = card.GetComponentsInChildren<Text>()[0].text.Remove(19, card.GetComponentsInChildren<Text>()[0].text.Length - 19);
+                    texto += "...";
+                    card.GetComponentsInChildren<Text>()[0].text = texto;
+                }
+                //byte[] b = new byte[4];
+                //for (int j = 0; j < 4; j++) {
+                //    var i = UnityEngine.Random.Range(0, 255);
+                //    b[j] = Convert.ToByte(i);
+                //}
+                //card.GetComponentsInChildren<Image>()[1].color = new Color32(b[0], b[1], b[2], 255);
+                card.transform.localScale = new Vector3(1, 1, 1);
+                card.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                addcardEvent(card, usuario);
             }
-            if (card.GetComponentsInChildren<Text>()[0].text.Length > 20) {
-                var texto = card.GetComponentsInChildren<Text>()[0].text.Remove(19, card.GetComponentsInChildren<Text>()[0].text.Length - 19);
-                texto += "...";
-                card.GetComponentsInChildren<Text>()[0].text = texto;
-            }
-            //byte[] b = new byte[4];
-            //for (int j = 0; j < 4; j++) {
-            //    var i = UnityEngine.Random.Range(0, 255);
-            //    b[j] = Convert.ToByte(i);
-            //}
-            //card.GetComponentsInChildren<Image>()[1].color = new Color32(b[0], b[1], b[2], 255);
-            card.transform.localScale = new Vector3(1, 1, 1);
-            card.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            addcardEvent(card, usuario);
         }
     }
 

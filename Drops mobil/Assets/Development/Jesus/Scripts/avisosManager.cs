@@ -131,6 +131,9 @@ public class avisosManager : MonoBehaviour
             panelMenuPerfil.SetActive(true);
             modalPerfil.SetActive(true);
             modalVista.SetActive(false);
+            foreach (var btnImage in modalPerfil.GetComponentsInChildren<fondoManager>()) {
+                btnImage.gameObject.GetComponent<Image>().color = btnImage.colorArray[manager.getFondo()];
+            }
         } else {
             panelMenuPerfil.SetActive(false);
         }

@@ -60,7 +60,8 @@ public class packManager : MonoBehaviour {
      * Enciende el mensaje eliminando paquete y elimina todo el contenido del paquete
      */
     public void eliminarPaquete() {
-        //GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Eliminando paquete");
+        Debug.Log("ELIMINANDO PAQUETE");
+        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Eliminando paquete");
         //webServiceRegistro.validarAccionSqlite("Eliminar : " + paquete.descripcion, manager.getUsuario(), "Borrar paquete");
         borrarDatos();
     }
@@ -102,6 +103,7 @@ public class packManager : MonoBehaviour {
             transform.GetComponentsInChildren<Button>()[1].interactable = true;
             transform.GetComponentsInChildren<Button>()[2].interactable = true;
         }
+        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
     }
 
     void borrarImagenes(string idPaquete) {

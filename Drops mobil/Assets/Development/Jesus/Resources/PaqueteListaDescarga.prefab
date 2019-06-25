@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8754679436814945909}
   - component: {fileID: 3223615530573087302}
   - component: {fileID: 4453348003603154962}
+  - component: {fileID: 1395204962030945533}
   m_Layer: 5
   m_Name: PaqueteListaDescarga
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.654902, b: 0.9254902, a: 1}
+  m_Color: {r: 0, g: 0.654902, b: 0.9254902, a: 0.4509804}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -124,6 +125,26 @@ MonoBehaviour:
     descripcionCategoria: 
   respuestasPaquete:
     respuestas: []
+--- !u!114 &1395204962030945533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009579828414651628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b638bf4f8791af49a8f1e741fee21bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorArray:
+  - {r: 0.101960786, g: 0.6509804, b: 0.7176471, a: 0.4509804}
+  - {r: 0.5176471, g: 0.45490196, b: 0.6313726, a: 0.4509804}
+  - {r: 0.9607843, g: 0.41568628, b: 0.4745098, a: 0.4509804}
+  - {r: 1, g: 0.25490198, b: 0.3019608, a: 0.4509804}
+  - {r: 0.7058824, g: 0.11372549, b: 0.42352942, a: 0.4509804}
+  - {r: 0, g: 0.1764706, b: 0.2509804, a: 0.4509804}
+  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 0.4509804}
 --- !u!1 &5263398045118497578
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45025513, g: 0.9137255, b: 0.4352941, a: 1}
+  m_Color: {r: 0.5673282, g: 0.57169634, b: 0.5754717, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

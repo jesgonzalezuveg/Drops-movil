@@ -8,6 +8,7 @@ public class mainMenuManager : MonoBehaviour {
     GameObject vistaActiva;
     GameObject mascota;
     public GameObject terminosCondiciones;
+    public GameObject btnTerminos;
 
     public void Start() {
         vistaActiva = vistas[0];
@@ -22,11 +23,6 @@ public class mainMenuManager : MonoBehaviour {
      * 
      */
     public void cambiarVista(int vista) {
-        if (vista == 3) {
-            mascota.SetActive(false);
-        } else {
-            mascota.SetActive(true);
-        }
         vistaActiva.SetActive(false);
         vistas[vista].SetActive(true);
         vistaActiva = vistas[vista];
@@ -39,6 +35,14 @@ public class mainMenuManager : MonoBehaviour {
                 input.GetComponentInChildren<InputField>().text = "";
             }
         }
+
+        if (vistaActiva.name == "2" || vistaActiva.name == "3") {
+            btnTerminos.SetActive(true);
+        } else {
+            btnTerminos.SetActive(false);
+        }
+
+        valMascota();
     }
 
     public void pairingCode() {
@@ -57,8 +61,22 @@ public class mainMenuManager : MonoBehaviour {
     public void terminosCondicionesFunction() {
         if (terminosCondiciones.active == true) {
             terminosCondiciones.SetActive(false);
+            btnTerminos.SetActive(true);
+            vistaActiva.SetActive(true);
+            valMascota();
         } else {
             terminosCondiciones.SetActive(true);
+            btnTerminos.SetActive(false);
+            vistaActiva.SetActive(false);
+            mascota.SetActive(false);
+        }
+    }
+
+    void valMascota() {
+        if (vistaActiva.name == "3") {
+            mascota.SetActive(false);
+        } else {
+            mascota.SetActive(true);
         }
     }
 }

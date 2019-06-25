@@ -10,7 +10,7 @@ public class CursoManager : MonoBehaviour {
     public static string[] letras =  new string[25];
     public static string respuestaFraseCompletada = "";
 
-    private float time = 999.0f;
+    private float time = 30.0f;
     private float tiempo;
     private bool aumento = false;
     private bool comenzarPregunta = false;
