@@ -7,10 +7,12 @@ using System;
 
 public class CursoManager : MonoBehaviour {
 
-    public static string[] letras =  new string[25];
-    public static string respuestaFraseCompletada = "";
+    public string[] letras =  new string[25];
+    public string respuestaFraseCompletada = "";
+    public string fraseACompletarPublica = "";
 
-    private float time = 30.0f;
+
+    private float time = 300.0f;
     private float tiempo;
     private bool aumento = false;
     private bool comenzarPregunta = false;
@@ -60,6 +62,7 @@ public class CursoManager : MonoBehaviour {
     //Variables para prefabs Drag&Drop
     public GameObject itemDrag;
     public GameObject Slot;
+    public GameObject NoSlot;
 
     //Variables para Paneles Drag&Drop
     public GameObject Respuesta;
@@ -248,7 +251,7 @@ public class CursoManager : MonoBehaviour {
                     //    respuestaCorrecta();
                     //}
 
-                    textoCompletado.text = respuestaFraseCompletada;
+                    //textoCompletado.text = respuestaFraseCompletada;
                     if (respuestaFraseCompletada == fraseACompletar) {
                         webServiceRegistro.validarAccionSqlite("Respondió correctamente(Completar palabra): " + respuestaFraseCompletada, manager.getUsuario(), "Respondió pregunta");
                         respuestaFraseCompletada = "";
@@ -379,6 +382,7 @@ public class CursoManager : MonoBehaviour {
                 case "Completar palabra":
                     fraseCompletada = "";
                     imprimePregunta();
+                    textoCompletado.text = "Intentos 3";
                     break;
                 case "Seleccion Multiple":
                     imprimePregunta();
@@ -475,6 +479,7 @@ public class CursoManager : MonoBehaviour {
                 var palabra = respuestasOfQuestion.descripcion;
                 llenarLetras(palabra);
                 fraseACompletar = palabra.ToUpper();
+                fraseACompletarPublica = palabra.ToUpper();
             } else {
                 var respuestasOfQuestion = webServiceRespuestas.getRespuestasByPreguntaSqLite(preguntas[countPreguntas].id);
                 llenarRespuestas(respuestasOfQuestion.respuestas);
@@ -591,6 +596,7 @@ public class CursoManager : MonoBehaviour {
 
     public void crearPanelRespuesta(string palabra) {
         var x = Instantiate(Respuesta, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        x.AddComponent<Slot2>();
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
         x.name = "Respuesta";
         dividirPalabra(palabra, x, true);
@@ -617,7 +623,13 @@ public class CursoManager : MonoBehaviour {
     }
 
     public void crearBotonLetra(char respuesta, float angle, float radius, GameObject panel, bool onlySlot) {
-        var x = Instantiate(Slot, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        GameObject x;
+        if (!onlySlot) {
+            x = Instantiate(Slot, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        } else {
+            x = Instantiate(NoSlot, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        }
+        //var x = Instantiate(Slot, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
         x.transform.SetParent(panel.transform, false);
         int index = x.transform.GetSiblingIndex();
         if (!onlySlot) {
@@ -1038,6 +1050,15 @@ public class CursoManager : MonoBehaviour {
         if (manager.getUsuario() != "") {
             webServiceRegistro.validarAccionSqlite("El usuario no termino la partida", manager.getUsuario(), "Ejercicio sin terminar");
             webServiceLog.cerrarLog(manager.getUsuario());
+        }
+    }
+
+    public void intentosCompletarPalabra(int intentos) {
+        if (intentos == 0) {
+            //idRespuesta = "0";
+            correctas = -1;
+            comenzarPregunta = false;
+
         }
     }
 

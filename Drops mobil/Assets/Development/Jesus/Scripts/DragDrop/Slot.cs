@@ -25,6 +25,7 @@ public class Slot : MonoBehaviour, IDropHandler
                 DragHandeler.itemBeingDragged.transform.SetParent(transform);
             }
         }
+        Debug.Log(DragHandeler.itemBeingDragged.transform.name);
     }
 
     #endregion

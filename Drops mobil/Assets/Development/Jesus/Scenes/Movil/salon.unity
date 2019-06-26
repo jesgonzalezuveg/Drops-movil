@@ -4921,6 +4921,7 @@ MonoBehaviour:
   itemDrag: {fileID: 1028261488205697011, guid: 052e02e2b41e4be4cbe6597e7c8dd7ca,
     type: 3}
   Slot: {fileID: 7403050785426158740, guid: 106f75424fbb6ef42a9a3725ca24db4b, type: 3}
+  NoSlot: {fileID: 7403050785426158740, guid: f38c207a74eb14f40b5fc33993706c27, type: 3}
   Respuesta: {fileID: 7467022029612979053, guid: 81c993b3519120b47a258f25d2aebe4e,
     type: 3}
   PanelLetras: {fileID: 1534132283298596507, guid: 3d1c0c842a85d4a4b889588eca69de85,
