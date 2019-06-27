@@ -11,7 +11,7 @@ using Object = System.Object;
 
 public class db : MonoBehaviour
 {
-    String code ="";
+    //String code ="";
     String code2 ="";
 
     // Start is called before the first frame update

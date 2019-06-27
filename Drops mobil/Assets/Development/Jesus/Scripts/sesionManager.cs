@@ -8,7 +8,9 @@ public class sesionManager : MonoBehaviour
 
     private void Awake() {
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
-        manager.cargando.SetActive(false);
+        if (GameObject.FindObjectOfType<appManager>()) {
+            GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
+        }
     }
     public void changeScene() {
         StartCoroutine(GameObject.FindObjectOfType<appManager>().cambiarEscena("menuCategorias", "menuCategorias"));

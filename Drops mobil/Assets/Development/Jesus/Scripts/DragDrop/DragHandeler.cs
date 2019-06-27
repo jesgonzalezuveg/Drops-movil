@@ -40,6 +40,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (itemBeingDragged == null && transform.parent.parent.name != "Respuesta") {
             GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
+        if (transform.parent.parent.name == "Respuesta") {
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
     }
 
     #region IBeginDragHandler implementation

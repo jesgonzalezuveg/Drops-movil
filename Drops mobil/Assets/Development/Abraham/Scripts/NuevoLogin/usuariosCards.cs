@@ -66,28 +66,44 @@ public class usuariosCards : MonoBehaviour {
     }
 
     IEnumerator getUserImg(string url, GameObject card) {
-        string path = url.Split('/')[url.Split('/').Length - 1];
-        if (File.Exists(Application.persistentDataPath + path)) {
-            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-            Texture2D texture = new Texture2D(8, 8);
-            texture.LoadImage(byteArray);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            card.GetComponentsInChildren<Image>()[1].sprite = sprite;
-        } else {
-            WWW www = new WWW(url);
-            yield return www;
-            Texture2D texture = www.texture;
-            byte[] bytes;
-            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                bytes = texture.EncodeToJPG();
-            } else {
-                bytes = texture.EncodeToPNG();
+        string path = url.Split('/')[url.Split('/').Length - 1]; ;
+        string urlModificada = "";
+        using (WWW wwwImage = new WWW(url)) {
+            yield return wwwImage;
+
+            if (wwwImage.responseHeaders.Count > 0) {
+                foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
+                    if (entry.Key == "STATUS") {
+                        if (entry.Value == "HTTP/1.1 404 Not Found") {
+                            Debug.Log("No se encontro la imagen");
+                            urlModificada = "http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png"; 
+                            path = urlModificada.Split('/')[urlModificada.Split('/').Length - 1]; ;
+                        }
+                        if (File.Exists(Application.persistentDataPath + path)) {
+                            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+                            Texture2D texture = new Texture2D(8, 8);
+                            texture.LoadImage(byteArray);
+                            Rect rec = new Rect(0, 0, texture.width, texture.height);
+                            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                            card.GetComponentsInChildren<Image>()[1].sprite = sprite;
+                        } else {
+                            WWW www = new WWW(url);
+                            yield return www;
+                            Texture2D texture = www.texture;
+                            byte[] bytes;
+                            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                                bytes = texture.EncodeToJPG();
+                            } else {
+                                bytes = texture.EncodeToPNG();
+                            }
+                            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                            Rect rec = new Rect(0, 0, texture.width, texture.height);
+                            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                            card.GetComponentsInChildren<Image>()[1].sprite = sprite;
+                        }
+                    }
+                }
             }
-            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            card.GetComponentsInChildren<Image>()[1].sprite = sprite;
         }
     }
 

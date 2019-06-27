@@ -12,9 +12,9 @@ public class CursoManager : MonoBehaviour {
     public string fraseACompletarPublica = "";
 
 
-    private float time = 300.0f;
+    private float time = 30.0f;
     private float tiempo;
-    private bool aumento = false;
+    //private bool aumento = false;
     private bool comenzarPregunta = false;
     public Text Tiempo;
     SyncroManager sicroManager;
@@ -496,7 +496,7 @@ public class CursoManager : MonoBehaviour {
             //gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 30, 0));
         }
         var radius = 4f;
-        int p = 1;
+        //int p = 1;
         int i = 0;
         destroyChildrens();
         if (!canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
@@ -613,7 +613,7 @@ public class CursoManager : MonoBehaviour {
         var letras = shuffleArray(palabra);
         var numberOfObjects = palabra.Length;
         var radius = 4f;
-        int p = 1;
+        //int p = 1;
         int i = 0;
         foreach (char caratcter in letras) {
             float angle = i * Mathf.PI * 2 / numberOfObjects;

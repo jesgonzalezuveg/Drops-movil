@@ -30,7 +30,9 @@ public class avisosManager : MonoBehaviour
         paquetesRecientes = null;
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         panelAvisos.SetActive(false);
-        if (manager.isOnline) {
+        if (UnityEngine.Application.internetReachability == NetworkReachability.NotReachable) {
+            //No hay conexion a internet
+        } else {
             StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("3"));
         }
     }
@@ -58,9 +60,12 @@ public class avisosManager : MonoBehaviour
             mostrarAviso();
             if (manager.getOld == 1) {
                 manager.getOld = 2;
-                if (manager.isOnline) {
+                if (UnityEngine.Application.internetReachability == NetworkReachability.NotReachable) {
+                    //No hay conexion a internet
+                } else {
                     StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("90"));
                 }
+                
             }
         }
     }
@@ -153,28 +158,48 @@ public class avisosManager : MonoBehaviour
 
     IEnumerator getImagenPaquete(string urlImagen) {
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
-        Debug.Log(path);
-        if (File.Exists(Application.persistentDataPath + path)) {
-            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-            Texture2D texture = new Texture2D(8, 8);
-            texture.LoadImage(byteArray);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            imagen.sprite = sprite;
-        } else {
-            WWW www = new WWW(urlImagen);
-            yield return www;
-            Texture2D texture = www.texture;
-            byte[] bytes;
-            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                bytes = texture.EncodeToJPG();
-            } else {
-                bytes = texture.EncodeToPNG();
+        string urlModificada = "";
+        using (WWW wwwImage = new WWW(urlImagen)) {
+            yield return wwwImage;
+
+            if (wwwImage.responseHeaders.Count > 0) {
+                foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
+                    if (entry.Key == "STATUS") {
+                        Debug.Log(entry.Value);
+                        if (entry.Value == "HTTP/1.1 404 Not Found") {
+                            Debug.Log("No se encontro la imagen");
+                            var spriteObj = Resources.Load("preloadedCoverPacks/portadaPaqueteCarga");
+                            Texture2D tex = spriteObj as Texture2D;
+                            Rect rec = new Rect(0, 0, tex.width, tex.height);
+                            imagen.sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+                        } else {
+                            Debug.Log(path);
+                            if (File.Exists(Application.persistentDataPath + path)) {
+                                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+                                Texture2D texture = new Texture2D(8, 8);
+                                texture.LoadImage(byteArray);
+                                Rect rec = new Rect(0, 0, texture.width, texture.height);
+                                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                                imagen.sprite = sprite;
+                            } else {
+                                WWW www = new WWW(urlImagen);
+                                yield return www;
+                                Texture2D texture = www.texture;
+                                byte[] bytes;
+                                if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                                    bytes = texture.EncodeToJPG();
+                                } else {
+                                    bytes = texture.EncodeToPNG();
+                                }
+                                File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                                Rect rec = new Rect(0, 0, texture.width, texture.height);
+                                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                                imagen.sprite = sprite;
+                            }
+                        }
+                    }
+                }
             }
-            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            imagen.sprite = sprite;
         }
     }
 }

@@ -34,7 +34,7 @@ public class SyncroManager : MonoBehaviour {
                 validarJson(jsonGeneral, false);
                 return;
             }
-        } else if (scene.name == "mainMenu") {
+        } else if (scene.name == "mainMenu" || scene.name == "mainMenuSesion") {
             if (UnityEngine.Application.internetReachability != NetworkReachability.NotReachable) {
                 sincronizacionUsuarios();
                 validarJson(jsonGeneral, false);
@@ -44,7 +44,7 @@ public class SyncroManager : MonoBehaviour {
     }
 
     void Update() {
-        if (scene.name == "mainMenu" && SyncroManager.respuestaWsSincro == "1") {
+        if (scene.name == "mainMenu" || scene.name == "mainMenuSesion" && SyncroManager.respuestaWsSincro == "1") {
             SyncroManager.respuestaWsSincro = "0";
             borrarPaquetes();
         }
@@ -148,7 +148,7 @@ public class SyncroManager : MonoBehaviour {
         if (last == true) {
             logs = webServiceLog.getLastLogByUser(idUsuarioActual, manager.lastIdLog);
         } else {
-            if (scene.name == "mainMenu") {
+            if (scene.name == "mainMenu" || scene.name == "mainMenuSesion") {
                 logs = webServiceLog.getLogsByUser(idUsuarioActual, "0");
             } else {
                 logs = webServiceLog.getLogsByUser(idUsuarioActual, manager.lastIdLog);
@@ -285,7 +285,7 @@ public class SyncroManager : MonoBehaviour {
     }
 
     public void borrarPaquetes() {
-        if (scene.name == "mainMenu") {
+        if (scene.name == "mainMenu" || scene.name == "mainMenuSesion") {
             paquetes = webServicePaquetes.getPaquetesBorradosSqLite();
             if (paquetes != null) {
                 foreach (var paquete in paquetes.paquete) {
