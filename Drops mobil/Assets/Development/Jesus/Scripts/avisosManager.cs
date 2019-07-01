@@ -20,6 +20,9 @@ public class avisosManager : MonoBehaviour
     public GameObject panelMenuPerfil;
     public GameObject modalPerfil;
     public GameObject modalVista;
+    public GameObject nombre;
+    public Animator animController;
+    public bool anim = false;
 
     public void setPaquetesMasNuevos(webServiceAvisos.paqueteDataNuevos[]newPacks) {
         paquetesRecientes = newPacks;
@@ -40,6 +43,8 @@ public class avisosManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animController.enabled = false;
+        anim = false;
     }
 
     // Update is called once per frame
@@ -131,22 +136,27 @@ public class avisosManager : MonoBehaviour
         }
     }
 
-    public void menuPerfil() {
-        if (panelMenuPerfil.active == false) {
-            panelMenuPerfil.SetActive(true);
-            modalPerfil.SetActive(true);
-            modalVista.SetActive(false);
-            foreach (var btnImage in modalPerfil.GetComponentsInChildren<fondoManager>()) {
-                btnImage.gameObject.GetComponent<Image>().color = btnImage.colorArray[manager.getFondo()];
-            }
-        } else {
+    public void menuPerfil(bool conf) {
+        if (conf) {
             panelMenuPerfil.SetActive(false);
+
+        } else {
+            if (panelMenuPerfil.active == false) {
+                panelMenuPerfil.SetActive(true);
+                //modalPerfil.SetActive(true);
+                //modalVista.SetActive(false);
+                //foreach (var btnImage in modalPerfil.GetComponentsInChildren<fondoManager>()) {
+                //    btnImage.gameObject.GetComponent<Image>().color = btnImage.colorArray[manager.getFondo()];
+                //}
+            } else {
+                panelMenuPerfil.SetActive(false);
+            }
         }
     }
 
     public void mostrarModalVista() {
-        modalPerfil.SetActive(false);
-        modalVista.SetActive(true);
+        //modalPerfil.SetActive(false);
+        //modalVista.SetActive(true);
         //if (manager.vistaLista == true) {
         //    modalVista.GetComponentsInChildren<Image>()[0].color = new Color(123f, 114f, 114f, 0f);
         //    modalVista.GetComponentsInChildren<Image>()[1].color = new Color(123f, 114f, 114f, 100f);
@@ -154,6 +164,26 @@ public class avisosManager : MonoBehaviour
         //    modalVista.GetComponentsInChildren<Image>()[0].color = new Color(123f, 114f, 114f, 100f);
         //    modalVista.GetComponentsInChildren<Image>()[1].color = new Color(123f, 114f, 114f, 0f);
         //}
+    }
+
+    public void animMenu() {
+        panelMenuPerfil.SetActive(false);
+
+        if (anim == true) {
+            animController.SetBool("anim", true);
+        } else {
+            animController.SetBool("anim", false);
+        }
+
+        if (anim == false) {
+            animController.enabled = true;
+            anim = true;
+            //nombre.SetActive(false);
+        } else {
+            animController.enabled = true;
+            anim = false;
+            //nombre.SetActive(true);
+        }
     }
 
     IEnumerator getImagenPaquete(string urlImagen) {

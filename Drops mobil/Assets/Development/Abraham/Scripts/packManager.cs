@@ -10,6 +10,7 @@ public class packManager : MonoBehaviour {
     public webServicePaquetes.paqueteData paquete = null;       ///< paquete estructura paqueteData que almacena los datos del paquete al que pertenese esta tarjeta
     public webServiceRespuestas.Data respuestasPaquete = null;       ///< paquete estructura Data que almacena los datos de las respuestas del paquete
     private appManager manager;         ///< manager AppManager 
+    private paquetesManager pManager;
 
     /**
      * Funcion que se manda llamar al inicio de la escena (frame 1)
@@ -17,6 +18,7 @@ public class packManager : MonoBehaviour {
      */
     public void Start() {
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
+        pManager = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>(); 
         GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
         /*if (GetComponentInChildren<Text>()) {
             GetComponentInChildren<Text>().text = paquete.descripcion;
@@ -28,10 +30,15 @@ public class packManager : MonoBehaviour {
      * Enciende el mensaje descargando paquete y inserta el registro de descarga
      */
     public void descargaPaquete() {
-        gameObject.GetComponentInParent<gridScrollLayout>().estaAjustado = false;
-        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Descargando paquete");
-        webServiceRegistro.validarAccionSqlite("Descarga: " + paquete.descripcion, manager.getUsuario(), "Descargar paquete");
-        consultarDatos();
+        manager.validarConexion();
+        if (manager.isOnline) {
+            gameObject.GetComponentInParent<gridScrollLayout>().estaAjustado = false;
+            GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Descargando paquete");
+            webServiceRegistro.validarAccionSqlite("Descarga: " + paquete.descripcion, manager.getUsuario(), "Descargar paquete");
+            consultarDatos();
+        } else {
+            pManager.panelMsj();
+        }
     }
 
     /**
@@ -50,9 +57,14 @@ public class packManager : MonoBehaviour {
      * Enciende el mensaje descargando paquete y inserta el registro de actualizar
      */
     public void actualizarPaquete() {
-        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Actualizando paquete");
-        webServiceRegistro.validarAccionSqlite("Actualización : " + paquete.descripcion, manager.getUsuario(), "Actualizar paquete");
-        consultarDatos();
+        manager.validarConexion();
+        if (manager.isOnline) {
+            GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Actualizando paquete");
+            webServiceRegistro.validarAccionSqlite("Actualización : " + paquete.descripcion, manager.getUsuario(), "Actualizar paquete");
+            consultarDatos();
+        } else {
+            pManager.panelMsj();
+        }
     }
 
     /**

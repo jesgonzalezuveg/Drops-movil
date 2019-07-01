@@ -295,7 +295,7 @@ public class SyncroManager : MonoBehaviour {
                     if (res == 1) {
                         res = webServicePreguntas.deletePreguntasByPaqueteSqLite(paquete.id);
                         if (res == 1) {
-                            Debug.Log("Se borraron las respuestas y preguntas del paquete " + paquete.id);
+                            //Debug.Log("Se borraron las respuestas y preguntas del paquete " + paquete.id);
                             //res = webServicePaquetes.deletePaqueteSqLite(paquete.id);
                             //if (res == 1) {
                             //    Debug.Log("Se borro por completo el paquete " + paquete.id);
@@ -303,14 +303,14 @@ public class SyncroManager : MonoBehaviour {
                             //    Debug.Log("Error al borrar el paquete");
                             //}
                         } else {
-                            Debug.Log("Se borraron las respuestas del paquete " + paquete.id + "(error al borrar las preguntas)");
+                            //Debug.Log("Se borraron las respuestas del paquete " + paquete.id + "(error al borrar las preguntas)");
                         }
                     } else {
-                        Debug.Log("Error al borrar las respuestas del paquete " + paquete.id);
+                        //Debug.Log("Error al borrar las respuestas del paquete " + paquete.id);
                     }
                 }
             } else {
-                Debug.Log("No encontro paquetes borrados");
+                //Debug.Log("No encontro paquetes borrados");
             }
         }
     }

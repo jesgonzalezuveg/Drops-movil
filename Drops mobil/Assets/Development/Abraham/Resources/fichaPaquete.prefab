@@ -70,7 +70,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2d38558341bd24a48aaebbc5a11b729d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5d0840692c4654d49a49b690021ffa15, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 3448915564954615648}
   - component: {fileID: 8890977317905849123}
   - component: {fileID: 2720532637316044520}
-  - component: {fileID: 2688445057066197514}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -389,26 +388,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &2688445057066197514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4344971223365484152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b638bf4f8791af49a8f1e741fee21bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorArray:
-  - {r: 0.101960786, g: 0.6509804, b: 0.7176471, a: 1}
-  - {r: 0.5176471, g: 0.45490196, b: 0.6313726, a: 1}
-  - {r: 0.9607843, g: 0.41568628, b: 0.4745098, a: 1}
-  - {r: 1, g: 0.25490198, b: 0.3019608, a: 1}
-  - {r: 0.7058824, g: 0.11372549, b: 0.42352942, a: 1}
-  - {r: 0, g: 0.1764706, b: 0.2509804, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
 --- !u!1 &4689585068168458528
 GameObject:
   m_ObjectHideFlags: 0

@@ -256,6 +256,7 @@ public class appManager : MonoBehaviour {
      * se encarga de llamar las validaciones de los datos de la BD
      */
     public void Update() {
+        validarConexion();
         if (isOnline) {
             if (Usuario != "" && bandera) {
                 if (Imagen == "") {
@@ -310,7 +311,11 @@ public class appManager : MonoBehaviour {
 
                             }
                         } else {
+                            Debug.Log(isOnline);
                             if (isOnline) {
+                                Debug.Log("IS ACTUALIZED");
+                                Debug.Log(descargaLocal.fechaDescarga);
+                                Debug.Log(pack.fechaModificacion);
                                 if (isActualized(descargaLocal.fechaDescarga, pack.fechaModificacion)) {
 
                                     paquetesManager.newCardJugar(pack, null);
@@ -318,6 +323,7 @@ public class appManager : MonoBehaviour {
                                     paquetesManager.newCardActualizar(pack, null);
                                 }
                             } else {
+                                Debug.Log("IS NOT ACTUALIZED");
                                 paquetesManager.newCardJugar(pack, null);
                             }
                         }
@@ -347,6 +353,7 @@ public class appManager : MonoBehaviour {
                     }
                 } else {
                     //paquetesManager.panelDescargas.transform.GetChild(0).gameObject.SetActive(false);
+                    paquetesManager.panelDescargaMsj.SetActive(true);
                     paquetesManager.panelDescargas.transform.GetChild(1).gameObject.SetActive(true);
                     paquetesManager.panelDescargas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "No hay paquetes por descargar.";
                 }
@@ -557,22 +564,47 @@ public class appManager : MonoBehaviour {
             mes = 1;
             año = 2;
         }
-        fechaDescarga = fechaDescarga.Replace('/', ' ');
-        fechaDescarga = fechaDescarga.Replace(':', ' ');
-        string[] splitDateDescarga = fechaDescarga.Split(' ');
-        if (fechaDescarga.Contains("p")) {
-            if (splitDateDescarga[3] != "12") {
-                splitDateDescarga[3] = Int32.Parse(splitDateDescarga[3]) + 12 + "";
+        string[] splitDateDescarga;
+        DateTime descarga;
+        if (fechaDescarga.Contains("-")) {
+            fechaDescarga = fechaDescarga.Replace('-', ' ');
+            fechaDescarga = fechaDescarga.Replace(':', ' ');
+            splitDateDescarga = fechaDescarga.Split(' ');
+            descarga = new DateTime(Int32.Parse(splitDateDescarga[0]), Int32.Parse(splitDateDescarga[1]), Int32.Parse(splitDateDescarga[2]), Int32.Parse(splitDateDescarga[3]), Int32.Parse(splitDateDescarga[4]), Int32.Parse(splitDateDescarga[5]));
+        } else {
+            fechaDescarga = fechaDescarga.Replace('/', ' ');
+            fechaDescarga = fechaDescarga.Replace(':', ' ');
+            splitDateDescarga = fechaDescarga.Split(' ');
+            if (fechaDescarga.Contains("p") || fechaDescarga.Contains("a")) {
+                if (splitDateDescarga[3] != "12") {
+                    splitDateDescarga[3] = Int32.Parse(splitDateDescarga[3]) + 12 + "";
+                }
             }
+            fechaDescarga = fechaDescarga.Remove(19, fechaDescarga.Length - 19);
+            descarga = new DateTime(Int32.Parse(splitDateDescarga[año]), Int32.Parse(splitDateDescarga[mes]), Int32.Parse(splitDateDescarga[dia]), Int32.Parse(splitDateDescarga[3]), Int32.Parse(splitDateDescarga[4]), Int32.Parse(splitDateDescarga[5]));
         }
-        fechaDescarga = fechaDescarga.Remove(19, fechaDescarga.Length - 19);
-        //Formato de fechaModificacion paquete = yyyy-MM-dd HH:mm:ss
-        fechaModificacion = fechaModificacion.Replace('-', ' ');
-        fechaModificacion = fechaModificacion.Replace(':', ' ');
-        string[] splitDatePack = fechaModificacion.Split(' ');
 
-        DateTime descarga = new DateTime(Int32.Parse(splitDateDescarga[año]), Int32.Parse(splitDateDescarga[mes]), Int32.Parse(splitDateDescarga[dia]), Int32.Parse(splitDateDescarga[3]), Int32.Parse(splitDateDescarga[4]), Int32.Parse(splitDateDescarga[5]));
-        DateTime modificacion = new DateTime(Int32.Parse(splitDatePack[0]), Int32.Parse(splitDatePack[1]), Int32.Parse(splitDatePack[2]), Int32.Parse(splitDatePack[3]), Int32.Parse(splitDatePack[4]), Int32.Parse(splitDatePack[5]));
+        //Formato de fechaModificacion paquete = yyyy-MM-dd HH:mm:ss
+        string[] splitDatePack;
+        DateTime modificacion;
+        if (fechaModificacion.Contains("-")) {
+            fechaModificacion = fechaModificacion.Replace('-', ' ');
+            fechaModificacion = fechaModificacion.Replace(':', ' ');
+            splitDatePack = fechaModificacion.Split(' ');
+            modificacion = new DateTime(Int32.Parse(splitDatePack[0]), Int32.Parse(splitDatePack[1]), Int32.Parse(splitDatePack[2]), Int32.Parse(splitDatePack[3]), Int32.Parse(splitDatePack[4]), Int32.Parse(splitDatePack[5]));
+        } else {
+            fechaModificacion = fechaModificacion.Replace('/', ' ');
+            fechaModificacion = fechaModificacion.Replace(':', ' ');
+            splitDatePack = fechaModificacion.Split(' ');
+            if (fechaModificacion.Contains("p") || fechaModificacion.Contains("a")) {
+                if (splitDatePack[3] != "12") {
+                    splitDatePack[3] = Int32.Parse(splitDatePack[3]) + 12 + "";
+                }
+            }
+            fechaModificacion = fechaModificacion.Remove(19, fechaModificacion.Length - 19);
+            modificacion = new DateTime(Int32.Parse(splitDatePack[año]), Int32.Parse(splitDatePack[mes]), Int32.Parse(splitDatePack[dia]), Int32.Parse(splitDatePack[3]), Int32.Parse(splitDatePack[4]), Int32.Parse(splitDatePack[5]));
+        }
+
         if (descarga < modificacion) {
             return false;
         } else {

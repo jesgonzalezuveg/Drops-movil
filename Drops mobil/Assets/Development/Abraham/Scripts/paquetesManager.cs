@@ -22,6 +22,7 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelTabsBtn;
     public GameObject panelPaquetes;
     public GameObject panelDescargas;
+    public GameObject panelDescargaMsj;
 
     public webServiceCategoria.categoriaData categoriaTab = null;
 
@@ -419,7 +420,8 @@ public class paquetesManager : MonoBehaviour {
             fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
-            fichaPaquete.GetComponentInChildren<fondoManager>().transform.gameObject.GetComponent<Image>().color = fichaPaquete.GetComponentInChildren<fondoManager>().colorArray[manager.getFondo()];
+            Debug.Log("LINEA 423 paquetesManager IMAGEN DEL PREFAB PARA NUEVOS PAQUETES");
+            //fichaPaquete.GetComponentInChildren<fondoManager>().transform.gameObject.GetComponent<Image>().color = fichaPaquete.GetComponentInChildren<fondoManager>().colorArray[manager.getFondo()];
         }
         fichaPaquete.name = "fichaPack" + pack.id;
         StartCoroutine(llenarFicha(fichaPaquete, pack.descripcion, pack.urlImagen, pack.id));
@@ -558,13 +560,16 @@ public class paquetesManager : MonoBehaviour {
                                 Debug.Log("No se encontro la imagen");
                                 sprite = portadaDefault();
                             } else {
+                                Debug.Log("EL PATH DE LA IMAGEN ES "+Application.persistentDataPath +""+path);
                                 if (File.Exists(Application.persistentDataPath + path)) {
+                                    Debug.Log("ENCONTRO EL ARCHIVO");
                                     byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
                                     Texture2D texture = new Texture2D(8, 8);
                                     texture.LoadImage(byteArray);
                                     Rect rec = new Rect(0, 0, texture.width, texture.height);
                                     sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
                                 } else {
+                                    Debug.Log("NO ENCONTRO EL ARCHIVO");
                                     WWW www = new WWW(urlImagen);
                                     yield return www;
                                     Texture2D texture = www.texture;
@@ -779,6 +784,38 @@ public class paquetesManager : MonoBehaviour {
             panelTabsBtn.SetActive(true);
         }
     }
+
+    public void recargarPanelDescargas() {
+        manager.validarConexion();
+        if (manager.isOnline) {
+            panelDescargaMsj.SetActive(false);
+            cambiarVistaPaquetes(manager.vistaLista);
+            controlPanel(2);
+        } else {
+            if (panelDescargaMsj.active == true) {
+                panelDescargaMsj.SetActive(false);
+            } else {
+                panelDescargaMsj.SetActive(true);
+                panelDescargaMsj.GetComponentInChildren<Text>().text = "¡No hay conexión a internet!";
+            }
+        }
+    }
+
+    public void panelMsj() {
+        if (panelDescargaMsj.active == true) {
+            if (panelDescargas.active == true) {
+                recargarPanelDescargas();
+                panelDescargaMsj.SetActive(false);
+            } else {
+                panelDescargaMsj.SetActive(false);
+            }
+        } else {
+            panelDescargaMsj.SetActive(true);
+            panelDescargaMsj.GetComponentInChildren<Text>().text = "¡No hay conexión a internet!";
+        }
+    }
+
+
 
     public void cambiarVistaPaquetes(bool vista) {
         bool panelActivo = panelDescargas.active;
