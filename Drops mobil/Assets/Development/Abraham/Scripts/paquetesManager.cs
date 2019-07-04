@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
+using UnityEngine.Networking;
 
 public class paquetesManager : MonoBehaviour {
 
@@ -23,6 +24,9 @@ public class paquetesManager : MonoBehaviour {
     public GameObject panelPaquetes;
     public GameObject panelDescargas;
     public GameObject panelDescargaMsj;
+
+    public Font f_font1;
+    public Font f_font2;
 
     public webServiceCategoria.categoriaData categoriaTab = null;
 
@@ -75,20 +79,37 @@ public class paquetesManager : MonoBehaviour {
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 2;
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
         } else {
+            //Vista en lista
+            //listaPaquetes.GetComponent<GridLayoutGroup>().padding.top = 50;
+            //listaPaquetes.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            //listaPaquetes.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+            //listaPaquetes.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            //listaPaquetes.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
+            //listaPaquetes.GetComponent<GridLayoutGroup>().constraintCount = 1;
+            //listaPaquetes.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
+
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().padding.top = 10;
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 1;
+            //listaPaquetesNuevos.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
+
             listaPaquetes.GetComponent<GridLayoutGroup>().padding.top = 50;
             listaPaquetes.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             listaPaquetes.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
             listaPaquetes.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
-            listaPaquetes.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
-            listaPaquetes.GetComponent<GridLayoutGroup>().constraintCount = 1;
+            listaPaquetes.GetComponent<GridLayoutGroup>().cellSize = new Vector2(280f, 280f);
+            listaPaquetes.GetComponent<GridLayoutGroup>().constraintCount = 2;
             listaPaquetes.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
 
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().padding.top = 10;
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startCorner = GridLayoutGroup.Corner.UpperLeft;
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().startAxis = GridLayoutGroup.Axis.Horizontal;
-            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().cellSize = new Vector2(560f, 100f);
-            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 1;
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().cellSize = new Vector2(280f, 280f);
+            listaPaquetesNuevos.GetComponent<GridLayoutGroup>().constraintCount = 2;
             listaPaquetesNuevos.GetComponent<GridLayoutGroup>().spacing = new Vector2(10, 20);
         }
 
@@ -102,12 +123,20 @@ public class paquetesManager : MonoBehaviour {
                 panel.constraintCount = 2;
                 panel.spacing = new Vector2(10, 20);
             } else {
+                //Vista Lista
+                //panel.padding.top = 50;
+                //panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                //panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                //panel.startAxis = GridLayoutGroup.Axis.Horizontal;
+                //panel.cellSize = new Vector2(560f, 100f);
+                //panel.constraintCount = 1;
+                //panel.spacing = new Vector2(10, 20);
                 panel.padding.top = 50;
                 panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
                 panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
                 panel.startAxis = GridLayoutGroup.Axis.Horizontal;
-                panel.cellSize = new Vector2(560f, 100f);
-                panel.constraintCount = 1;
+                panel.cellSize = new Vector2(280f, 280f);
+                panel.constraintCount = 2;
                 panel.spacing = new Vector2(10, 20);
             }
         }
@@ -273,75 +302,48 @@ public class paquetesManager : MonoBehaviour {
      * no importa si inicio con Facebook o es usuario UVEG
      */
     IEnumerator getUserImg() {
-        if (manager.GetComponent<appManager>().getImagen() != null) {
-            string path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
-            string url = manager.GetComponent<appManager>().getImagen();
-            using (WWW wwwImage = new WWW(url)) {
-                yield return wwwImage;
-
-                if (wwwImage.responseHeaders.Count > 0) {
-                    foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
-                        if (entry.Key == "STATUS") {
-                            Debug.Log(entry.Value);
-                            if (entry.Value == "HTTP/1.1 404 Not Found") {
-                                Debug.Log("No se encontro la imagen");
-                                manager.GetComponent<appManager>().setImagen("http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png");
-                                path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
-                            }
-                            Debug.Log(path);
-                            if (File.Exists(Application.persistentDataPath + path)) {
-                                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-                                Texture2D texture = new Texture2D(8, 8);
-                                texture.LoadImage(byteArray);
-                                Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                imagen.GetComponent<Image>().sprite = sprite;
-                            } else {
-                                WWW www = new WWW(url);
-                                yield return www;
-                                Texture2D texture = www.texture;
-                                byte[] bytes;
-                                if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                                    bytes = texture.EncodeToJPG();
-                                } else {
-                                    bytes = texture.EncodeToPNG();
-                                }
-                                File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-                                Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                imagen.GetComponent<Image>().sprite = sprite;
-                            }
+        Sprite sprite = null;
+        string path = manager.GetComponent<appManager>().getImagen().Split('/')[manager.GetComponent<appManager>().getImagen().Split('/').Length - 1];
+        string url = manager.GetComponent<appManager>().getImagen();
+        if (File.Exists(Application.persistentDataPath + path)) {
+            byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+            Texture2D texture = new Texture2D(8, 8);
+            texture.LoadImage(byteArray);
+            Rect rec = new Rect(0, 0, texture.width, texture.height);
+            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            imagen.GetComponent<Image>().sprite = sprite;
+        } else {
+            if (manager.isOnline) {
+                using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(url)) {
+                    AsyncOperation asyncLoad = www.SendWebRequest();
+                    while (!asyncLoad.isDone) {
+                        yield return null;
+                    }
+                    if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                        Debug.Log(www.error);
+                    } else {
+                        Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                        byte[] bytes;
+                        if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                            bytes = texture.EncodeToJPG();
+                        } else {
+                            bytes = texture.EncodeToPNG();
                         }
+                        File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                        Rect rec = new Rect(0, 0, texture.width, texture.height);
+                        sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
                     }
                 }
             }
         }
-        /*if (manager.GetComponent<appManager>().getImagen() != null) {
-            string url = manager.GetComponent<appManager>().getImagen();
-            string path = url.Split('/')[url.Split('/').Length - 1];
-            if (File.Exists(Application.persistentDataPath + path)) {
-                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-                Texture2D texture = new Texture2D(8, 8);
-                texture.LoadImage(byteArray);
-                Rect rec = new Rect(0, 0, texture.width, texture.height);
-                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                imagen.GetComponent<Image>().sprite = sprite;
-            } else {
-                WWW www = new WWW(url);
-                yield return www;
-                Texture2D texture = www.texture;
-                byte[] bytes;
-                if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                    bytes = texture.EncodeToJPG();
-                } else {
-                    bytes = texture.EncodeToPNG();
-                }
-                File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-                Rect rec = new Rect(0, 0, texture.width, texture.height);
-                var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                imagen.GetComponent<Image>().sprite = sprite;
-            }
-        }*/
+
+        if (sprite == null) {
+            var spriteObj = Resources.Load("preloadedCoverPacks/invitado");
+            Texture2D tex = spriteObj as Texture2D;
+            Rect rec = new Rect(0, 0, tex.width, tex.height);
+            sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+        }
+        imagen.GetComponent<Image>().sprite = sprite;
     }
 
     /**
@@ -352,8 +354,9 @@ public class paquetesManager : MonoBehaviour {
     public void newCardJugar(webServicePaquetes.paqueteData pack, GameObject lista) {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
-            fichaPaquete = Instantiate(Resources.Load("PaqueteListaFix") as GameObject);
-            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            //fichaPaquete = Instantiate(Resources.Load("PaqueteListaFix") as GameObject);
+            //fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteOption") as GameObject);
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaqueteJugar") as GameObject);
             fichaPaquete.GetComponentInChildren<fondoManager>().transform.gameObject.GetComponent<Image>().color = fichaPaquete.GetComponentInChildren<fondoManager>().colorArray[manager.getFondo()];
@@ -369,9 +372,10 @@ public class paquetesManager : MonoBehaviour {
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
         fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
-        if (manager.vistaLista == true) {
-            fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
-        }
+        //Vista
+        //if (manager.vistaLista == true) {
+        //    fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
+        //}
 
         reajustarGridLayout(listaPaquetes);
     }
@@ -384,8 +388,9 @@ public class paquetesManager : MonoBehaviour {
     public void newCardActualizar(webServicePaquetes.paqueteData pack, GameObject lista) {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
-            fichaPaquete = Instantiate(Resources.Load("PaqueteLista") as GameObject);
-            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            //fichaPaquete = Instantiate(Resources.Load("PaqueteLista") as GameObject);
+            //fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteOption") as GameObject);
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaqueteActualizar") as GameObject);
             fichaPaquete.GetComponentInChildren<fondoManager>().transform.gameObject.GetComponent<Image>().color = fichaPaquete.GetComponentInChildren<fondoManager>().colorArray[manager.getFondo()];
@@ -401,9 +406,10 @@ public class paquetesManager : MonoBehaviour {
         fichaPaquete.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
         fichaPaquete.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         fichaPaquete.GetComponent<packManager>().paquete = pack;
-        if (manager.vistaLista == true) {
-            fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
-        }
+        //vista
+        //if (manager.vistaLista == true) {
+        //    fichaPaquete.transform.GetChild(4).gameObject.SetActive(false);
+        //}
 
         reajustarGridLayout(listaPaquetes);
     }
@@ -416,8 +422,9 @@ public class paquetesManager : MonoBehaviour {
     public void newCardDescarga(webServicePaquetes.paqueteData pack) {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
-            fichaPaquete = Instantiate(Resources.Load("PaqueteListaDescarga") as GameObject);
-            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            //fichaPaquete = Instantiate(Resources.Load("PaqueteListaDescarga") as GameObject);
+            //fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteDescarga") as GameObject);
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
             Debug.Log("LINEA 423 paquetesManager IMAGEN DEL PREFAB PARA NUEVOS PAQUETES");
@@ -437,8 +444,9 @@ public class paquetesManager : MonoBehaviour {
     public void newCardEmpty(GameObject obj) {
         GameObject fichaPaquete;
         if (manager.vistaLista == true) {
-            fichaPaquete = Instantiate(Resources.Load("PaqueteListaEmpty") as GameObject);
-            fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            //fichaPaquete = Instantiate(Resources.Load("PaqueteListaEmpty") as GameObject);
+            //fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
+            fichaPaquete = Instantiate(Resources.Load("placeHolder") as GameObject);
         } else {
             fichaPaquete = Instantiate(Resources.Load("placeHolder") as GameObject);
         }
@@ -549,41 +557,33 @@ public class paquetesManager : MonoBehaviour {
         ficha.GetComponentsInChildren<Text>()[0].text = descripcion;
         if (Int32.Parse(id) > 10) {
             string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
-            using (WWW wwwImage = new WWW(urlImagen)) {
-                yield return wwwImage;
-
-                if (wwwImage.responseHeaders.Count > 0) {
-                    foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
-                        if (entry.Key == "STATUS") {
-                            Debug.Log(entry.Value);
-                            if (entry.Value == "HTTP/1.1 404 Not Found") {
-                                Debug.Log("No se encontro la imagen");
-                                sprite = portadaDefault();
+            if (File.Exists(Application.persistentDataPath + path)) {
+                //Debug.Log("ENCONTRO EL ARCHIVO");
+                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+                Texture2D texture = new Texture2D(8, 8);
+                texture.LoadImage(byteArray);
+                Rect rec = new Rect(0, 0, texture.width, texture.height);
+                sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            } else {
+                if (manager.isOnline) {
+                    using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(urlImagen)) {
+                        AsyncOperation asyncLoad = www.SendWebRequest();
+                        while (!asyncLoad.isDone) {
+                            yield return null;
+                        }
+                        if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                            Debug.Log(www.error);
+                        } else {
+                            Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                            byte[] bytes;
+                            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                                bytes = texture.EncodeToJPG();
                             } else {
-                                Debug.Log("EL PATH DE LA IMAGEN ES "+Application.persistentDataPath +""+path);
-                                if (File.Exists(Application.persistentDataPath + path)) {
-                                    Debug.Log("ENCONTRO EL ARCHIVO");
-                                    byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-                                    Texture2D texture = new Texture2D(8, 8);
-                                    texture.LoadImage(byteArray);
-                                    Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                    sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                } else {
-                                    Debug.Log("NO ENCONTRO EL ARCHIVO");
-                                    WWW www = new WWW(urlImagen);
-                                    yield return www;
-                                    Texture2D texture = www.texture;
-                                    byte[] bytes;
-                                    if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                                        bytes = texture.EncodeToJPG();
-                                    } else {
-                                        bytes = texture.EncodeToPNG();
-                                    }
-                                    File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-                                    Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                    sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                }
+                                bytes = texture.EncodeToPNG();
                             }
+                            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                            Rect rec = new Rect(0, 0, texture.width, texture.height);
+                            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
                         }
                     }
                 }
@@ -611,39 +611,33 @@ public class paquetesManager : MonoBehaviour {
         Sprite sprite = null;
         if (Int32.Parse(id) > 10) {
             string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
-            using (WWW wwwImage = new WWW(urlImagen)) {
-                yield return wwwImage;
-
-                if (wwwImage.responseHeaders.Count > 0) {
-                    foreach (KeyValuePair<string, string> entry in wwwImage.responseHeaders) {
-                        if (entry.Key == "STATUS") {
-                            Debug.Log(entry.Value);
-                            if (entry.Value == "HTTP/1.1 404 Not Found") {
-                                Debug.Log("No se encontro la imagen");
-                                sprite = portadaDefault();
+            if (File.Exists(Application.persistentDataPath + path)) {
+                //Debug.Log("ENCONTRO EL ARCHIVO");
+                byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
+                Texture2D texture = new Texture2D(8, 8);
+                texture.LoadImage(byteArray);
+                Rect rec = new Rect(0, 0, texture.width, texture.height);
+                sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+            } else {
+                if (manager.isOnline) {
+                    using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(urlImagen)) {
+                        AsyncOperation asyncLoad = www.SendWebRequest();
+                        while (!asyncLoad.isDone) {
+                            yield return null;
+                        }
+                        if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                            Debug.Log(www.error);
+                        } else {
+                            Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                            byte[] bytes;
+                            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                                bytes = texture.EncodeToJPG();
                             } else {
-                                if (File.Exists(Application.persistentDataPath + path)) {
-                                    byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
-                                    Texture2D texture = new Texture2D(8, 8);
-                                    texture.LoadImage(byteArray);
-                                    Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                    sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                } else {
-                                    WWW www = new WWW(urlImagen);
-                                    yield return www;
-                                    Texture2D texture = www.texture;
-                                    byte[] bytes;
-                                    if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                                        bytes = texture.EncodeToJPG();
-                                    } else {
-                                        bytes = texture.EncodeToPNG();
-                                    }
-                                    File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-                                    Rect rec = new Rect(0, 0, texture.width, texture.height);
-                                    sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-                                }
+                                bytes = texture.EncodeToPNG();
                             }
-                            ficha.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+                            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                            Rect rec = new Rect(0, 0, texture.width, texture.height);
+                            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
                         }
                     }
                 }
@@ -665,6 +659,7 @@ public class paquetesManager : MonoBehaviour {
             ficha.GetComponent<Image>().sprite = sprite;
         }
     }
+
     public Sprite portadaDefault(){
         var spriteObj = Resources.Load("preloadedCoverPacks/portadaPaqueteCarga");
         Texture2D tex = spriteObj as Texture2D;
@@ -758,6 +753,10 @@ public class paquetesManager : MonoBehaviour {
             }
             Color col = new Color(panelPaquetes.GetComponentInChildren<Image>().color.r, panelPaquetes.GetComponentInChildren<Image>().color.g, panelPaquetes.GetComponentInChildren<Image>().color.b, 0f);
             panelPaquetes.GetComponentInChildren<Image>().color = col;
+            if (GameObject.Find("PanelPaquetesBtn") && GameObject.Find("PanelDescargasBtn")) {
+                GameObject.Find("PanelPaquetesBtn").GetComponentInChildren<Text>().font = f_font1;
+                GameObject.Find("PanelDescargasBtn").GetComponentInChildren<Text>().font = f_font2;
+            }
         } else if (option == 2) {
             panelPaquetes.SetActive(false);
             panelDescargas.SetActive(true);
@@ -769,6 +768,10 @@ public class paquetesManager : MonoBehaviour {
             }
             Color col = new Color(panelDescargas.GetComponentInChildren<Image>().color.r, panelDescargas.GetComponentInChildren<Image>().color.g, panelDescargas.GetComponentInChildren<Image>().color.b, 0f);
             panelDescargas.GetComponentInChildren<Image>().color = col;
+            if (GameObject.Find("PanelPaquetesBtn") && GameObject.Find("PanelDescargasBtn")) {
+                GameObject.Find("PanelPaquetesBtn").GetComponentInChildren<Text>().font = f_font2;
+                GameObject.Find("PanelDescargasBtn").GetComponentInChildren<Text>().font = f_font1;
+            }
         } else if (option == 3) {
             panelPaquetes.SetActive(false);
             panelDescargas.SetActive(false);
@@ -796,6 +799,7 @@ public class paquetesManager : MonoBehaviour {
                 panelDescargaMsj.SetActive(false);
             } else {
                 panelDescargaMsj.SetActive(true);
+                Debug.Log("MENSAJE DE RECARGAR PANEL DESCARGA");
                 panelDescargaMsj.GetComponentInChildren<Text>().text = "¡No hay conexión a internet!";
             }
         }
@@ -811,6 +815,7 @@ public class paquetesManager : MonoBehaviour {
             }
         } else {
             panelDescargaMsj.SetActive(true);
+            Debug.Log("MENSAJE DE PANELMSJ");
             panelDescargaMsj.GetComponentInChildren<Text>().text = "¡No hay conexión a internet!";
         }
     }
@@ -851,7 +856,8 @@ public class paquetesManager : MonoBehaviour {
 
     public void reajustarGridLayout(GameObject obj) {
         if (manager.vistaLista == true) {
-            obj.GetComponent<gridScrollLayout>().tamañoScroll = 100;
+            //obj.GetComponent<gridScrollLayout>().tamañoScroll = 100;
+            obj.GetComponent<gridScrollLayout>().tamañoScroll = 330;
         } else {
             obj.GetComponent<gridScrollLayout>().tamañoScroll = 330;
         }

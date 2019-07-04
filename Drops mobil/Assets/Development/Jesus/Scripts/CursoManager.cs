@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
+using UnityEngine.Networking;
 
 public class CursoManager : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class CursoManager : MonoBehaviour {
     public string fraseACompletarPublica = "";
 
 
-    private float time = 30.0f;
+    private float time = 300.0f;
     private float tiempo;
     //private bool aumento = false;
     private bool comenzarPregunta = false;
@@ -78,6 +79,7 @@ public class CursoManager : MonoBehaviour {
     private List<int> posRespuestas = new List<int>();
 
     public Image imagenPack;
+    public Text NombrePaquete;
 
     webServicePreguntas.preguntaData[] preguntas = null;
     appManager manager;
@@ -110,29 +112,47 @@ public class CursoManager : MonoBehaviour {
 
 
     IEnumerator putImagenPack(string urlImagen) {
+        Sprite sprite = null;
         string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
         if (File.Exists(Application.persistentDataPath + path)) {
             byte[] byteArray = File.ReadAllBytes(Application.persistentDataPath + path);
             Texture2D texture = new Texture2D(8, 8);
             texture.LoadImage(byteArray);
             Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            imagenPack.sprite = sprite;
+            sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
         } else {
-            WWW www = new WWW(urlImagen);
-            yield return www;
-            Texture2D texture = www.texture;
-            byte[] bytes;
-            if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                bytes = texture.EncodeToJPG();
-            } else {
-                bytes = texture.EncodeToPNG();
+            if (manager.isOnline) {
+                using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(urlImagen)) {
+                    AsyncOperation asyncLoad = www.SendWebRequest();
+                    while (!asyncLoad.isDone) {
+                        yield return null;
+                    }
+                    if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                        Debug.Log(www.error);
+                    } else {
+                        Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                        byte[] bytes;
+                        if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                            bytes = texture.EncodeToJPG();
+                        } else {
+                            bytes = texture.EncodeToPNG();
+                        }
+                        File.WriteAllBytes(Application.persistentDataPath + path, bytes);
+                        Rect rec = new Rect(0, 0, texture.width, texture.height);
+                        sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
+                    }
+                }
             }
-            File.WriteAllBytes(Application.persistentDataPath + path, bytes);
-            Rect rec = new Rect(0, 0, texture.width, texture.height);
-            var sprite = Sprite.Create(texture, rec, new Vector2(0.5f, 0.5f), 100);
-            imagenPack.sprite = sprite;
         }
+
+        if (sprite == null) {
+            var spriteObj = Resources.Load("preloadedCoverPacks/portadaPaqueteCarga");
+            Texture2D tex = spriteObj as Texture2D;
+            Rect rec = new Rect(0, 0, tex.width, tex.height);
+            sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+        }
+
+        imagenPack.sprite = sprite;
     }
 
     void Awake() {
@@ -183,6 +203,7 @@ public class CursoManager : MonoBehaviour {
         preguntas = manager.preguntasCategoria;
         numPreguntas = preguntas.Length;
         var urlImagen = webServicePaquetes.getPaquetesByDescripcionSqLite(preguntas[0].descripcionPaquete).urlImagen;
+        NombrePaquete.text =preguntas[0].descripcionPaquete;
         StartCoroutine(putImagenPack(urlImagen));
         maxPuntosPorPartida = 700 + ((numPreguntas - 4) * 400);
         var idUsuario = webServiceUsuario.consultarIdUsuarioSqLite(manager.getUsuario());
@@ -372,6 +393,7 @@ public class CursoManager : MonoBehaviour {
         //panelCompletarPalabra.SetActive(false);
         if (countPreguntas < preguntas.Length) {
             textoCompletado.text = "-";
+            respuestaFraseCompletada = "";
             idPregunta = preguntas[countPreguntas].id;
             descripcionTipoEjercicio = preguntas[countPreguntas].descripcionEjercicio;
             webServiceRegistro.validarAccionSqlite("Pregunta: " + preguntas[countPreguntas].descripcion, manager.getUsuario(), "Entró a pregunta");
@@ -595,7 +617,7 @@ public class CursoManager : MonoBehaviour {
     //}
 
     public void crearPanelRespuesta(string palabra) {
-        var x = Instantiate(Respuesta, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+        var x = Instantiate(Respuesta);
         x.AddComponent<Slot2>();
         x.transform.SetParent(canvasParentOfAnswers.transform, false);
         x.name = "Respuesta";
@@ -1015,13 +1037,21 @@ public class CursoManager : MonoBehaviour {
 
     public void salir() {
         sicroManager = GameObject.Find("SincroManager").GetComponent<SyncroManager>();
+        if (manager.isOnline) {
+            GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Sincronizando datos");
+        }
         sicroManager.synchronizationInRealTime();
+        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
         StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena("menuCategorias", "menuCategorias"));
     }
 
     public void reiniciar() {
         sicroManager = GameObject.Find("SincroManager").GetComponent<SyncroManager>();
+        if (manager.isOnline) {
+            GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Sincronizando datos");
+        }
         sicroManager.synchronizationInRealTime();
+        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
         StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena("salon", "menuCategorias"));
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class webServiceAvisos : MonoBehaviour
 {
@@ -43,7 +44,6 @@ public class webServiceAvisos : MonoBehaviour
 
     public static DataAvisos getLogAvisosLast3DaysSqLite(string idPaquete, string idUsuario, string fecha) {
         string query = "SELECT * FROM aviso WHERE idPaquete = "+idPaquete+" AND idUsuario = "+idUsuario+ " AND Datetime(fechaVisualizacion) >= Datetime('"+fecha+"');";
-        Debug.Log(query);
         var result = conexionDB.selectGeneral(query);
         if (result != "0") {
             result = "{\"avisoLog\": [" + result + "]}";

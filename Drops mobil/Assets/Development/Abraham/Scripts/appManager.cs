@@ -311,19 +311,16 @@ public class appManager : MonoBehaviour {
 
                             }
                         } else {
-                            Debug.Log(isOnline);
+                            //Debug.Log(isOnline);
                             if (isOnline) {
-                                Debug.Log("IS ACTUALIZED");
-                                Debug.Log(descargaLocal.fechaDescarga);
-                                Debug.Log(pack.fechaModificacion);
+                                //Debug.Log(descargaLocal.fechaDescarga);
+                                //Debug.Log(pack.fechaModificacion);
                                 if (isActualized(descargaLocal.fechaDescarga, pack.fechaModificacion)) {
-
                                     paquetesManager.newCardJugar(pack, null);
                                 } else {
                                     paquetesManager.newCardActualizar(pack, null);
                                 }
                             } else {
-                                Debug.Log("IS NOT ACTUALIZED");
                                 paquetesManager.newCardJugar(pack, null);
                             }
                         }
@@ -353,7 +350,6 @@ public class appManager : MonoBehaviour {
                     }
                 } else {
                     //paquetesManager.panelDescargas.transform.GetChild(0).gameObject.SetActive(false);
-                    paquetesManager.panelDescargaMsj.SetActive(true);
                     paquetesManager.panelDescargas.transform.GetChild(1).gameObject.SetActive(true);
                     paquetesManager.panelDescargas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "No hay paquetes por descargar.";
                 }

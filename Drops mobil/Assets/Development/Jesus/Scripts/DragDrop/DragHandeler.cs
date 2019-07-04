@@ -37,6 +37,14 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             //}
         }
 
+        if (Input.GetMouseButtonDown(0)) {
+            this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+
         if (itemBeingDragged == null && transform.parent.parent.name != "Respuesta") {
             GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
