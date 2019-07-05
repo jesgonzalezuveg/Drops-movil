@@ -424,7 +424,7 @@ public class paquetesManager : MonoBehaviour {
         if (manager.vistaLista == true) {
             //fichaPaquete = Instantiate(Resources.Load("PaqueteListaDescarga") as GameObject);
             //fichaPaquete.GetComponent<Image>().color = fichaPaquete.GetComponent<fondoManager>().colorArray[manager.getFondo()];
-            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteDescarga") as GameObject);
+            fichaPaquete = Instantiate(Resources.Load("fichaPaqueteDownload") as GameObject);
         } else {
             fichaPaquete = Instantiate(Resources.Load("fichaPaquete") as GameObject);
             Debug.Log("LINEA 423 paquetesManager IMAGEN DEL PREFAB PARA NUEVOS PAQUETES");
@@ -554,6 +554,14 @@ public class paquetesManager : MonoBehaviour {
      */
     IEnumerator llenarFicha(GameObject ficha, string descripcion, string urlImagen, string id) {
         Sprite sprite = null;
+        ficha.GetComponentsInChildren<Text>()[0].text = descripcion;
+        if (descripcion.Length>18) {
+            ficha.GetComponentsInChildren<Text>()[0].fontSize = 110;
+        } else if(descripcion.Length < 7){
+            ficha.GetComponentsInChildren<Text>()[0].fontSize = 220;
+        } else {
+            ficha.GetComponentsInChildren<Text>()[0].fontSize = 150;
+        }
         ficha.GetComponentsInChildren<Text>()[0].text = descripcion;
         if (Int32.Parse(id) > 10) {
             string path = urlImagen.Split('/')[urlImagen.Split('/').Length - 1];
