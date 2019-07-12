@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5191844338299985774}
   - component: {fileID: 4473481544407309467}
   - component: {fileID: 6457727199171422506}
+  - component: {fileID: 1311047624429905555}
   m_Layer: 5
   m_Name: fichaPaqueteActualizar
   m_TagString: Untagged
@@ -155,6 +156,29 @@ MonoBehaviour:
     descripcionCategoria: Ciencias sociales
   respuestasPaquete:
     respuestas: []
+--- !u!114 &1311047624429905555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2301725744807964953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
 --- !u!1 &2852048183069283170
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,10 +212,10 @@ RectTransform:
   m_Father: {fileID: 5674362125588823863}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.000083923}
-  m_SizeDelta: {x: 280, y: 280}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6970422387511637561
 CanvasRenderer:
@@ -284,10 +308,10 @@ RectTransform:
   m_Father: {fileID: 5674362125588823863}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.27, y: -104.95}
-  m_SizeDelta: {x: 243.76, y: 51.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3995467287715111727
 CanvasRenderer:

@@ -26,11 +26,23 @@ public class webServicePreguntas : MonoBehaviour {
         public string idServer = "";
         public string descripcionEjercicio = "";
         public string descripcionPaquete = "";
+        public string numPreguntas = "";
     }
 
     [Serializable]
     public class Data {
         public preguntaData[] preguntas;
+    }
+
+    public static string getPreguntasByPaquete(string idPaquete) {
+        string query = "SELECT COUNT(id) AS numPreguntas FROM pregunta WHERE idPaquete = '" + idPaquete + "';";
+        var result = conexionDB.selectGeneral(query);
+        if (result != "0") {
+            preguntaData data = JsonUtility.FromJson<preguntaData>(result);
+            return data.numPreguntas;
+        } else {
+            return "0";
+        }
     }
 
     public static string consultarIdServerPreguntaSqLiteById(string id) {

@@ -13,7 +13,7 @@ public class CursoManager : MonoBehaviour {
     public string fraseACompletarPublica = "";
 
 
-    private float time = 300.0f;
+    private float time = 900.0f;
     private float tiempo;
     //private bool aumento = false;
     private bool comenzarPregunta = false;
@@ -203,7 +203,7 @@ public class CursoManager : MonoBehaviour {
         preguntas = manager.preguntasCategoria;
         numPreguntas = preguntas.Length;
         var urlImagen = webServicePaquetes.getPaquetesByDescripcionSqLite(preguntas[0].descripcionPaquete).urlImagen;
-        NombrePaquete.text =preguntas[0].descripcionPaquete;
+        NombrePaquete.text = preguntas[0].descripcionPaquete;
         StartCoroutine(putImagenPack(urlImagen));
         maxPuntosPorPartida = 700 + ((numPreguntas - 4) * 400);
         var idUsuario = webServiceUsuario.consultarIdUsuarioSqLite(manager.getUsuario());
@@ -344,8 +344,9 @@ public class CursoManager : MonoBehaviour {
             correctas = 0;
             racha = 0;
             multiplicador = 1;
-            textoRacha.text = "";
+            textoRacha.text = "0";
             textoMultiplicador.text = "X1";
+            textoMultiplicador.transform.parent.parent.gameObject.SetActive(false); 
             StartCoroutine(activaObjeto(incorrectoimg));
             descripcionTipoEjercicio = "";
             webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
@@ -381,6 +382,8 @@ public class CursoManager : MonoBehaviour {
                 multiplicador++;
             }
             textoMultiplicador.text = "X" + multiplicador;
+            textoMultiplicador.transform.parent.parent.gameObject.SetActive(false);
+            textoMultiplicador.transform.parent.parent.gameObject.SetActive(true);
         } else {
             puntajePregunta = 100;
             //PuntajeObtenido.SetActive(false);
@@ -430,6 +433,39 @@ public class CursoManager : MonoBehaviour {
             getNota();
             webServiceRegistro.validarAccionSqlite("Puntaje obtenido: " + score, manager.getUsuario(), "Puntaje obtenido");
             webServiceRegistro.validarAccionSqlite("Terminó ejercicio", manager.getUsuario(), "Terminó ejercicio");
+
+            int dificultad = 1;
+            int nPreguntas = preguntas.Length;
+            if (nPreguntas <= 5) {
+                dificultad = 1;
+            }else if (nPreguntas > 5 && nPreguntas <= 10) {
+                dificultad = 2;
+            } else if(nPreguntas > 10 && nPreguntas <= 15) {
+                dificultad = 3;
+            } else if(nPreguntas > 15){
+                dificultad = 4;
+            }
+
+            int exitEstadistica = webServiceEstadistica.existPuntajePaqueteSqlite(dificultad, preguntas[0].idPaquete, manager.getIdUsuario());
+            Debug.Log("HAY PUNTAJES DE ESTE PAQUETE " + exitEstadistica);
+            if (exitEstadistica == 0) {
+                if (webServiceEstadistica.insertarEstadisticasSqLite(score.ToString(), dificultad, preguntas.Length, preguntas[0].idPaquete, manager.getIdUsuario()) != 1) {
+                    Debug.Log("ERROR AL INSERTAR EN LA TABLA ESTADISTICAS");
+                } else {
+                    Debug.Log("SE INSERTO CORRECTAMENTE EN LA TABLA ESTADISTICA");
+                }
+            }else{
+                if (webServiceEstadistica.valPuntajePaqueteSqlite(score.ToString(), dificultad, preguntas[0].idPaquete, manager.getIdUsuario()) != 1) {
+                    Debug.Log("NO SE ENCONTRARON PUNTAJES MAYORES");
+                    if (webServiceEstadistica.updatePuntajePaqueteSqlite(score.ToString(), preguntas.Length, dificultad, preguntas[0].idPaquete, manager.getIdUsuario()) ==1) {
+                        Debug.Log("SE MODIFICO CORRRECTAMENTE EL PUNTAJE");
+                    } else {
+                        Debug.Log("ERROR AL MODIFICAR EL PUNTAJE");
+                    }
+                } else {
+                    Debug.Log("SE ENCONTRARON PUNTAJES MAYORES");
+                }
+            }
         }
     }
 
@@ -823,7 +859,7 @@ public class CursoManager : MonoBehaviour {
                 correctas = -1;
                 racha = 0;
                 multiplicador = 1;
-                textoRacha.text = "";
+                textoRacha.text = "0";
                 textoMultiplicador.text = "";
 
             }

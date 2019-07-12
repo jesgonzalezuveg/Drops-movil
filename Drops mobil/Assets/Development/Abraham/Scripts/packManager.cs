@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
+using UnityEngine.Networking;
 
 public class packManager : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class packManager : MonoBehaviour {
     public webServiceRespuestas.Data respuestasPaquete = null;       ///< paquete estructura Data que almacena los datos de las respuestas del paquete
     private appManager manager;         ///< manager AppManager 
     private paquetesManager pManager;
+    private animationManager aManager;
 
     /**
      * Funcion que se manda llamar al inicio de la escena (frame 1)
@@ -19,6 +21,7 @@ public class packManager : MonoBehaviour {
     public void Start() {
         manager = GameObject.Find("AppManager").GetComponent<appManager>();
         pManager = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>(); 
+        aManager = GameObject.Find("AnimationManager").GetComponent<animationManager>(); 
         GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
         /*if (GetComponentInChildren<Text>()) {
             GetComponentInChildren<Text>().text = paquete.descripcion;
@@ -101,8 +104,9 @@ public class packManager : MonoBehaviour {
     void borrarDatos() {
         manager.setPreguntas(null);
         manager.setRespuestas(null);
-        transform.GetComponentsInChildren<Button>()[1].interactable = false;
-        transform.GetComponentsInChildren<Button>()[2].interactable = false;
+        transform.GetChild(1).GetComponentInChildren<Button>().interactable = false;
+        transform.GetChild(4).GetComponentInChildren<Button>().interactable = false;
+        //transform.GetComponentsInChildren<Button>()[2].interactable = false;
         manager.packToPlay = paquete;
         var res = webServiceDescarga.deleteDescargaSqLite(paquete.id);
         if (res == 1) {
@@ -112,10 +116,12 @@ public class packManager : MonoBehaviour {
             paquetesManager.cambiarVistaPaquetes(manager.vistaLista);
         } else {
             Debug.Log("Error al borrar paquete");
-            transform.GetComponentsInChildren<Button>()[1].interactable = true;
-            transform.GetComponentsInChildren<Button>()[2].interactable = true;
+            transform.transform.GetChild(1).GetComponentInChildren<Button>().interactable = true;
+            transform.GetChild(4).GetComponentInChildren<Button>().interactable = true;
+            //transform.GetComponentsInChildren<Button>()[2].interactable = true;
         }
         GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
+        pManager.modalPaquete.SetActive(false);
     }
 
     void borrarImagenes(string idPaquete) {
@@ -157,6 +163,33 @@ public class packManager : MonoBehaviour {
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);
         }
+    }
+
+    public void mostrarModalPaquete() {
+        pManager.modalPaquete.transform.GetChild(1).GetComponent<Image>().color = pManager.modalPaquete.transform.GetChild(1).GetComponent<fondoManager>().colorArray[manager.getFondo()];
+        pManager.modalPaquete.GetComponentInChildren<packManager>().paquete = this.GetComponent<packManager>().paquete;
+        pManager.modalPaquete.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = this.GetComponent<packManager>().paquete.descripcion;
+        pManager.modalPaquete.transform.GetChild(1).transform.GetChild(1).transform.GetChild(0).GetComponentInChildren<Image>().sprite = this.transform.GetChild(0).gameObject.GetComponentInChildren<Image>().sprite;
+        StartCoroutine(pManager.llenarFicha(pManager.modalPaquete.transform.GetChild(1).transform.GetChild(1).gameObject, this.GetComponent<packManager>().paquete.urlImagen, this.GetComponent<packManager>().paquete.id));
+        pManager.modalPaquete.SetActive(true);
+        int dificultad = 1;
+        if (manager.numeroPreguntas <= 5) {
+            dificultad = 1;
+        } else if (manager.numeroPreguntas > 5 && manager.numeroPreguntas <= 10) {
+            dificultad = 2;
+        } else if (manager.numeroPreguntas > 10 && manager.numeroPreguntas <= 15) {
+            dificultad = 3;
+        } else if (manager.numeroPreguntas > 15) {
+            dificultad = 4;
+        }
+        Debug.Log("NUMERO DE PREGUNTAS: " + webServicePreguntas.getPreguntasByPaquete(paquete.id));
+        string score = webServiceEstadistica.getPuntaje(dificultad, paquete.id, manager.getIdUsuario());
+        string numPreguntas = webServicePreguntas.getPreguntasByPaquete(paquete.id);
+        StartCoroutine(aManager.comenzarPuntajeMaxAnim(Convert.ToInt32(score), Convert.ToInt32(numPreguntas), dificultad));
+    }
+
+    public void closeDetallePaqute() {
+        StartCoroutine(aManager.animClosePanelDetalle());
     }
 
 }
