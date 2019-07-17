@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5664787146149798934}
   - component: {fileID: 5205458026922357558}
   - component: {fileID: 7705947175826954144}
+  - component: {fileID: 3571391863663316713}
   m_Layer: 5
   m_Name: RepuestaRelacion
   m_TagString: Untagged
@@ -98,6 +99,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &3571391863663316713
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071499863815233967}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4301877258469595142
 GameObject:
   m_ObjectHideFlags: 0

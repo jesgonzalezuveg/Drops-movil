@@ -7,13 +7,19 @@ using System;
 using UnityEngine.Networking;
 
 public class CursoManager : MonoBehaviour {
-
+    bool animPar1 = false;
+    bool animPar2 = false;
+    bool animPar3 = false;
+    public Color[] colores;
+    public RuntimeAnimatorController[] animaciones;
     public string[] letras =  new string[25];
     public string respuestaFraseCompletada = "";
     public string fraseACompletarPublica = "";
 
 
-    private float time = 900.0f;
+    private float time = 30.0f;
+    private float timeDelete;
+    private float timeClockPerSecond;
     private float tiempo;
     //private bool aumento = false;
     private bool comenzarPregunta = false;
@@ -59,6 +65,7 @@ public class CursoManager : MonoBehaviour {
     public GameObject btnValidarPalabra;
     public GameObject respuestaTexto;
     public GameObject canvasParentOfAnswers;
+    public Image PanelTiempo;
 
     //Variables para prefabs Drag&Drop
     public GameObject itemDrag;
@@ -156,10 +163,15 @@ public class CursoManager : MonoBehaviour {
     }
 
     void Awake() {
+        timeClockPerSecond = 1 / time;
+        timeDelete = time-1;
         respuestaFraseCompletada = "";
         tiempo = time;
         fraseACompletar = "";
         fraseCompletada = "";
+        animPar1 = false;
+        animPar2 = false;
+        animPar3 = false;
     }
 
     void Start() {
@@ -230,19 +242,23 @@ public class CursoManager : MonoBehaviour {
 
     private void Update() {
         if (comenzarPregunta == true) {
-
             if (tiempo > 0) {
                 tiempo -= Time.deltaTime;
             }
-
+            float t = Mathf.Round(tiempo);
             if (tiempo <= (time / 3)) {
-                Tiempo.color = Color.red;
+                Tiempo.color = colores[1];
             } else if(tiempo < ((time / 3) * 2) && tiempo > (time / 3)){
-                Tiempo.color = Color.yellow;
+                Tiempo.color = colores[2];
             } else if(tiempo >= ((time / 3) * 2)){
-                Tiempo.color = Color.green;
+                Tiempo.color = colores[0];
             }
+
             Tiempo.text = "" + Mathf.Round(tiempo).ToString();
+            if (Mathf.Round(tiempo)==timeDelete) {
+                PanelTiempo.fillAmount = PanelTiempo.fillAmount - timeClockPerSecond;
+                timeDelete--;
+            }
 
             if (tiempo <= 0.1f) {
                 idRespuesta = "0";
@@ -337,6 +353,11 @@ public class CursoManager : MonoBehaviour {
                     break;
             }
         } else if (correctas < 0) {
+            if (descripcionTipoEjercicio == "Relacionar") {
+                foreach (var anim in canvasParentOfAnswers.GetComponentsInChildren<Animator>()) {
+                    anim.enabled = true;
+                }
+            }
             textoCompletado.text = "Respuesta: " + fraseACompletar;
             textoPuntajeObtenido.text = "";
             webServiceRegistro.validarAccionSqlite("Respondió incorrectamente(" + descripcionTipoEjercicio + ")", manager.getUsuario(), "Respondió pregunta");
@@ -356,6 +377,11 @@ public class CursoManager : MonoBehaviour {
     }
 
     public void respuestaCorrecta() {
+        if (descripcionTipoEjercicio != "Relacionar") {
+            foreach (var anim in canvasParentOfAnswers.GetComponentsInChildren<Animator>()) {
+                anim.enabled = true;
+            }
+        }
         aciertos++;
         countPreguntas++;
         correctas = 0;
@@ -405,6 +431,9 @@ public class CursoManager : MonoBehaviour {
                     imprimePregunta();
                     break;
                 case "Completar palabra":
+                    if (canvasParentOfAnswers.GetComponent<GridLayoutGroup>()) {
+                        Destroy(canvasParentOfAnswers.GetComponent<GridLayoutGroup>());
+                    }
                     fraseCompletada = "";
                     imprimePregunta();
                     textoCompletado.text = "Intentos 3";
@@ -868,6 +897,28 @@ public class CursoManager : MonoBehaviour {
     }
 
     void addEvent(GameObject obj, webServiceRespuestas.respuestaData respuesta) {
+        if (descripcionTipoEjercicio == "Seleccion simple") {
+            if (respuesta.correcto == "True") {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[7];
+                obj.GetComponentInChildren<Animator>().enabled = false;
+            } else {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[6];
+                obj.GetComponentInChildren<Animator>().enabled = false;
+            }
+        } else if (descripcionTipoEjercicio == "Seleccion Multiple") {
+            if (respuesta.correcto != "True") {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[6];
+                obj.GetComponentInChildren<Animator>().enabled = false;
+            }
+
+        } else if (descripcionTipoEjercicio == "Seleccion simple texto") {
+            if (respuesta.correcto != "True") {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[8];
+                obj.GetComponentInChildren<Animator>().enabled = false;
+            }
+        }
+
+
         objsRespuestas.Add(obj);
         if (respuesta.correcto == "True") {
             posRespuestas.Add(1);
@@ -878,15 +929,18 @@ public class CursoManager : MonoBehaviour {
             if (descripcionTipoEjercicio != "Seleccion Multiple") {
                 comenzarPregunta = false;
             }
+
             idRespuesta = respuesta.id;
             if (respuesta.correcto == "True") {
                 webServiceDetalleIntento.insertarDetalleIntentoSqLite("True", idPregunta, respuesta.id, idIntento);
                 correctas++;
-                Color color = Color.green;
+                Color color = colores[0];
                 color.a = 0.5f;
                 obj.GetComponentInChildren<Button>().GetComponentInChildren<Image>().color = color;
                 obj.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
             } else {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[9];
+                obj.GetComponentInChildren<Animator>().enabled = true;
                 correctas = -1;
             }
             //Destroy(obj);
@@ -894,6 +948,34 @@ public class CursoManager : MonoBehaviour {
     }
 
     void addEventPares(GameObject obj, webServiceRespuestas.respuestaData respuesta) {
+        if (respuesta.relacion == "1") {
+            if (animPar1 == false) {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[0];
+                animPar1 = true;
+            } else {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[1];
+                animPar1 = false;
+            }
+            obj.GetComponentInChildren<Animator>().enabled = false;
+        } else if(respuesta.relacion == "2"){
+            if (animPar2 == false) {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[2];
+                animPar2 = true;
+            } else {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[3];
+                animPar2 = false;
+            }
+            obj.GetComponentInChildren<Animator>().enabled = false;
+        } else if (respuesta.relacion == "3") {
+            if (animPar3 == false) {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[4];
+                animPar3 = true;
+            } else {
+                obj.GetComponentInChildren<Animator>().runtimeAnimatorController = animaciones[5];
+                animPar3 = false;
+            }
+            obj.GetComponentInChildren<Animator>().enabled = false;
+        }
         objsRespuestas.Add(obj);
         relacionesPares.Add(respuesta.relacion);
         obj.GetComponentInChildren<Button>().onClick.AddListener(delegate {
@@ -901,22 +983,22 @@ public class CursoManager : MonoBehaviour {
             if (seleccion) {
                 parDos = respuesta.relacion;
                 if (respuesta.relacion == "1") {
-                    colorRespuestas(obj, Color.blue);
+                    colorRespuestas(obj, colores[3]);
                 } else if (respuesta.relacion == "2") {
-                    colorRespuestas(obj, Color.yellow);
+                    colorRespuestas(obj, colores[2]);
                 } else if (respuesta.relacion == "3") {
-                    colorRespuestas(obj, Color.green);
+                    colorRespuestas(obj, colores[0]);
                 } else {
                     Debug.Log("CursoManager line 628");
                     Debug.Log("Error al momento de asignar la relacion de un par.");
                 }
             } else { 
                 if (respuesta.relacion == "1") {
-                    colorRespuestas(obj, Color.blue);
+                    colorRespuestas(obj, colores[3]);
                 }else if (respuesta.relacion == "2") {
-                    colorRespuestas(obj, Color.yellow);
+                    colorRespuestas(obj, colores[2]);
                 } else if (respuesta.relacion == "3") {
-                    colorRespuestas(obj, Color.green);
+                    colorRespuestas(obj, colores[0]);
                 } else {
                     Debug.Log("CursoManager line 628");
                     Debug.Log("Error al momento de asignar la relacion de un par.");
@@ -1008,10 +1090,10 @@ public class CursoManager : MonoBehaviour {
             int pos = 0;
             foreach (GameObject obj in objsRespuestas) {
                 if (posRespuestas[pos] == 1) {
-                    colorRespuestas(obj, Color.green);
+                    colorRespuestas(obj, colores[0]);
                     pos++;
                 } else {
-                    colorRespuestas(obj, Color.red);
+                    colorRespuestas(obj, colores[1]);
                     pos++;
                 }
             }
@@ -1019,13 +1101,13 @@ public class CursoManager : MonoBehaviour {
             int pos2 = 0;
             foreach (GameObject obj in objsRespuestas) {
                 if (relacionesPares[pos2] == "1") {
-                    colorRespuestas(obj, Color.blue);
+                    colorRespuestas(obj, colores[3]);
                     pos2++;
                 }else if(relacionesPares[pos2] == "2") {
-                    colorRespuestas(obj, Color.yellow);
+                    colorRespuestas(obj, colores[2]);
                     pos2++;
                 }else if (relacionesPares[pos2] == "3") {
-                    colorRespuestas(obj, Color.green);
+                    colorRespuestas(obj, colores[0]);
                     pos2++;
                 } else {
                     Debug.Log("CursoManager line 749");
@@ -1052,6 +1134,8 @@ public class CursoManager : MonoBehaviour {
         ///Variables para control del tiempo
         comenzarPregunta = false;
         tiempo = time;
+        PanelTiempo.fillAmount = 1f;
+        timeDelete = time - 1;
         //////
         destroyChildrens();
         llamarPreguntas();
