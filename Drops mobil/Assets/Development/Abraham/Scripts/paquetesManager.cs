@@ -143,6 +143,20 @@ public class paquetesManager : MonoBehaviour {
         }
     }
 
+    public void fillPaquetesLocal() {
+        var paquetesLocales = webServicePaquetes.getPaquetesSqLite();
+        if (paquetesLocales != null) {
+            manager.setPaquetes(paquetesLocales.paquete);
+        } else {
+            newCardEmpty(listaPaquetes);
+        }
+        var categoriasLocal = webServiceCategoria.getCategoriasSql();
+        if (categoriasLocal != null) {
+            manager.setCategorias(categoriasLocal);
+        }
+        StartCoroutine(getUserImg());
+    }
+
     /**
      * Funcion que se manda llamar al inicio de la escena (frame 1)
      * set numeroPreguntas al que el usuario ya habia seleccionado
@@ -160,17 +174,7 @@ public class paquetesManager : MonoBehaviour {
             StartCoroutine(webServicePaquetes.getPaquetes());
         } else {
 
-            var paquetesLocales = webServicePaquetes.getPaquetesSqLite();
-            if (paquetesLocales != null) {
-                manager.setPaquetes(paquetesLocales.paquete);
-            } else {
-                newCardEmpty(listaPaquetes);
-            }
-            var categoriasLocal = webServiceCategoria.getCategoriasSql();
-            if (categoriasLocal != null) {
-                manager.setCategorias(categoriasLocal);
-            }
-            StartCoroutine(getUserImg());
+            fillPaquetesLocal();
         }
 
         scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
@@ -808,7 +812,6 @@ public class paquetesManager : MonoBehaviour {
                 panelDescargaMsj.SetActive(false);
             } else {
                 panelDescargaMsj.SetActive(true);
-                Debug.Log("MENSAJE DE RECARGAR PANEL DESCARGA");
                 panelDescargaMsj.GetComponentInChildren<Text>().text = "¡No hay conexión a internet!";
             }
         }
@@ -843,6 +846,7 @@ public class paquetesManager : MonoBehaviour {
                 DestroyImmediate(objeto.gameObject);
             }
         }
+
 
         if (categoriaTab != null) {
             fillTabContent(tabActivo, categoriaTab);

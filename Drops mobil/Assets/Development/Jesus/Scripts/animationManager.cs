@@ -42,15 +42,19 @@ public class animationManager : MonoBehaviour
             if (dificultad == 1) {
                 col = bronce;
                 rango.text = "Bronce";
+                numPreguntas = 5;
             } else if (dificultad == 2) {
                 col = plata;
                 rango.text = "Plata";
+                numPreguntas = 10;
             } else if (dificultad == 3) {
                 col = oro;
                 rango.text = "Oro";
+                numPreguntas = 15;
             } else if (dificultad == 4) {
                 col = esmeralda;
                 rango.text = "Diamante";
+                numPreguntas = 20;
             }
             colorStar();
 
@@ -68,9 +72,10 @@ public class animationManager : MonoBehaviour
 
             float puntajeMax = ((numPreguntas - 4) * 400) + 700;
             float puntePorEstrella = puntajeMax / 10;
-            if (score < 1100) {
-                //Esta seccion es para cuando no se consigue niguna estrella
-            } else if (score >= 1100 && score <= (puntePorEstrella * 6)) {
+            Debug.Log("NUMERO DE PREGUNTAS :" + numPreguntas );
+            Debug.Log("PUNTAJE Maximo :" + puntajeMax );
+            Debug.Log("PUNTAJE POR ESTRELLA :" + puntePorEstrella );
+            if (score >= (puntePorEstrella * 5) && score <= (puntePorEstrella * 6)) {
                 controllerEstralla1.enabled = true;
                 yield return new WaitForSeconds(0.3f);
             } else if (score > (puntePorEstrella * 6) && score < (puntePorEstrella * 8.5)) {

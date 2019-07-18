@@ -139,6 +139,9 @@ public class webServicePaquetes : MonoBehaviour{
 
             if (www.isNetworkError || www.isHttpError) {
                 Debug.Log(www.error);
+                if (GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>()) {
+                    GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().fillPaquetesLocal();
+                }
             } else {
                 string text;
                 text = www.downloadHandler.text;

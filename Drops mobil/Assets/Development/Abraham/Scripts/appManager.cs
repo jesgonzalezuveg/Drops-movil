@@ -218,6 +218,21 @@ public class appManager : MonoBehaviour {
     /// Valida la conexion a internet
     /// </summary>
     public void validarConexion() {
+        string m_ReachabilityText = "";
+        if (Application.internetReachability == NetworkReachability.NotReachable) {
+            //Change the Text
+            m_ReachabilityText = "Not Reachable.";
+        }
+        //Check if the device can reach the internet via a carrier data network
+        else if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) {
+            m_ReachabilityText = "Reachable via carrier data network.";
+        }
+        //Check if the device can reach the internet via a LAN
+        else if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) {
+            m_ReachabilityText = "Reachable via Local Area Network.";
+        }
+        //Debug.Log(m_ReachabilityText);
+
         if (UnityEngine.Application.internetReachability == NetworkReachability.NotReachable) {
             isOnline = false;
         } else {
@@ -290,9 +305,12 @@ public class appManager : MonoBehaviour {
      * que se encuentran en la BD.
      */
     public void validarPaquetes() {
+        //Debug.Log("METODO validarPaquetes entro");
         if (GameObject.Find("ListaPaquetes")) {
+            Debug.Log("Encontro ListaPaquetes");
             var paquetesManager = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>();
             if (paquetes != null && banderaPaquetes) {
+                Debug.Log("Paquetes no es null");
                 paquetesManager.destruirObjetos(null);
                 destruirObjetos();
                 paquetesManager.cambiarVistaPaquetes(vistaLista);
@@ -300,36 +318,46 @@ public class appManager : MonoBehaviour {
                 foreach (var pack in paquetes) {
                     var local = webServicePaquetes.getPaquetesByDescripcionSqLite(pack.descripcion);
                     if (local != null) {
+                        Debug.Log("PAQUETES POR DESCRIPCION no es null");
                         pack.id = local.id;
                         var descargaLocal = webServiceDescarga.getDescargaByPaquete(pack.id);
                         if (descargaLocal == null) {
+                            Debug.Log("Paquetes DESCARGABLES LOCAL ES NULL");
                             if (isOnline) {
                                 paquetesPorDescargar++;
                                 paquetesManager.newCardDescarga(pack);
-
+                                Debug.Log("PASO MENTODO NEW CARDDESCARGAR LINEA 345");
                             } else {
 
                             }
                         } else {
+                            Debug.Log("Paquetes DESCARGABLES LOCAL NO ES NULL");
                             //Debug.Log(isOnline);
                             if (isOnline) {
                                 //Debug.Log(descargaLocal.fechaDescarga);
                                 //Debug.Log(pack.fechaModificacion);
                                 if (isActualized(descargaLocal.fechaDescarga, pack.fechaModificacion)) {
+                                    Debug.Log("NO HAY ACTUALIZACION EN EL PAQUETE");
                                     paquetesManager.newCardJugar(pack, null);
+                                    Debug.Log("PASO MENTODO NEW CARDJUGAR");
                                 } else {
+                                    Debug.Log("EL PAQUETE NECESITA ACTUALIZACION");
                                     paquetesManager.newCardActualizar(pack, null);
+                                    Debug.Log("PASO MENTODO NEWCARDACTUALIZAR");
                                 }
                             } else {
                                 paquetesManager.newCardJugar(pack, null);
+                                Debug.Log("PASO MENTODO NEW CARDJUGAR EN LINEA 366");
                             }
                         }
                     } else {
                         webServicePaquetes.insertarPaqueteSqLite(pack);
                         paquetesManager.newCardDescarga(pack);
+                        Debug.Log("PASO MENTODO NEW CARDDESCARGAR LINEA 372");
                     }
                 }
                 if (GameObject.FindObjectOfType<appManager>()) {
+                    Debug.Log("ENCONTRO GAMEOBJECT DE TIPO APPMANAGER");
                     GameObject.FindObjectOfType<appManager>().cargando.SetActive(false);
                 }
 
@@ -345,7 +373,9 @@ public class appManager : MonoBehaviour {
                         //paquetesManager.panelDescargas.transform.GetChild(0).gameObject.SetActive(true);
                         paquetesManager.panelDescargas.transform.GetChild(1).gameObject.SetActive(false);
                         for (int i = 0; i < emptyObj; i++) {
+                            Debug.Log("PASO MENTODO NEWCARDEMPTY");
                             paquetesManager.newCardEmpty(paquetesManager.listaPaquetesNuevos);
+                            Debug.Log("PASO MENTODO NEWCARDEMPTY LINEA 394");
                         }
                     }
                 } else {
@@ -355,7 +385,12 @@ public class appManager : MonoBehaviour {
                 }
 
                 banderaPaquetes = false;
+            } else {
+                Debug.Log("PAQUETES ES NULL");
+                Debug.Log("ESPERANDO PAQUETES");
             }
+        } else {
+            //Debug.Log("NO ENCONTRO LISTA PAQUETES");
         }
     }
 
@@ -364,6 +399,7 @@ public class appManager : MonoBehaviour {
      * que se encuentran en la BD.
      */
     public void validarCategorias() {
+        //Debug.Log("METODO validarCategorias entro");
         if (categorias != null && banderaCategorias) {
             foreach (var categoria in categorias) {
                 var local = webServiceCategoria.getCategoriaByDescripcionSqLite(categoria.descripcion);

@@ -398,7 +398,7 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
                 Debug.Log(www.error + " 314 WSUsu");
             } else {
                 string text;
@@ -447,7 +447,7 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
                 Debug.Log(www.error + " 361 WSUsu");
             } else {
                 string text;
@@ -516,9 +516,9 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
                 Debug.Log(www.error + " 429 WSUsu");
-                GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
                 GameObject.FindObjectOfType<keyboardManager>().setUsuario("");
                 GameObject.FindObjectOfType<keyboardManager>().setNombre("");
                 GameObject.FindObjectOfType<keyboardManager>().setPassword("");

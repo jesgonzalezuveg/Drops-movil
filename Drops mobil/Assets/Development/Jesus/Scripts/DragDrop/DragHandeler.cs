@@ -8,9 +8,14 @@ using UnityEngine.UI;
 public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
     public static GameObject itemBeingDragged;
     public static Transform parentItemBeingDragged;
+    public static bool starAnim = false;
     Vector3 startPosition;
     Transform startParent;
+    public Animator animationDrag;
 
+    private void Awake() {
+        animationDrag.enabled = false;
+    }
 
     private void Update() {
 
@@ -86,6 +91,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     #region IEndDragHandler implementation
 
     public void OnEndDrag(PointerEventData eventData) {
+        animationDrag.enabled = false;
         //gameObject.transform.localScale = gameObject.transform.parent.localScale;
         itemBeingDragged = null;
         if (transform.parent.parent.name != "Respuesta") {
@@ -95,6 +101,13 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             //Debug.Log("Es el panel respuesta");
         }
         if (transform.parent == startParent) {
+            if (starAnim == true) {
+                Handheld.Vibrate();
+                animationDrag.enabled = true;
+                animationDrag.Play("BadDrop", -1, 0f);
+                starAnim = false;
+            }
+            Debug.Log("REGRESO A LA POSICION INICIAL");
             transform.position = startPosition;
         }
         validarEstadoLetra();
@@ -105,41 +118,41 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public static void validarEstadoLetra() {
         return;
-        GameObject panelRes = GameObject.Find("PanelLetras");
-        GameObject res = GameObject.Find("Respuesta");
-        GameObject panelCentral = GameObject.Find("PanelCentral");
-        //Debug.Log("La escala es respuesta: " + res.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width);
-        //Debug.Log("La escala es panel respuesta: " + panelRes.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width);
-        float escala = res.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width/ panelRes.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width;
-        if (panelRes != null && res != null) {
-            foreach (Transform hijo in panelRes.transform) {
-                if (hijo.gameObject.transform.childCount > 0) {
-                    hijo.gameObject.transform.GetChild(0).localScale = hijo.gameObject.transform.localScale;
-                    hijo.gameObject.transform.GetChild(0).GetComponent<CanvasGroup>().blocksRaycasts = true;
-                }
-            }
+        //GameObject panelRes = GameObject.Find("PanelLetras");
+        //GameObject res = GameObject.Find("Respuesta");
+        //GameObject panelCentral = GameObject.Find("PanelCentral");
+        ////Debug.Log("La escala es respuesta: " + res.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width);
+        ////Debug.Log("La escala es panel respuesta: " + panelRes.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width);
+        //float escala = res.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width/ panelRes.transform.GetChild(0).gameObject.GetComponent<RectTransform>().rect.width;
+        //if (panelRes != null && res != null) {
+        //    foreach (Transform hijo in panelRes.transform) {
+        //        if (hijo.gameObject.transform.childCount > 0) {
+        //            hijo.gameObject.transform.GetChild(0).localScale = hijo.gameObject.transform.localScale;
+        //            hijo.gameObject.transform.GetChild(0).GetComponent<CanvasGroup>().blocksRaycasts = true;
+        //        }
+        //    }
 
-            //Array.Clear(panelCentral.GetComponent<CursoManager>().letras, panelCentral.GetComponent<CursoManager>().letras.Length);
-            foreach (Transform hijo in res.transform) {
-                if (hijo.gameObject.transform.childCount > 0) {
-                    //Debug.Log("La escala es: "+escala);
-                    float escalaAjustada = escala + (escala*0.66f);
-                    hijo.gameObject.transform.GetChild(0).localScale = new Vector3(escalaAjustada, escalaAjustada, escalaAjustada);
-                    //hijo.gameObject.transform.GetChild(0).localScale = hijo.gameObject.transform.localScale;
-                    string letraActual = hijo.gameObject.transform.GetChild(0).name;
-                    int index = hijo.gameObject.transform.GetSiblingIndex();
-                    panelCentral.GetComponent<CursoManager>().letras[index] = letraActual;
-                    hijo.gameObject.transform.GetChild(0).GetComponent<CanvasGroup>().blocksRaycasts = true;
-                }
-            }
-            panelCentral.GetComponent<CursoManager>().respuestaFraseCompletada = "";
-            foreach (string letra in panelCentral.GetComponent<CursoManager>().letras) {
-                panelCentral.GetComponent<CursoManager>().respuestaFraseCompletada += letra;
-            }
-        } else {
-            Debug.Log("DragHandeler linea 75");
-            Debug.Log("panelRes: "+panelRes);
-            Debug.Log("res: "+res);
-        }
+        //    //Array.Clear(panelCentral.GetComponent<CursoManager>().letras, panelCentral.GetComponent<CursoManager>().letras.Length);
+        //    foreach (Transform hijo in res.transform) {
+        //        if (hijo.gameObject.transform.childCount > 0) {
+        //            //Debug.Log("La escala es: "+escala);
+        //            float escalaAjustada = escala + (escala*0.66f);
+        //            hijo.gameObject.transform.GetChild(0).localScale = new Vector3(escalaAjustada, escalaAjustada, escalaAjustada);
+        //            //hijo.gameObject.transform.GetChild(0).localScale = hijo.gameObject.transform.localScale;
+        //            string letraActual = hijo.gameObject.transform.GetChild(0).name;
+        //            int index = hijo.gameObject.transform.GetSiblingIndex();
+        //            panelCentral.GetComponent<CursoManager>().letras[index] = letraActual;
+        //            hijo.gameObject.transform.GetChild(0).GetComponent<CanvasGroup>().blocksRaycasts = true;
+        //        }
+        //    }
+        //    panelCentral.GetComponent<CursoManager>().respuestaFraseCompletada = "";
+        //    foreach (string letra in panelCentral.GetComponent<CursoManager>().letras) {
+        //        panelCentral.GetComponent<CursoManager>().respuestaFraseCompletada += letra;
+        //    }
+        //} else {
+        //    Debug.Log("DragHandeler linea 75");
+        //    Debug.Log("panelRes: "+panelRes);
+        //    Debug.Log("res: "+res);
+        //}
     }
 }

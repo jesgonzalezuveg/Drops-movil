@@ -17,7 +17,7 @@ public class CursoManager : MonoBehaviour {
     public string fraseACompletarPublica = "";
 
 
-    private float time = 30.0f;
+    private float time = 300.0f;
     private float timeDelete;
     private float timeClockPerSecond;
     private float tiempo;
@@ -367,7 +367,8 @@ public class CursoManager : MonoBehaviour {
             multiplicador = 1;
             textoRacha.text = "0";
             textoMultiplicador.text = "X1";
-            textoMultiplicador.transform.parent.parent.gameObject.SetActive(false); 
+            textoMultiplicador.transform.parent.parent.gameObject.SetActive(false);
+            Handheld.Vibrate();
             StartCoroutine(activaObjeto(incorrectoimg));
             descripcionTipoEjercicio = "";
             webServiceIntento.updateIntentoSqlite(idIntento, score.ToString());
@@ -459,6 +460,8 @@ public class CursoManager : MonoBehaviour {
             textoPuntajeMarcador.text = score + "";
             textoRachaMax.text = mayorRacha + "";
             textoAciertos.text = aciertos + "";
+            PanelTiempo.gameObject.SetActive(false);
+            Tiempo.gameObject.SetActive(false);
             getNota();
             webServiceRegistro.validarAccionSqlite("Puntaje obtenido: " + score, manager.getUsuario(), "Puntaje obtenido");
             webServiceRegistro.validarAccionSqlite("Terminó ejercicio", manager.getUsuario(), "Terminó ejercicio");
@@ -1019,7 +1022,7 @@ public class CursoManager : MonoBehaviour {
                 Texture2D tex = opsSp as Texture2D;
                 Rect rec = new Rect(0, 0, tex.width, tex.height);
                 var sprite = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
-                obj.GetComponentInChildren<Image>().sprite = sprite;
+                //obj.GetComponentInChildren<Image>().sprite = sprite;
                 break;
             case 1:
             case 2:
@@ -1027,28 +1030,28 @@ public class CursoManager : MonoBehaviour {
                 Texture2D tex2 = bienSp as Texture2D;
                 Rect rec2 = new Rect(0, 0, tex2.width, tex2.height);
                 var sprite2 = Sprite.Create(tex2, rec2, new Vector2(0.5f, 0.5f), 100);
-                obj.GetComponentInChildren<Image>().sprite = sprite2;
+                //obj.GetComponentInChildren<Image>().sprite = sprite2;
                 break;
             case 3:
                 obj.GetComponentInChildren<AudioSource>().clip = genial;
                 Texture2D tex3 = genialSp as Texture2D;
                 Rect rec3 = new Rect(0, 0, tex3.width, tex3.height);
                 var sprite3 = Sprite.Create(tex3, rec3, new Vector2(0.5f, 0.5f), 100);
-                obj.GetComponentInChildren<Image>().sprite = sprite3;
+                //obj.GetComponentInChildren<Image>().sprite = sprite3;
                 break;
             case 4:
                 obj.GetComponentInChildren<AudioSource>().clip = asombroso;
                 Texture2D tex4 = asombrosoSp as Texture2D;
                 Rect rec4 = new Rect(0, 0, tex4.width, tex4.height);
                 var sprite4 = Sprite.Create(tex4, rec4, new Vector2(0.5f, 0.5f), 100);
-                obj.GetComponentInChildren<Image>().sprite = sprite4;
+                //obj.GetComponentInChildren<Image>().sprite = sprite4;
                 break;
             case 5:
                 obj.GetComponentInChildren<AudioSource>().clip = excelente;
                 Texture2D tex5 = excelenteSp as Texture2D;
                 Rect rec5 = new Rect(0, 0, tex5.width, tex5.height);
                 var sprite5 = Sprite.Create(tex5, rec5, new Vector2(0.5f, 0.5f), 100);
-                obj.GetComponentInChildren<Image>().sprite = sprite5;
+                //obj.GetComponentInChildren<Image>().sprite = sprite5;
                 break;
             default:
                 int random = UnityEngine.Random.Range(0, 4);
@@ -1074,7 +1077,7 @@ public class CursoManager : MonoBehaviour {
                 Texture2D tex6 = spriteACargar as Texture2D;
                 Rect rec6 = new Rect(0, 0, tex6.width, tex6.height);
                 var sprite6 = Sprite.Create(tex6, rec6, new Vector2(0.5f, 0.5f), 100);
-                obj.GetComponentInChildren<Image>().sprite = sprite6;
+                //obj.GetComponentInChildren<Image>().sprite = sprite6;
                 break;
         }
     }

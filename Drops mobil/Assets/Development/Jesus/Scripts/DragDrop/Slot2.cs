@@ -50,6 +50,7 @@ public class Slot2 : MonoBehaviour, IDropHandler
                     panelCentral.GetComponent<CursoManager>().intentosCompletarPalabra(intentos);
                 }
                 //Debug.Log("Te quedan " + intentos + " intentos");
+                DragHandeler.starAnim = true;
             }
             //if (item.transform.parent.name != DragHandeler.parentItemBeingDragged.name) {
             //    item.transform.SetParent(DragHandeler.parentItemBeingDragged);

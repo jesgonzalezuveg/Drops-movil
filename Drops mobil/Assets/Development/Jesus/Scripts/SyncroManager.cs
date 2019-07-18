@@ -289,8 +289,8 @@ public class SyncroManager : MonoBehaviour {
             paquetes = webServicePaquetes.getPaquetesBorradosSqLite();
             if (paquetes != null) {
                 foreach (var paquete in paquetes.paquete) {
-                    Debug.Log(paquete.id);
-                    Debug.Log(paquete.descripcion);
+                    //Debug.Log(paquete.id);
+                    //Debug.Log(paquete.descripcion);
                     var res = webServiceRespuestas.deleteRespuestasByPaqueteSqLite(paquete.id);
                     if (res == 1) {
                         res = webServicePreguntas.deletePreguntasByPaqueteSqLite(paquete.id);
