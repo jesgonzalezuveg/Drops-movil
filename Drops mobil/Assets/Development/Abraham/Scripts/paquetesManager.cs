@@ -177,7 +177,23 @@ public class paquetesManager : MonoBehaviour {
             fillPaquetesLocal();
         }
 
-        scrollBar.GetComponent<Slider>().value = manager.numeroPreguntas;
+        switch (manager.numeroPreguntas) {
+            case 5:
+                scrollBar.GetComponent<Slider>().value = 1;
+                break;
+            case 10:
+                scrollBar.GetComponent<Slider>().value = 2;
+                break;
+            case 15:
+                scrollBar.GetComponent<Slider>().value = 3;
+                break;
+            case 20:
+                scrollBar.GetComponent<Slider>().value = 4;
+                break;
+            default:
+                scrollBar.GetComponent<Slider>().value = 1;
+                break;
+        }
         audioBox.isOn = manager.mascotaActive;
         setVisibleModal(false);
         manager.setBanderas(true);
@@ -516,7 +532,23 @@ public class paquetesManager : MonoBehaviour {
                 ray.enabled = true;
             }
             //gameObject.GetComponent<GraphicRaycaster>().enabled = true;
-            manager.numeroPreguntas = scrollBar.GetComponent<Slider>().value;
+            switch (scrollBar.GetComponent<Slider>().value) {
+                case 1:
+                    manager.numeroPreguntas = 5;
+                    break;
+                case 2:
+                    manager.numeroPreguntas = 10;
+                    break;
+                case 3:
+                    manager.numeroPreguntas = 15;
+                    break;
+                case 4:
+                    manager.numeroPreguntas = 20;
+                    break;
+                default:
+                    manager.numeroPreguntas = 5;
+                    break;
+            }
             manager.mascotaActive = audioBox.isOn;
             webServicePreferencias.updatePreferenciaSqlite(manager.getUsuario(), manager.numeroPreguntas, manager.mascotaActive, manager.getFondo());
         } else {
@@ -540,7 +572,23 @@ public class paquetesManager : MonoBehaviour {
                 ray.enabled = true;
             }
             //gameObject.GetComponent<GraphicRaycaster>().enabled = true;
-            manager.numeroPreguntas = scrollBar.GetComponent<Slider>().value;
+            switch (scrollBar.GetComponent<Slider>().value) {
+                case 1:
+                    manager.numeroPreguntas = 5;
+                    break;
+                case 2:
+                    manager.numeroPreguntas = 10;
+                    break;
+                case 3:
+                    manager.numeroPreguntas = 15;
+                    break;
+                case 4:
+                    manager.numeroPreguntas = 20;
+                    break;
+                default:
+                    manager.numeroPreguntas = 5;
+                    break;
+            }
             manager.mascotaActive = audioBox.isOn;
             webServicePreferencias.updatePreferenciaSqlite(manager.getUsuario(), manager.numeroPreguntas, manager.mascotaActive, manager.getFondo());
         } else {
@@ -817,18 +865,21 @@ public class paquetesManager : MonoBehaviour {
         }
     }
 
-    public void panelMsj() {
-        if (panelDescargaMsj.active == true) {
+    public void panelMsj(string msj) {
+        GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
+        panelDescargaMsj.SetActive(true);
+        Debug.Log("MENSAJE DE PANELMSJ");
+        panelDescargaMsj.GetComponentInChildren<Text>().text = msj;
+    }
+
+    public void cerrarPanelMsj() {
+        if(panelDescargaMsj.active == true) {
             if (panelDescargas.active == true) {
                 recargarPanelDescargas();
                 panelDescargaMsj.SetActive(false);
             } else {
                 panelDescargaMsj.SetActive(false);
             }
-        } else {
-            panelDescargaMsj.SetActive(true);
-            Debug.Log("MENSAJE DE PANELMSJ");
-            panelDescargaMsj.GetComponentInChildren<Text>().text = "¡No hay conexión a internet!";
         }
     }
 

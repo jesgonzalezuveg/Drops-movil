@@ -173,10 +173,14 @@ public class webServiceRespuestas : MonoBehaviour {
             AsyncOperation asyncLoad = www.SendWebRequest();
             // Wait until the asynchronous scene fully loads
             while (!asyncLoad.isDone) {
+                GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Descargando "+asyncLoad.progress +"%");
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
+                Debug.Log(www.error + "Error al descargar respuestas");
+                if (GameObject.Find("AppManager").GetComponent<appManager>() && GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>()) {
+                    GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().panelMsj("Ha ocurrido un problema. Recomendamos verificar conexión de Internet.");
+                }
             } else {
                 string text;
                 text = www.downloadHandler.text;

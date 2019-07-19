@@ -40,7 +40,7 @@ public class packManager : MonoBehaviour {
             webServiceRegistro.validarAccionSqlite("Descarga: " + paquete.descripcion, manager.getUsuario(), "Descargar paquete");
             consultarDatos();
         } else {
-            pManager.panelMsj();
+            pManager.panelMsj("¡No hay conexión a internet!");
         }
     }
 
@@ -66,7 +66,7 @@ public class packManager : MonoBehaviour {
             webServiceRegistro.validarAccionSqlite("Actualización : " + paquete.descripcion, manager.getUsuario(), "Actualizar paquete");
             consultarDatos();
         } else {
-            pManager.panelMsj();
+            pManager.panelMsj("¡No hay conexión a internet!");
         }
     }
 

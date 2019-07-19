@@ -290,9 +290,9 @@ public class webServiceUsuario : MonoBehaviour {
             }
             if (www.isNetworkError || www.isHttpError) {
                 if (GameObject.Find("Mensaje")) {
-                    GameObject.Find("Mensaje").GetComponent<Text>().text = "Se requiere conexión a Internet";
+                    GameObject.Find("Mensaje").GetComponent<Text>().text = "Se requiere una conexión estable a Internet";
                 }
-                Debug.Log(www.error + " 224 WSUsu");
+                Debug.Log(www.error + " webServiceUsuario Linea 295");
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
             } else {
                 string text;
@@ -345,7 +345,7 @@ public class webServiceUsuario : MonoBehaviour {
                         }
 
                         if (www2.isNetworkError || www2.isHttpError) {
-                            Debug.Log(www2.error + " 269 WSUsu");
+                            Debug.Log(www2.error + " webServiceUsuario Linea 348");
                         } else {
                             string text2;
                             text2 = www2.downloadHandler.text;
@@ -398,8 +398,8 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
-                Debug.Log(www.error + " 314 WSUsu");
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere una conexión estable a internet";
+                Debug.Log(www.error + " webServiceUsuario Linea 402");
             } else {
                 string text;
                 text = www.downloadHandler.text;
@@ -447,8 +447,8 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
-                Debug.Log(www.error + " 361 WSUsu");
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere una conexión estable a internet";
+                Debug.Log(www.error + " webServiceUsuario Linea 451");
             } else {
                 string text;
                 text = www.downloadHandler.text;
@@ -516,9 +516,9 @@ public class webServiceUsuario : MonoBehaviour {
                 yield return null;
             }
             if (www.isNetworkError || www.isHttpError) {
-                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
-                Debug.Log(www.error + " 429 WSUsu");
-                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere conexión a internet";
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere una conexión estable a internet";
+                Debug.Log(www.error + " 429 webServiceUsuario Linea 520");
+                GameObject.Find("Mensaje").GetComponentInChildren<Text>().text = "Se requiere una conexión estable a internet";
                 GameObject.FindObjectOfType<keyboardManager>().setUsuario("");
                 GameObject.FindObjectOfType<keyboardManager>().setNombre("");
                 GameObject.FindObjectOfType<keyboardManager>().setPassword("");
@@ -548,7 +548,7 @@ public class webServiceUsuario : MonoBehaviour {
                         }
 
                         if (www2.isNetworkError || www2.isHttpError) {
-                            Debug.Log(www2.error + " 460 WSUsu");
+                            Debug.Log(www2.error + "webServiceUsuario Linea 551");
                         } else {
                             string text2;
                             text2 = www2.downloadHandler.text;

@@ -17,7 +17,7 @@ public class CursoManager : MonoBehaviour {
     public string fraseACompletarPublica = "";
 
 
-    private float time = 300.0f;
+    private float time = 30.0f;
     private float timeDelete;
     private float timeClockPerSecond;
     private float tiempo;

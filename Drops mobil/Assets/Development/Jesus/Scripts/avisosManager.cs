@@ -203,7 +203,7 @@ public class avisosManager : MonoBehaviour
                         yield return null;
                     }
                     if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
-                        Debug.Log(www.error);
+                        Debug.Log(www.error + "Error al descargar imagen del aviso");
                     } else {
                         Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
                         byte[] bytes;
