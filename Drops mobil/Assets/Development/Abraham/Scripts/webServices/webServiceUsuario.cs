@@ -85,7 +85,7 @@ public class webServiceUsuario : MonoBehaviour {
      * @param programa puede ser nulo, en caso de ser alumno uveg insertará el programa al cual esta inscrito
      */
     public static int insertarUsuarioSqLite(string usuario, string nombre, string rol, string gradoEstudios, string programa, string contraseña, string imagenUrl) {
-        string query = "INSERT INTO usuario (usuario, nombre, rol, gradoEstudios, programa, fechaRegistro, status, SyncroStatus, password, imagen) VALUES ('" + usuario + "','" + nombre + "','" + rol + "','" + gradoEstudios + "','" + programa + "', dateTime('now','localtime'), 1, 0, '"+ contraseña +"','" + imagenUrl + "');";
+        string query = "INSERT INTO usuario (usuario, nombre, rol, gradoEstudios, programa, fechaRegistro, status, SyncroStatus, password, imagen) VALUES ('" + usuario + "','" + nombre + "','" + rol + "','" + gradoEstudios + "','" + programa + "', dateTime('now','localtime'), 1, 0, '" + contraseña + "','" + imagenUrl + "');";
         var result = conexionDB.alterGeneral(query);
         if (result == 1) {
             return 1;
@@ -297,6 +297,7 @@ public class webServiceUsuario : MonoBehaviour {
             } else {
                 string text;
                 text = www.downloadHandler.text;
+                //Debug.Log(text);
                 text = text.Replace("[", "");
                 text = text.Replace("]", "");
                 JsonResponse data = JsonUtility.FromJson<JsonResponse>(text);
@@ -313,6 +314,9 @@ public class webServiceUsuario : MonoBehaviour {
                         if (idLocal == "0") {
                             insertarUsuarioSqLite(data.data.Usuario, nombreCompleto, "usuarioUveg", data.data.ProgramaAcademico, data.data.ProgramaEstudio, contraseña, data.data.Imagen);
                         }
+                        idLocal = consultarIdUsuarioSqLite(data.data.Usuario);
+                        //Debug.Log("EL ID DEL USUARIO ES "+idLocal);
+                        manager.setIdUsuario(idLocal);
                         webServiceLog.insertarLogSqLite(data.data.Usuario);
                         int res = webServiceUsuario.updateSesionStatusSqlite(data.data.Usuario, 1);
                         if (res == 0) {
@@ -365,6 +369,9 @@ public class webServiceUsuario : MonoBehaviour {
                                 if (idLocal == "0") {
                                     insertarUsuarioSqLite(myObject.usuario, myObject.nombre, "usuarioApp", myObject.programa, myObject.programa, myObject.password, "http://sii.uveg.edu.mx/unity/dropsV2/img/invitado.png");
                                 }
+                                idLocal = consultarIdUsuarioSqLite(data.data.Usuario);
+                                Debug.Log("EL ID DEL USUARIO ES " + idLocal);
+                                manager.setIdUsuario(idLocal);
                                 webServiceLog.insertarLogSqLite(myObject.usuario);
                                 int res = webServiceUsuario.updateSesionStatusSqlite(myObject.usuario, 1);
                                 if (res == 0) {
@@ -489,7 +496,7 @@ public class webServiceUsuario : MonoBehaviour {
                         webServiceRegistro.insertarRegistroSqLite("Login Facebook", usuario, 2);
                         SceneManager.LoadScene("menuCategorias");
                     } else {
-                        if (insertarUsuarioSqLite(usuario, name, "usuarioFacebook", "", "","", imagen) == 1) {
+                        if (insertarUsuarioSqLite(usuario, name, "usuarioFacebook", "", "", "", imagen) == 1) {
                             webServiceLog.insertarLogSqLite(data.data.Usuario);
                             webServiceRegistro.insertarRegistroSqLite("Login Facebook", data.data.Usuario, 2);
                             SceneManager.LoadScene("menuCategorias");
@@ -507,7 +514,7 @@ public class webServiceUsuario : MonoBehaviour {
         WWWForm form = new WWWForm();
         Dictionary<string, string> headers = form.headers;
         headers["Authorization"] = API_KEY;
-        Debug.Log("{\"usuario\": \"" + usuario + "\", \"contrasena\": \"\"}");
+        Debug.Log("{\"usuario\": \"" + usuario + "\", \"contrasena\": \""+contraseña+"\"}");
         form.AddField("data", "{\"usuario\": \"" + usuario + "\", \"contrasena\": \"\"}");
         using (UnityWebRequest www = UnityWebRequest.Post(USUARIO_DATA, form)) {
             AsyncOperation asyncLoad = www.SendWebRequest();
@@ -554,6 +561,12 @@ public class webServiceUsuario : MonoBehaviour {
                             text2 = www2.downloadHandler.text;
                             if (text2 == "0") {
                                 Debug.Log("Fallo el insert");
+                                //Agregar retroalimentacion que el usuario ya existe
+                                GameObject.FindObjectOfType<PlayerManager>().setMensaje(false, "");
+                                GameObject.FindObjectOfType<mainMenuManager>().cambiarVista(3);
+                                if (GameObject.Find("Mensaje")) {
+                                    GameObject.Find("Mensaje").GetComponent<Text>().text = "El usuario ya existe";
+                                }
                             } else {
                                 GameObject.FindObjectOfType<keyboardManager>().setUsuario("");
                                 GameObject.FindObjectOfType<keyboardManager>().setNombre("");
@@ -561,6 +574,9 @@ public class webServiceUsuario : MonoBehaviour {
                                 GameObject.FindObjectOfType<keyboardManager>().setPassword2("");
                                 GameObject.FindObjectOfType<PlayerManager>().setMensaje(false, "");
                                 GameObject.FindObjectOfType<mainMenuManager>().cambiarVista(2);
+                                if (GameObject.Find("Mensaje")) {
+                                    GameObject.Find("Mensaje").GetComponent<Text>().text = "Usuario registrado";
+                                }
                                 //GameObject.Find("Mascota").GetComponentInChildren<Text>().text = "Tu usuario se registro con éxito";
                             }
                         }

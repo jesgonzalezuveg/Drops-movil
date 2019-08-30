@@ -65,7 +65,7 @@ public class SyncroManager : MonoBehaviour {
         if (json != null && json != "{\"Usuarios\":[]}") {
             StartCoroutine(webServiceSincronizacion.SincroData(json, realTime));
         } else {
-            Debug.Log("No hay datos para sincronizar");
+            //Debug.Log("No hay datos para sincronizar");
             SyncroManager.respuestaWsSincro = "1";
         }
     }
@@ -178,7 +178,7 @@ public class SyncroManager : MonoBehaviour {
             jsonPerUser += "]";
         } else {
             jsonPerUser = null;
-            Debug.Log("No se encontraron logs");
+            //Debug.Log("No se encontraron logs");
         }
     }
 

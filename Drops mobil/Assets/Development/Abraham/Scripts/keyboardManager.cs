@@ -225,21 +225,21 @@ public class keyboardManager : MonoBehaviour {
         inputActivo.GetComponent<Image>().color = new Color(1, 1, 0.8f);
     }
 
-
     /** Función que se activa cuando el usuario da click en el boton continuar
      * @param
      */
     public void login() {
         GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Cargando....");
-        Debug.Log("Buscar en BD Local");
+        //Debug.Log("Buscar en BD Local");
 
         // Consultar en BD local (sqlite)
-        Debug.Log(inputs[0].GetComponentInChildren<InputField>().text + " - " + inputs[1].GetComponentInChildren<InputField>().text);
+        //Debug.Log(inputs[0].GetComponentInChildren<InputField>().text + " - " + inputs[1].GetComponentInChildren<InputField>().text);
         password = inputs[1].GetComponentInChildren<InputField>().text;
         var usuario = webServiceUsuario.consultarLoginUsuarioSqLite(inputs[0].GetComponentInChildren<InputField>().text, password);
         if (usuario != null) {
             if (usuario.password != "") {
                 Debug.Log("usuario no es null");
+                GameObject.FindObjectOfType<appManager>().setIdUsuario(usuario.id);
                 GameObject.FindObjectOfType<appManager>().setNombre(usuario.nombre);
                 GameObject.FindObjectOfType<appManager>().setUsuario(usuario.usuario);
                 GameObject.FindObjectOfType<appManager>().setGradoEstudios(usuario.programa);

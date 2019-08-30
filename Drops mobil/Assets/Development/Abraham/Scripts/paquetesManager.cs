@@ -250,15 +250,21 @@ public class paquetesManager : MonoBehaviour {
     }
 
     void fillTabContent(GameObject content, webServiceCategoria.categoriaData categoria) {
+        Debug.Log("CATEGORIA" + categoria.descripcion);
         destruirObjetos(content.GetComponentInChildren<gridScrollLayout>().gameObject);
         var paquetes = webServicePaquetes.getPaquetesByCategoriaSqLite(categoria.id);
         if (paquetes != null) {
             foreach (var paquete in paquetes) {
                 var descarga = webServiceDescarga.getDescargaByPaquete(paquete.id);
                 if (descarga != null) {
+                    Debug.Log(descarga.fechaDescarga);
+                    Debug.Log("------------------------");
+                    Debug.Log(paquete.fechaModificacion);
                     if (isActualized(descarga.fechaDescarga, paquete.fechaModificacion)) {
+                        Debug.Log("Esta actualizado el paquete " + paquete.descripcion);
                         newCardJugar(paquete, content.GetComponentInChildren<gridScrollLayout>().gameObject);
                     } else {
+                        Debug.Log("No se encuentra actualizado el paquete " + paquete.descripcion);
                         newCardActualizar(paquete, content.GetComponentInChildren<gridScrollLayout>().gameObject);
                     }
                 }
@@ -524,6 +530,7 @@ public class paquetesManager : MonoBehaviour {
             if (panelPaquetes.active == false) {
                 panelDescargas.SetActive(false);
                 panelPaquetes.SetActive(true);
+                panelTabsBtn.SetActive(true);
                 foreach (var ficha in panelPaquetes.GetComponentsInChildren<fondoManager>()) {
                     ficha.transform.gameObject.GetComponent<Image>().color = ficha.colorArray[manager.getFondo()];
                 }
@@ -557,6 +564,14 @@ public class paquetesManager : MonoBehaviour {
             } else if (panelPaquetes.active == true) {
                 panelPaquetes.SetActive(false);
             }
+
+            if (panelTabs.active == true) {
+                panelTabs.SetActive(false);
+            }
+            if (panelTabsBtn.active == true) {
+                panelTabsBtn.SetActive(false);
+            }
+
             foreach (var ray in gameObject.GetComponentsInChildren<GraphicRaycaster>(true)) {
                 ray.enabled = false;
             }
@@ -777,7 +792,7 @@ public class paquetesManager : MonoBehaviour {
         manager.paquetesPorDescargar = 0;
         int res = webServiceUsuario.updateAllSesionStatusSqlite(0);
         if (res == 0) {
-            Debug.Log("Error en paquetesManager en linea 470");
+            //Debug.Log("Error en paquetesManager en linea 470");
             Debug.Log("Error al modificar los status de sesion de los usuarios");
         }
         webServiceRegistro.validarAccionSqlite("Logout", manager.getUsuario(), "Cerrar sesión");

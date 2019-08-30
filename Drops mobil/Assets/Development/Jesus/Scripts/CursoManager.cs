@@ -232,9 +232,9 @@ public class CursoManager : MonoBehaviour {
     void loadImagenCategoria() {
         var categoria = webServiceCategoria.getCategoriaByIdSqLite(webServicePaquetes.getPaquetesByDescripcionSqLite(preguntas[0].descripcionPaquete).idCategoria).descripcion;
         categoria = categoria.Replace(" ", string.Empty);
-        Debug.Log(categoria);
+        //Debug.Log(categoria);
         var textura = Resources.Load(categoria) as Texture2D;
-        Debug.Log(textura);
+        //Debug.Log(textura);
         Rect rec = new Rect(0, 0, textura.width, textura.height);
         var sprite = Sprite.Create(textura, rec, new Vector2(0.5f, 0.5f), 100);
         PanelRespuestas.GetComponent<Image>().sprite = sprite;
@@ -1159,11 +1159,11 @@ public class CursoManager : MonoBehaviour {
     }
 
     public void salir() {
-        sicroManager = GameObject.Find("SincroManager").GetComponent<SyncroManager>();
-        if (manager.isOnline) {
-            GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Sincronizando datos");
-        }
-        sicroManager.synchronizationInRealTime();
+        //sicroManager = GameObject.Find("SincroManager").GetComponent<SyncroManager>();
+        //if (manager.isOnline) {
+        //    GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Sincronizando datos");
+        //}
+        //sicroManager.synchronizationInRealTime();
         GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(false, "");
         StartCoroutine(GameObject.Find("AppManager").GetComponent<appManager>().cambiarEscena("menuCategorias", "menuCategorias"));
     }

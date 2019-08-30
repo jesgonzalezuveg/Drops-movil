@@ -13,7 +13,7 @@
               "fkTable" : null
             },
             {
-              "nombre" : "fechaVizualizacion",
+              "nombre" : "fechaVisualizacion",
               "tipo" : "datetime",
               "NN": "1",
               "PK": "0",

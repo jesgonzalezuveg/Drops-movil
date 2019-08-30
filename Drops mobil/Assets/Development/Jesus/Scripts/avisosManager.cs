@@ -69,7 +69,8 @@ public class avisosManager : MonoBehaviour
                 if (UnityEngine.Application.internetReachability == NetworkReachability.NotReachable) {
                     //No hay conexion a internet
                 } else {
-                    StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("90"));
+                    //Cambiar por 90 dias
+                    StartCoroutine(webServiceAvisos.getPaquetesMasNuevos("180"));
                 }
                 
             }
@@ -77,26 +78,32 @@ public class avisosManager : MonoBehaviour
     }
 
     void mostrarAviso() {
-        if (manager.mostrarAviso == true && paquetesRecientes != null) {
-            manager.mostrarAviso = false;
-            var idUser = manager.getIdUsuario();
-            foreach (var paquete in paquetesRecientes) {
-                var descargas = webServiceAvisos.isPackDonwload(paquete.id);
-                if (descargas == 0) {
-                    var res = webServiceAvisos.getLogAvisosLast3DaysSqLite(paquete.id, idUser, paquete.fechaIntervalo);
-                    if (res == null) {
-                        llenarAviso(paquete.id, paquete.descripcion, paquete.descripcionCategoria, paquete.fechaRegistro, paquete.urlImagen);
-                        break;
+        try {
+            if (manager.mostrarAviso == true && paquetesRecientes != null) {
+                manager.mostrarAviso = false;
+                var idUser = manager.getIdUsuario();
+                //Debug.Log("EL ID DEL USUARIO ES " + idUser);
+                foreach (var paquete in paquetesRecientes) {
+                    var descargas = webServiceAvisos.isPackDonwload(paquete.id);
+                    if (descargas == 0) {
+                        var res = webServiceAvisos.getLogAvisosLast3DaysSqLite(paquete.id, idUser, paquete.fechaIntervalo);
+                        if (res == null) {
+                            llenarAviso(paquete.id, paquete.descripcion, paquete.descripcionCategoria, paquete.fechaRegistro, paquete.urlImagen);
+                            break;
+                        } else {
+                            avisoEstatico.SetActive(true);
+                            panelAvisos.SetActive(true);
+                        }
                     } else {
-                        avisoEstatico.SetActive(true);
-                        panelAvisos.SetActive(true);
+                        //Debug.Log("El paquete " + paquete.descripcion + " ya fue descargado");
                     }
-                } else {
-                    //Debug.Log("El paquete " + paquete.descripcion + " ya fue descargado");
                 }
+            } else {
+                //Debug.Log("NO ENTRO A LA VALIDACION PARA MOSTRAR AVISOS");
             }
-        } else {
-            //Debug.Log("NO ENTRO A LA VALIDACION PARA MOSTRAR AVISOS");
+        } catch (Exception e) {
+            Debug.Log("ERROR TRY");
+            Debug.LogException(e, this);
         }
     }
 

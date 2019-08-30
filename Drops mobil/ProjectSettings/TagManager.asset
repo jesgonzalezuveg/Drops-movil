@@ -7,6 +7,8 @@ TagManager:
   - Items
   - btnEliminar
   - btnPlayUpdate
+  - btnVista1
+  - btnVista2
   layers:
   - Default
   - TransparentFX

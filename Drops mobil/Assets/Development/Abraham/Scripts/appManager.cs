@@ -222,14 +222,17 @@ public class appManager : MonoBehaviour {
         if (Application.internetReachability == NetworkReachability.NotReachable) {
             //Change the Text
             m_ReachabilityText = "Not Reachable.";
+            //Debug.Log(m_ReachabilityText);
         }
         //Check if the device can reach the internet via a carrier data network
         else if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) {
             m_ReachabilityText = "Reachable via carrier data network.";
+            //Debug.Log(m_ReachabilityText);
         }
         //Check if the device can reach the internet via a LAN
         else if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) {
             m_ReachabilityText = "Reachable via Local Area Network.";
+            //Debug.Log(m_ReachabilityText);
         }
         //Debug.Log(m_ReachabilityText);
 
@@ -370,8 +373,8 @@ public class appManager : MonoBehaviour {
 
                 banderaPaquetes = false;
             } else {
-                Debug.Log("PAQUETES ES NULL");
-                Debug.Log("ESPERANDO PAQUETES");
+                //Debug.Log("PAQUETES ES NULL");
+                //Debug.Log("ESPERANDO PAQUETES");
             }
         } else {
             //Debug.Log("NO ENCONTRO LISTA PAQUETES");

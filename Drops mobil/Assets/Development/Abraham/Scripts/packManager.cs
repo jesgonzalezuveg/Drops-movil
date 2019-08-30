@@ -113,6 +113,8 @@ public class packManager : MonoBehaviour {
             Debug.Log("Se borro correctamente el paquete");
             var paquetesManager = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>();
             borrarImagenes(paquete.id);
+            transform.transform.GetChild(1).GetComponentInChildren<Button>().interactable = true;
+            transform.GetChild(4).GetComponentInChildren<Button>().interactable = true;
             paquetesManager.cambiarVistaPaquetes(manager.vistaLista);
         } else {
             Debug.Log("Error al borrar paquete");
