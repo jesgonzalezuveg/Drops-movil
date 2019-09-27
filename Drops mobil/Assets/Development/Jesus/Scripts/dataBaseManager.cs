@@ -47,6 +47,7 @@ public class dataBaseManager : MonoBehaviour
     }
 
 
+    public TextAsset jsonFile;
     public string[] ordenTablas;
     string path;
     string jsonString;
@@ -65,11 +66,14 @@ public class dataBaseManager : MonoBehaviour
     void Start()
     {
         ejecutarQuery("PRAGMA foreign_keys=off;", "Se desactivaron FKs");
-        path = Application.streamingAssetsPath + "/dataBase.json";
-        jsonString = File.ReadAllText(path);
+        //path = Application.streamingAssetsPath + "/dataBase.json";
+        //jsonString = File.ReadAllText(path);
+        jsonString = jsonFile.text;
+        Debug.Log(jsonFile.text);
         Tablas tablasJson = JsonUtility.FromJson<Tablas>(jsonString);
         for (int i = 0; i < ordenTablas.Length; i++) {
             foreach (var tabJson in tablasJson.tabla) {
+                Debug.Log(tabJson.nombre);
                 if (tabJson.nombre == ordenTablas[i]) {
                     string res = consultarTablas(tabJson.nombre);
                     if (res == "0") {

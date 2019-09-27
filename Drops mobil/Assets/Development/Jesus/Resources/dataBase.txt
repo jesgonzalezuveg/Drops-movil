@@ -1,0 +1,1029 @@
+{
+  "tabla" : [
+      {
+        "nombre" : "aviso",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaVisualizacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idPaquete",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "paquete"
+            },
+            {
+              "nombre" : "idUsuario",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "usuario"
+            }
+        ]
+      },
+      {
+        "nombre" : "catalogoAcciones",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "catalogoCatgoriaPaquete",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "catalogoEjercicio",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "codigo",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "descarga",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "equipo",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaDescarga",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idPaquete",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "paquete"
+            },
+            {
+              "nombre" : "idUsuario",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "usuario"
+            }
+        ]
+      },
+      {
+        "nombre" : "detalleIntento",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "correcto",
+              "tipo" : "boolean",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "syncroStatus",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idPregunta",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "pregunta"
+            },
+            {
+              "nombre" : "idRespuesta",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "respuesta"
+            },
+            {
+              "nombre" : "idIntento",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "intento"
+            }
+        ]
+      },
+      {
+        "nombre" : "estadistica",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "puntaje",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "10",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "numPreguntas",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "10",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "dificultad",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "10",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idPaquete",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "paquete"
+            },
+            {
+              "nombre" : "idUsuario",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "usuario"
+            }
+        ]
+      },
+      {
+        "nombre" : "intento",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "puntaje",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "10",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "syncroStatus",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idLog",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "log"
+            }
+        ]
+      },
+      {
+        "nombre" : "log",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaInicio",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaTermino",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "dispositivo",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "syncroStatus",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idServer",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idCodigo",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "codigo"
+            },
+            {
+              "nombre" : "idUsuario",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "usuario"
+            }
+        ]
+      },
+      {
+        "nombre" : "paquete",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "clave",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "urlImagen",
+              "tipo" : "varchar",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idCategoria",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "catalogoCatgoriaPaquete"
+            },
+            {
+              "nombre" : "idServer",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "preferencias",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idUsuario",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "usuario"
+            },
+            {
+              "nombre" : "numeroPreguntas",
+              "tipo" : "int",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "mascota",
+              "tipo" : "int",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fondo",
+              "tipo" : "int",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "pregunta",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idTipoEjercicio",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "catalogoEjercicio"
+            },
+            {
+              "nombre" : "idPaquete",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "paquete"
+            },
+            {
+              "nombre" : "idServer",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "registros",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "detalle",
+              "tipo" : "mediumtext",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "syncroStatus",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idAccion",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "catalogoAcciones"
+            },
+            {
+              "nombre" : "idLog",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "log"
+            },
+            {
+              "nombre" : "idUsuario",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "usuario"
+            }
+        ]
+      },
+      {
+        "nombre" : "respuesta",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "descripcion",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "urlImagen",
+              "tipo" : "mediumtext",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "correcto",
+              "tipo" : "boolean",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "relacion",
+              "tipo" : "int",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaModificacion",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "idPregunta",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : "pregunta"
+            },
+            {
+              "nombre" : "idServer",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "11",
+              "fkTable" : null
+            }
+        ]
+      },
+      {
+        "nombre" : "usuario",
+        "colum" : [
+            {
+              "nombre" : "id",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "1",
+              "AI": "1",
+              "size" : "11",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "usuario",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "nombre",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "rol",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "gradoEstudios",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "programa",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "fechaRegistro",
+              "tipo" : "datetime",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            },
+            {
+              "nombre" : "status",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "syncroStatus",
+              "tipo" : "int",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "2",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "password",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "imagen",
+              "tipo" : "varchar",
+              "NN": "1",
+              "PK": "0",
+              "AI": "0",
+              "size" : "200",
+              "fkTable" : null
+            },
+            {
+              "nombre" : "sesion",
+              "tipo" : "int",
+              "NN": "0",
+              "PK": "0",
+              "AI": "0",
+              "size" : null,
+              "fkTable" : null
+            }
+        ]
+      }
+  ]
+}
