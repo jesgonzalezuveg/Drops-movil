@@ -44,10 +44,7 @@ public class SyncroManager : MonoBehaviour {
     }
 
     void Update() {
-        if (scene.name == "mainMenu" || scene.name == "mainMenuSesion" && SyncroManager.respuestaWsSincro == "1") {
-            SyncroManager.respuestaWsSincro = "0";
-            borrarPaquetes();
-        }
+        
     }
 
     public void synchronizationInRealTime() {
@@ -284,7 +281,7 @@ public class SyncroManager : MonoBehaviour {
         }
     }
 
-    public void borrarPaquetes() {
+    /*public void borrarPaquetes() {
         if (scene.name == "mainMenu" || scene.name == "mainMenuSesion") {
             paquetes = webServicePaquetes.getPaquetesBorradosSqLite();
             if (paquetes != null) {
@@ -313,5 +310,5 @@ public class SyncroManager : MonoBehaviour {
                 //Debug.Log("No encontro paquetes borrados");
             }
         }
-    }
+    }*/
 }

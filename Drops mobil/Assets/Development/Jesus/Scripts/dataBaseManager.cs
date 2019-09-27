@@ -54,7 +54,8 @@ public class dataBaseManager : MonoBehaviour
     bool columFound = false;
 
     private void Awake() {
-        //La variable ordenTablas debe contener todas las tablas de la db, de lo contrario no las creará aunque esten en el json
+        //La variable ordenTablas debe contener todas las tablas de la db, de lo contrario no las creará aunque esten en el json.
+        //El orden de la tablas es importante. Si se crea una tabla con fk y no existe la tabla a la cual hace referencia la fk, esto causara un error
         ordenTablas = new string[] {"usuario", "catalogoAcciones", "catalogoCatgoriaPaquete", "catalogoEjercicio", "codigo", "paquete", "descarga", "aviso", "estadistica", "log", "preferencias", "intento", "registros", "pregunta", "respuesta", "detalleIntento" };
         tableFound = false;
         columFound = false;

@@ -110,9 +110,30 @@ public class packManager : MonoBehaviour {
         manager.packToPlay = paquete;
         var res = webServiceDescarga.deleteDescargaSqLite(paquete.id);
         if (res == 1) {
+            dataBaseManager.ejecutarQuery("PRAGMA foreign_keys=off;", "Se desactivaron FKs");
             Debug.Log("Se borro correctamente el paquete");
             var paquetesManager = GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>();
             borrarImagenes(paquete.id);
+
+            res = webServiceRespuestas.deleteRespuestasByPaqueteSqLite(paquete.id);
+            if (res == 1) {
+                res = webServicePreguntas.deletePreguntasByPaqueteSqLite(paquete.id);
+                if (res == 1) {
+                    Debug.Log("Se borraron las respuestas y preguntas del paquete " + paquete.id);
+                    //res = webServicePaquetes.deletePaqueteSqLite(paquete.id);
+                    //if (res == 1) {
+                    //    Debug.Log("Se borro por completo el paquete " + paquete.id);
+                    //} else {
+                    //    Debug.Log("Error al borrar el paquete");
+                    //}
+                } else {
+                    Debug.Log("Se borraron las respuestas del paquete " + paquete.id + "(error al borrar las preguntas)");
+                }
+            } else {
+                Debug.Log("Error al borrar las respuestas del paquete " + paquete.id);
+            }
+
+            dataBaseManager.ejecutarQuery("PRAGMA foreign_keys=on;", "Se activaron FKs");
             transform.transform.GetChild(1).GetComponentInChildren<Button>().interactable = true;
             transform.GetChild(4).GetComponentInChildren<Button>().interactable = true;
             paquetesManager.cambiarVistaPaquetes(manager.vistaLista);
