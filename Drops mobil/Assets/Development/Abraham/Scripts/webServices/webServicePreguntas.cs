@@ -197,6 +197,12 @@ public class webServicePreguntas : MonoBehaviour {
             }
             if (www.isNetworkError || www.isHttpError) {
                 Debug.Log(www.error + "Error al descargar preguntas");
+                Debug.Log(www.isHttpError);
+                Debug.Log(www.isNetworkError);
+                Debug.Log(www.isHttpError);
+                Debug.Log(www.downloadProgress);
+                Debug.Log(www.error + "Error al descargar preguntas");
+                Debug.Log(www.error + "Error al descargar preguntas");
                 if (GameObject.Find("AppManager").GetComponent<appManager>() && GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>()) {
                     GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().panelMsj("Ha ocurrido un problema. Verifique su conexión de Internet.");
                 }
