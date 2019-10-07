@@ -190,21 +190,27 @@ public class webServicePreguntas : MonoBehaviour {
         form.AddField("descripcion", paquete);
         using (UnityWebRequest www = UnityWebRequest.Post(URL, form)) {
             AsyncOperation asyncLoad = www.SendWebRequest();
+
             // Wait until the asynchronous scene fully loads
             while (!asyncLoad.isDone) {
                 GameObject.Find("Player").GetComponent<PlayerManager>().setMensaje(true, "Descargando " + asyncLoad.progress + "%");
                 yield return null;
             }
+
+
             if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error + "Error al descargar preguntas");
-                Debug.Log(www.isHttpError);
-                Debug.Log(www.isNetworkError);
-                Debug.Log(www.isHttpError);
-                Debug.Log(www.downloadProgress);
-                Debug.Log(www.error + "Error al descargar preguntas");
-                Debug.Log(www.error + "Error al descargar preguntas");
+                //Debug.Log("Es un error www.error");
+                //Debug.Log(www.error);
+                //Debug.Log("Es un error isHttpError");
+                //Debug.Log(www.isHttpError);
+                //Debug.Log("Es un error isNetworkError");
+                //Debug.Log(www.isNetworkError);
+                //Debug.Log("Es un error www.error");
+                //Debug.Log(www.error);
+                //Debug.Log("response code");
+                //Debug.Log(www.responseCode);
                 if (GameObject.Find("AppManager").GetComponent<appManager>() && GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>()) {
-                    GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().panelMsj("Ha ocurrido un problema. Verifique su conexión de Internet.");
+                    GameObject.Find("ListaPaquetes").GetComponent<paquetesManager>().panelMsj("Ha ocurrido un problema al descargar las preguntas. Verifique su conexión de Internet.");
                 }
             } else {
                 string text;

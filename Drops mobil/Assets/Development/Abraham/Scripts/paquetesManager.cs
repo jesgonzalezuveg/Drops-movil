@@ -648,6 +648,7 @@ public class paquetesManager : MonoBehaviour {
                             yield return null;
                         }
                         if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                            Debug.Log("Error al tratar de llenar la ficha de paquetes descargables sin public");
                             Debug.Log(www.error);
                         } else {
                             Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
@@ -702,6 +703,7 @@ public class paquetesManager : MonoBehaviour {
                             yield return null;
                         }
                         if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                            Debug.Log("Error al tratar de llenar la ficha de paquetes descargables con public");
                             Debug.Log(www.error);
                         } else {
                             Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;

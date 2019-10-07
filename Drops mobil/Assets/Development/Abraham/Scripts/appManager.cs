@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Networking;
 
 public class appManager : MonoBehaviour {
 
@@ -504,20 +504,41 @@ public class appManager : MonoBehaviour {
                         var pathArray = respuesta.urlImagen.Split('/');
                         var path = pathArray[pathArray.Length - 1];
                         if (!File.Exists(UnityEngine.Application.persistentDataPath + path)) {
-                            WWW www = new WWW(respuesta.urlImagen);
-                            yield return www;
-                            if (www.texture != null) {
-                                Texture2D texture = www.texture;
-                                byte[] bytes;
-                                if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                                    bytes = texture.EncodeToJPG();
-                                } else {
-                                    bytes = texture.EncodeToPNG();
+                            if (isOnline) {
+                                using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(respuesta.urlImagen)) {
+                                    AsyncOperation asyncLoad = www.SendWebRequest();
+                                    while (!asyncLoad.isDone) {
+                                        yield return null;
+                                    }
+                                    if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                                        Debug.Log("Error al tratar de obtener la imagen de la respuesta con id "+ respuesta.id);
+                                        Debug.Log(www.error);
+                                    } else {
+                                        Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                                        byte[] bytes;
+                                        if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                                            bytes = texture.EncodeToJPG();
+                                        } else {
+                                            bytes = texture.EncodeToPNG();
+                                        }
+                                        File.WriteAllBytes(UnityEngine.Application.persistentDataPath + path, bytes);
+                                    }
                                 }
-                                File.WriteAllBytes(UnityEngine.Application.persistentDataPath + path, bytes);
-                            } else {
-
                             }
+                            //WWW www = new WWW(respuesta.urlImagen);
+                            //yield return www;
+                            //if (www.texture != null) {
+                            //    Texture2D texture = www.texture;
+                            //    byte[] bytes;
+                            //    if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                            //        bytes = texture.EncodeToJPG();
+                            //    } else {
+                            //        bytes = texture.EncodeToPNG();
+                            //    }
+                            //    File.WriteAllBytes(UnityEngine.Application.persistentDataPath + path, bytes);
+                            //} else {
+
+                            //}
                         }
                     } else {
 
@@ -525,20 +546,41 @@ public class appManager : MonoBehaviour {
                 } else {
                     var pathArray = respuesta.urlImagen.Split('/');
                     var path = pathArray[pathArray.Length - 1];
-                    WWW www = new WWW(respuesta.urlImagen);
-                    yield return www;
-                    if (www.texture != null) {
-                        Texture2D texture = www.texture;
-                        byte[] bytes;
-                        if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
-                            bytes = texture.EncodeToJPG();
-                        } else {
-                            bytes = texture.EncodeToPNG();
+                    if (isOnline) {
+                        using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(respuesta.urlImagen)) {
+                            AsyncOperation asyncLoad = www.SendWebRequest();
+                            while (!asyncLoad.isDone) {
+                                yield return null;
+                            }
+                            if (www.isNetworkError || www.isHttpError || www.responseCode == 404) {
+                                Debug.Log("Error al tratar de obtener la imagen de la respuesta con id " + respuesta.id);
+                                Debug.Log(www.error);
+                            } else {
+                                Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                                byte[] bytes;
+                                if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                                    bytes = texture.EncodeToJPG();
+                                } else {
+                                    bytes = texture.EncodeToPNG();
+                                }
+                                File.WriteAllBytes(UnityEngine.Application.persistentDataPath + path, bytes);
+                            }
                         }
-                        File.WriteAllBytes(UnityEngine.Application.persistentDataPath + path, bytes);
-                    } else {
-
                     }
+                    //WWW www = new WWW(respuesta.urlImagen);
+                    //yield return www;
+                    //if (www.texture != null) {
+                    //    Texture2D texture = www.texture;
+                    //    byte[] bytes;
+                    //    if (path.Split('.')[path.Split('.').Length - 1] == "jpg" || path.Split('.')[path.Split('.').Length - 1] == "jpeg") {
+                    //        bytes = texture.EncodeToJPG();
+                    //    } else {
+                    //        bytes = texture.EncodeToPNG();
+                    //    }
+                    //    File.WriteAllBytes(UnityEngine.Application.persistentDataPath + path, bytes);
+                    //} else {
+
+                    //}
                 }
             }
         }
