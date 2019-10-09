@@ -115,30 +115,33 @@ public class paquetesManager : MonoBehaviour {
         }
 
         foreach (var panel in panelPaquetes.GetComponentsInChildren<GridLayoutGroup>()) {
-            if (manager.vistaLista != true) {
-                panel.padding.top = 50;
-                panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-                panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
-                panel.startAxis = GridLayoutGroup.Axis.Horizontal;
-                panel.cellSize = new Vector2(150f, 150f);
-                panel.constraintCount = 3;
-                panel.spacing = new Vector2(10, 20);
-            } else {
-                //Vista Lista
-                //panel.padding.top = 50;
-                //panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-                //panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
-                //panel.startAxis = GridLayoutGroup.Axis.Horizontal;
-                //panel.cellSize = new Vector2(560f, 100f);
-                //panel.constraintCount = 1;
-                //panel.spacing = new Vector2(10, 20);
-                panel.padding.top = 50;
-                panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-                panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
-                panel.startAxis = GridLayoutGroup.Axis.Horizontal;
-                panel.cellSize = new Vector2(280f, 280f);
-                panel.constraintCount = 2;
-                panel.spacing = new Vector2(10, 20);
+            Debug.Log(panel.gameObject.name);
+            if (panel.gameObject.name == "PanelPaquetesDescargados") {
+                if (manager.vistaLista != true) {
+                    panel.padding.top = 50;
+                    panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                    panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                    panel.startAxis = GridLayoutGroup.Axis.Horizontal;
+                    panel.cellSize = new Vector2(150f, 150f);
+                    panel.constraintCount = 3;
+                    panel.spacing = new Vector2(10, 20);
+                } else {
+                    //Vista Lista
+                    //panel.padding.top = 50;
+                    //panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                    //panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                    //panel.startAxis = GridLayoutGroup.Axis.Horizontal;
+                    //panel.cellSize = new Vector2(560f, 100f);
+                    //panel.constraintCount = 1;
+                    //panel.spacing = new Vector2(10, 20);
+                    panel.padding.top = 50;
+                    panel.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                    panel.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                    panel.startAxis = GridLayoutGroup.Axis.Horizontal;
+                    panel.cellSize = new Vector2(280f, 280f);
+                    panel.constraintCount = 2;
+                    panel.spacing = new Vector2(10, 20);
+                }
             }
         }
     }
@@ -250,22 +253,27 @@ public class paquetesManager : MonoBehaviour {
     }
 
     void fillTabContent(GameObject content, webServiceCategoria.categoriaData categoria) {
-        Debug.Log("CATEGORIA" + categoria.descripcion);
+        var paquetesOnline = manager.GetPaquetes();
+        //Debug.Log("CATEGORIA" + categoria.descripcion);
         destruirObjetos(content.GetComponentInChildren<gridScrollLayout>().gameObject);
         var paquetes = webServicePaquetes.getPaquetesByCategoriaSqLite(categoria.id);
         if (paquetes != null) {
             foreach (var paquete in paquetes) {
                 var descarga = webServiceDescarga.getDescargaByPaquete(paquete.id);
                 if (descarga != null) {
-                    Debug.Log(descarga.fechaDescarga);
-                    Debug.Log("------------------------");
-                    Debug.Log(paquete.fechaModificacion);
-                    if (isActualized(descarga.fechaDescarga, paquete.fechaModificacion)) {
-                        Debug.Log("Esta actualizado el paquete " + paquete.descripcion);
-                        newCardJugar(paquete, content.GetComponentInChildren<gridScrollLayout>().gameObject);
-                    } else {
-                        Debug.Log("No se encuentra actualizado el paquete " + paquete.descripcion);
-                        newCardActualizar(paquete, content.GetComponentInChildren<gridScrollLayout>().gameObject);
+                    foreach (var paqueteOnline in paquetesOnline) {
+                        if (paqueteOnline.clave == paquete.clave) {
+                            //se cambio paquete.fechaModificacion por paqueteOnline.fechaModificacion
+                            if (isActualized(descarga.fechaDescarga, paqueteOnline.fechaModificacion)) {
+                                //Debug.Log("Esta actualizado el paquete " + paquete.descripcion);
+                                newCardJugar(paquete, content.GetComponentInChildren<gridScrollLayout>().gameObject);
+                            } else {
+                                //Debug.Log("No se encuentra actualizado el paquete " + paquete.descripcion);
+                                newCardActualizar(paquete, content.GetComponentInChildren<gridScrollLayout>().gameObject);
+                            }
+                        } else {
+                            //Debug.Log("El paquete con clave " + paqueteOnline.clave + " no se encuentra en los paquetes locales");
+                        }
                     }
                 }
             }
@@ -279,32 +287,57 @@ public class paquetesManager : MonoBehaviour {
         var dia = 1;
         var mes = 0;
         var año = 2;
-        if (Application.isEditor) {
+        if (UnityEngine.Application.isEditor) {
             dia = 0;
             mes = 1;
             año = 2;
         }
-        fechaDescarga = fechaDescarga.Remove(10, fechaDescarga.Length - 10);
-        string[] splitDateDescarga = fechaDescarga.Split('/');
-        //Formato de fechaModificacion paquete = yyyy-MM-dd HH:mm:ss
-        fechaModificacion = fechaModificacion.Remove(10, fechaModificacion.Length - 10);
-        string[] splitDatePack = fechaModificacion.Split('/');
-        if (Int32.Parse(splitDateDescarga[año]) >= Int32.Parse(splitDatePack[año])) {
-            if (Int32.Parse(splitDateDescarga[mes]) >= Int32.Parse(splitDatePack[mes])) {
-                if (Int32.Parse(splitDateDescarga[mes]) == Int32.Parse(splitDatePack[mes])) {
-                    if (Int32.Parse(splitDateDescarga[dia]) >= Int32.Parse(splitDatePack[dia])) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            } else {
-                return false;
-            }
+        string[] splitDateDescarga;
+        DateTime descarga;
+        if (fechaDescarga.Contains("-")) {
+            fechaDescarga = fechaDescarga.Replace('-', ' ');
+            fechaDescarga = fechaDescarga.Replace(':', ' ');
+            splitDateDescarga = fechaDescarga.Split(' ');
+            descarga = new DateTime(Int32.Parse(splitDateDescarga[0]), Int32.Parse(splitDateDescarga[1]), Int32.Parse(splitDateDescarga[2]), Int32.Parse(splitDateDescarga[3]), Int32.Parse(splitDateDescarga[4]), Int32.Parse(splitDateDescarga[5]));
         } else {
-            return false;
+            fechaDescarga = fechaDescarga.Replace('/', ' ');
+            fechaDescarga = fechaDescarga.Replace(':', ' ');
+            splitDateDescarga = fechaDescarga.Split(' ');
+            if (fechaDescarga.Contains("p") || fechaDescarga.Contains("a")) {
+                if (splitDateDescarga[3] != "12") {
+                    splitDateDescarga[3] = Int32.Parse(splitDateDescarga[3]) + 12 + "";
+                }
+            }
+            fechaDescarga = fechaDescarga.Remove(19, fechaDescarga.Length - 19);
+            descarga = new DateTime(Int32.Parse(splitDateDescarga[año]), Int32.Parse(splitDateDescarga[mes]), Int32.Parse(splitDateDescarga[dia]), Int32.Parse(splitDateDescarga[3]), Int32.Parse(splitDateDescarga[4]), Int32.Parse(splitDateDescarga[5]));
         }
-        return true;
+
+        //Formato de fechaModificacion paquete = yyyy-MM-dd HH:mm:ss
+        string[] splitDatePack;
+        DateTime modificacion;
+        if (fechaModificacion.Contains("-")) {
+            fechaModificacion = fechaModificacion.Replace('-', ' ');
+            fechaModificacion = fechaModificacion.Replace(':', ' ');
+            splitDatePack = fechaModificacion.Split(' ');
+            modificacion = new DateTime(Int32.Parse(splitDatePack[0]), Int32.Parse(splitDatePack[1]), Int32.Parse(splitDatePack[2]), Int32.Parse(splitDatePack[3]), Int32.Parse(splitDatePack[4]), Int32.Parse(splitDatePack[5]));
+        } else {
+            fechaModificacion = fechaModificacion.Replace('/', ' ');
+            fechaModificacion = fechaModificacion.Replace(':', ' ');
+            splitDatePack = fechaModificacion.Split(' ');
+            if (fechaModificacion.Contains("p") || fechaModificacion.Contains("a")) {
+                if (splitDatePack[3] != "12") {
+                    splitDatePack[3] = Int32.Parse(splitDatePack[3]) + 12 + "";
+                }
+            }
+            fechaModificacion = fechaModificacion.Remove(19, fechaModificacion.Length - 19);
+            modificacion = new DateTime(Int32.Parse(splitDatePack[año]), Int32.Parse(splitDatePack[mes]), Int32.Parse(splitDatePack[dia]), Int32.Parse(splitDatePack[3]), Int32.Parse(splitDatePack[4]), Int32.Parse(splitDatePack[5]));
+        }
+
+        if (descarga < modificacion) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -427,6 +460,7 @@ public class paquetesManager : MonoBehaviour {
         if (lista == null) {
             fichaPaquete.transform.SetParent(listaPaquetes.transform);
         } else {
+            Debug.Log("NOMBRE DEL OBJETO " + lista.gameObject.name);
             fichaPaquete.transform.SetParent(lista.transform);
         }
         fichaPaquete.GetComponent<RectTransform>().localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
