@@ -20,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Development/Jesus/Scenes/Movil/mainMenuSesion.unity
     guid: 23f4b517267f4814db49d7ec5c2e41d3
-  - enabled: 0
-    path: Assets/Development/Jesus/Scenes/Movil/pruebaWebService.unity
-    guid: abf7acc2bbe92084ca43d001b44026b5
   m_configObjects: {}
