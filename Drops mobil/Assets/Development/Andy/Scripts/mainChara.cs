@@ -5,9 +5,6 @@ using UnityEngine;
 public class mainChara : MonoBehaviour{
     Animator mainAnim;
 
-    bool touchHead;
-    bool toScreen;
-
     // Start is called before the first frame update
     void Start(){
         mainAnim = GetComponent<Animator>();
