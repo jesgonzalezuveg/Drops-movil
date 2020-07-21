@@ -205,9 +205,10 @@ public class packManager : MonoBehaviour {
         } else if (manager.numeroPreguntas > 15) {
             dificultad = 4;
         }
-        Debug.Log("NUMERO DE PREGUNTAS: " + webServicePreguntas.getPreguntasByPaquete(paquete.id));
-        string score = webServiceEstadistica.getPuntaje(dificultad, paquete.id, manager.getIdUsuario());
         string numPreguntas = webServicePreguntas.getPreguntasByPaquete(paquete.id);
+        Debug.Log("PREGUNTAS TOTALES DEL PAQUETE: " + numPreguntas);
+        string score = webServiceEstadistica.getPuntaje(dificultad, paquete.id, manager.getIdUsuario());
+        Debug.Log("Score maximo obtenido: " + score);
         StartCoroutine(aManager.comenzarPuntajeMaxAnim(Convert.ToInt32(score), Convert.ToInt32(numPreguntas), dificultad));
     }
 

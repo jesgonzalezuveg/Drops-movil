@@ -38,23 +38,33 @@ public class animationManager : MonoBehaviour
 
     public IEnumerator comenzarPuntajeMaxAnim(int score, int numPreguntas, int dificultad) {
         if (stopAnimation == false) {
+            int calif1 = 0;
+            int calif2 = 0;
             controllerPanelDetallePaquete.enabled = true;
             if (dificultad == 1) {
                 col = bronce;
                 rango.text = "Bronce";
                 numPreguntas = 5;
+                calif1 = 3;
+                calif2 = 5;
             } else if (dificultad == 2) {
                 col = plata;
                 rango.text = "Plata";
                 numPreguntas = 10;
+                calif1 = 5;
+                calif2 = 7;
             } else if (dificultad == 3) {
                 col = oro;
                 rango.text = "Oro";
                 numPreguntas = 15;
+                calif1 = 7;
+                calif2 = 8;
             } else if (dificultad == 4) {
                 col = esmeralda;
                 rango.text = "Diamante";
                 numPreguntas = 20;
+                calif1 = 8;
+                calif2 = 9;
             }
             colorStar();
 
@@ -66,28 +76,23 @@ public class animationManager : MonoBehaviour
                 count++;
             }
             puntaje.text = score + "";
-            if (numPreguntas > 20) {
-                numPreguntas = 20;
-            }
 
             float puntajeMax = ((numPreguntas - 4) * 400) + 700;
-            float puntePorEstrella = puntajeMax / 10;
-            Debug.Log("NUMERO DE PREGUNTAS :" + numPreguntas );
-            Debug.Log("PUNTAJE Maximo :" + puntajeMax );
-            Debug.Log("PUNTAJE POR ESTRELLA :" + puntePorEstrella );
-            if (score >= (puntePorEstrella * 5) && score <= (puntePorEstrella * 6)) {
+
+
+            Debug.Log("Calificacion máxima que se puede " + puntajeMax);
+
+            if (score >= (calif1 * puntajeMax)/10) {
                 controllerEstralla1.enabled = true;
                 yield return new WaitForSeconds(0.3f);
-            } else if (score > (puntePorEstrella * 6) && score < (puntePorEstrella * 8.5)) {
-                controllerEstralla1.enabled = true;
-                yield return new WaitForSeconds(0.3f);
+            }
+
+            if (score >= (calif2 * puntajeMax) / 10) {
                 controllerEstralla2.enabled = true;
                 yield return new WaitForSeconds(0.3f);
-            } else if (score > (puntePorEstrella * 8.5)) {
-                controllerEstralla1.enabled = true;
-                yield return new WaitForSeconds(0.3f);
-                controllerEstralla2.enabled = true;
-                yield return new WaitForSeconds(0.3f);
+            }
+
+            if (score >= puntajeMax) {
                 controllerEstralla3.enabled = true;
                 yield return new WaitForSeconds(0.3f);
             }
