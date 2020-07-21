@@ -13,9 +13,10 @@ public class usuariosCards : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         var usuarios = webServiceUsuario.consultarUsuariosSqLite();
+        Debug.Log("***" + usuarios);
         foreach (var usuario in usuarios) {
             //Validacion que solo permite crear la tarjeta Invitados( quitar en caso de que se quieran crear las demas tarjetas ).
-            if (usuario.nombre == "Invitado") {
+            //if (usuario.nombre == "Invitado") {
                 var card = Instantiate(cardToInstantiate) as GameObject;
                 card.name = usuario.nombre + "card";
                 card.transform.SetParent(this.transform);
@@ -42,7 +43,7 @@ public class usuariosCards : MonoBehaviour {
                 card.transform.localScale = new Vector3(1, 1, 1);
                 card.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 addcardEvent(card, usuario);
-            }
+            //}
         }
     }
 
